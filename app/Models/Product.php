@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -12,6 +14,7 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'fy',
         'status',
         'health_claim',
         'nutritional_claim',
@@ -66,6 +69,11 @@ class Product extends Model
         return $this->belongsTo(Dose::class, 'dose_id');
     }
 
+    public function expirydate(): BelongsTo
+    {
+        return $this->belongsTo(Expirydate::class, 'expirydate_id');
+    }
+
     public function size(): BelongsTo
     {
         return $this->belongsTo(Size::class, 'size_id');
@@ -81,8 +89,50 @@ class Product extends Model
         return $this->belongsTo(Lab::class, 'lab_id');
     }
 
+    public function fiscalyear()
+    {
+        return $this->belongsTo(Fiscalyear::class);
+    }
+
     public function capital(): BelongsTo
     {
         return $this->belongsTo(Capital::class, 'capital_id');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+    public function renews()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function renewals()
+    {
+        return $this->hasMany(Renewal::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+    
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'product_ingredient')->withTimestamps();
+    }
+    public function compositions()
+    {
+        return $this->belongsToMany(Ingredient::class, 'product_composition')->withTimestamps();
+    }
+    public function importers()
+    {
+        return $this->belongsToMany(Importer::class, 'product_importer')->withTimestamps();
     }
 }

@@ -1,22 +1,29 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Country')
 
 @section('content')
-    <form class="row g-3" action="{{ route('country.store') }}" method="POST">
-    @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Country Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+<div class="add-heading">
+    <h3 class="heading-cm">Country</h3>
+    <p><a href="{{ route('country.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('country.store') }}" method="POST" class="form-cm">
+@csrf
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="" class="form-label cm">Country Name</label>
+            <input type="text" class="form-control cm" placeholder="Enter dose name" name="name">
+        </div>
+        <div class="col-md-4">
+            <label for="" class="form-label cm">Country Population</label>
+            <input type="text" class="form-control cm" placeholder="Enter dose name" name="population">
+        </div>
+        <div class="col-md-4">
+            <label for="" class="form-label cm">Country Area</label>
+            <input type="text" class="form-control cm" placeholder="Enter dose name" name="area">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="staticEmail2">Country Population</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="population">
-    </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Area</label>
-        <input type="text" class="form-control" id="inputPassword2" name="area">
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection
+

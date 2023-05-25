@@ -44,9 +44,10 @@
 
                             <div class="col-md-6">
                                 <select id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required autocomplete="role">
-                                    <option value="0">Super Admin</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">User</option>
+                                    <option value="0">Verifier</option>
+                                    <option value="1">Reviewer</option>
+                                    <option value="2">Data Entry Operator</option>
+                                    <option value="3">Report Viewer</option>
                                 </select>
                                 @error('role')
                                     <span class="invalid-feedback" role="alert">

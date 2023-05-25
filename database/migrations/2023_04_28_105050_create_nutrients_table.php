@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('permissable_overage');
             $table->text('caution');
             $table->string('usable_part');
-            $table->foreignId('nutrient_category')->constrained('nutrientcategories');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

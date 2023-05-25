@@ -1,30 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Lab')
 
 @section('content')
-    <form class="row g-3" action="{{ route('lab.store') }}" method="POST">
+<div class="add-heading">
+    <h3 class="heading-cm">Lab</h3>
+    <p><a href="{{ route('lab.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('lab.store') }}" method="POST" class="form-cm">
     @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Lab Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+    <div class="row mb-3">
+    <div class="col-md-6">
+        <label for="" class="form-label cm">Lab Name</label>
+        <input type="text" class="form-control cm" placeholder="Enter Lab Name" name="name">
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Recognized Agency</label>
-        <input type="text" class="form-control" id="inputPassword2" name="recognized_agency">
+    <div class="col-md-6">
+        <label for="" class="form-label cm">Recognized Agency</label>
+        <input type="text" class="form-control cm" placeholder="Enter Recognized Agency" name="recognized_agency">
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Website</label>
-        <input type="text" class="form-control" id="inputPassword2" name="website">
+
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Country</label>
-        <select name="country_id" id="country">
-        @foreach ($countries as $country)
-            <option value="{{ $country->id }}">{{ $country->name }}</option>
-        @endforeach
-        </select>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Website</label>
+            <input type="text" class="form-control cm" placeholder="Enter Lab Name" name="website">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm"> Country</label>
+            <select class="form-select kit-form-control mySelect" aria-label="Default select example" name="country_id">
+                <option value="1" selected disabled>Select</option>
+                @foreach ($countries as $country)
+                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection

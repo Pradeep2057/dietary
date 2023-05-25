@@ -46,7 +46,10 @@ class CapitalController extends Controller
 
     public function edit(Capital $capital)
     {
-        return view('pages.capital.edit', compact('capital'));
+        return view('pages.capital.edit', [
+            'capital' => $capital,
+            'capitals'    => Capital::all(),
+        ]);
     }
 
     public function update(Request $request, Capital $capital)

@@ -1,33 +1,45 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Edit Lab')
 
 @section('content')
-    <form class="row g-3" action="{{ route('lab.update', $lab) }}" method="post">
+<div class="add-heading">
+    <h3 class="heading-cm">Lab</h3>
+    <p><a href="{{ route('lab.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form class="form-cm"  action="{{ route('lab.update', $lab) }}" method="post">
     @csrf
     @method('PUT')
-    <div class="col-auto">
-        <label for="staticEmail2">Lab Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name" value="{{ $lab->name }}">
+    <div class="row mb-3">
+    <div class="col-md-6">
+        <label for="" class="form-label cm">Lab Name</label>
+        <input type="text" class="form-control cm" placeholder="Enter Lab Name" name="name" value="{{ $lab->name }}">
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Recognized Agency</label>
-        <input type="text" class="form-control" id="inputPassword2" name="recognized_agency" value="{{ $lab->recognized_agency }}">
+    <div class="col-md-6">
+        <label for="" class="form-label cm">Recognized Agency</label>
+        <input type="text" class="form-control cm" placeholder="Enter Recognized Agency" name="recognized_agency" value="{{ $lab->recognized_agency }}">
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Website</label>
-        <input type="text" class="form-control" id="inputPassword2" name="website" value="{{ $lab->website }}">
+
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Country</label>
-        <select name="country_id" id="country">
-        @foreach ($countries as $country)
-        <option value="{{ $country->id }}" @if($country->id == $selectedCountry->id) selected @endif>
-                {{ $country->name }}
-        </option>
-        @endforeach
-        </select>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Website</label>
+            <input type="text" class="form-control cm" placeholder="Enter Lab Name" name="website" value="{{ $lab->website }}">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm"> Country</label>
+            <select class="form-select kit-form-control mySelect" aria-label="Default select example" name="country_id">
+                <option value="1" selected disabled>Select</option>
+                @foreach ($countries as $country)
+                <option value="{{ $country->id }}" @if($country->id == $selectedCountry->id) selected @endif>
+                        {{ $country->name }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
 @endsection
+

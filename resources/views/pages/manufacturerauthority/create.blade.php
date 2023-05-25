@@ -1,14 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Manufacturer Authority')
 
 @section('content')
-    <form class="row g-3" action="{{ route('manufacturer-authority.store') }}" method="POST">
-    @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Manufacturer authority Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+<div class="add-heading">
+    <h3 class="heading-cm">Category</h3>
+    <p><a href="{{ route('manufacturer-authority.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('manufacturer-authority.store') }}" method="POST" class="form-cm">
+@csrf
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Manufacturer authority Name</label>
+            <input type="text" class="form-control cm" placeholder="Enter manufacturer authority name" name="name">
+        </div>
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection
+

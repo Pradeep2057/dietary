@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('recognized_agency')->default('');
             $table->string('website')->default('');
-            $table->foreignId('country_id')->constrained('countries');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

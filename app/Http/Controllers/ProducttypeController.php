@@ -45,7 +45,10 @@ class ProducttypeController extends Controller
 
     public function edit(Producttype $producttype)
     {
-        return view('pages.producttype.edit', compact('producttype'));
+        return view('pages.producttype.edit',[
+            'producttype'    => $producttype,
+            'producttypes'    => Producttype::all(),
+        ]);
     }
 
     public function update(Request $request, Producttype $producttype)
@@ -65,6 +68,6 @@ class ProducttypeController extends Controller
     {
         $this->authorize('delete', $producttype);
         $producttype->delete();
-        return redirect()->route('form-of-product.index')->with('successdt', 'Producttype deleted successfully.');;
+        return redirect()->route('type-of-product.index')->with('successdt', 'Producttype deleted successfully.');;
     }
 }

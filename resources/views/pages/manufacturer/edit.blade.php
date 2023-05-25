@@ -1,43 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Edit manufacturer')
 
 @section('content')
-    <form class="row g-3" action="{{ route('manufacturer.update', $manufacturer) }}" method="post">
+<div class="add-heading">
+    <h3 class="heading-cm"> 
+        <a href="{{ route('manufacturer.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Manufacturer<span class="sub-nav ms-2" > > Edit</span>
+    </h3>
+    <p><a href="{{ route('manufacturer.index')}}">View All</a></p>
+</div>
+
+<form class="form-cm" action="{{ route('manufacturer.update', $manufacturer) }}" method="post">
     @csrf
     @method('PUT')
-    <div class="col-auto">
-        <label for="staticEmail2">Manufacturer Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name" value="{{ $manufacturer->name }}">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Manufacture Name</label>
+            <input type="text" class="form-control cm" placeholder="Enter Manufacture Name" name="name"
+                value="{{ $manufacturer->name }}">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Registration Number</label>
+            <input type="text" class="form-control cm" placeholder="Enter Registration Number"
+                name="registration_number" value="{{ $manufacturer->registration_number }}">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Registration Number</label>
-        <input type="text" class="form-control" id="inputPassword2" name="registration_number" value="{{ $manufacturer->registration_number }}">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Registration Authority</label>
+            <select class="form-select kit-form-control mySelect" aria-label="Default select example"
+                name="registration_authority">
+                @foreach ($manufacturerauthorities as $manufacturerauthority)
+                <option value="{{ $manufacturerauthority->id }}" @if($manufacturerauthority->id == $selectedManufacturerauthority) selected @endif>
+                    {{ $manufacturerauthority->name }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Registartion Validity</label>
+            <input type="date" class="form-control cm" placeholder="Enter Firm No." name="registration_validity" value="{{ $manufacturer->registration_validity }}">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Registration Authority</label>
-        <select name="registration_authority" id="country">
-        @foreach ($manufacturerauthorities as $manufacturerauthority)
-        <option value="{{ $manufacturerauthority->id }}" @if($manufacturerauthority->id == $selectedManufacturerauthority) selected @endif>
-                {{ $manufacturerauthority->name }}
-        </option>
-        @endforeach
-        </select>
-    </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Registration Validity</label>
-        <input type="date" class="form-control" id="inputPassword2" name="registration_validity" value="{{ $manufacturer->registration_validity }}">
-    </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Country</label>
-        <select name="country_id" id="country">
-        @foreach ($countries as $country)
-        <option value="{{ $country->id }}" @if($country->id == $selectedCountry->id) selected @endif>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label for="" class="form-label cm"> Country</label>
+            <select class="form-select kit-form-control mySelect" aria-label="Default select example" name="country_id">
+            @foreach ($countries as $country)
+            <option value="{{ $country->id }}" @if($country->id == $selectedCountry->id) selected @endif>
                 {{ $country->name }}
-        </option>
-        @endforeach
-        </select>
+            </option>
+            @endforeach
+            </select>
+        </div>
+
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
 @endsection

@@ -1,38 +1,51 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Importer')
 
 @section('content')
-    <form class="row g-3" action="{{ route('importer.store') }}" method="POST">
+<div class="add-heading">
+    <h3 class="heading-cm">Importer</h3>
+    <p><a href="{{ route('importer.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('importer.store') }}" method="POST" class="form-cm">
     @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Importer Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Name of Importer</label>
+            <input type="text" class="form-control cm" placeholder="Enter Name of Importer" name="name">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Address</label>
+            <input type="text" class="form-control cm" placeholder="Enter Address" name="address">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Address</label>
-        <input type="text" class="form-control" id="inputPassword2" name="address">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">PAN No.</label>
+            <input type="text" class="form-control cm" placeholder="Enter PAN No." name="pan">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Firm No.</label>
+            <input type="text" class="form-control cm" placeholder="Enter Firm No." name="firm_no">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">PAN No</label>
-        <input type="text" class="form-control" id="inputPassword2" name="pan">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Exim Code.</label>
+            <input type="text" class="form-control cm" placeholder="Enter Exim Code." name="exim_code">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Contact Number</label>
+            <input type="tel" class="form-control cm" placeholder="Enter Contact Number" name="contact_number">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Firm No</label>
-        <input type="text" class="form-control" id="inputPassword2" name="firm_no">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label for="" class="form-label cm">Contact Person</label>
+            <input type="text" class="form-control cm" placeholder="Enter Contact Person " name="contact_person">
+        </div>
+
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Exim Code</label>
-        <input type="text" class="form-control" id="inputPassword2" name="exim_code">
-    </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Contact Number</label>
-        <input type="text" class="form-control" id="inputPassword2" name="contact_number">
-    </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Contact Person</label>
-        <input type="text" class="form-control" id="inputPassword2" name="contact_person">
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection

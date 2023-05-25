@@ -45,7 +45,10 @@ class ProductformController extends Controller
 
     public function edit(Productform $productform)
     {
-        return view('pages.productform.edit', compact('productform'));
+        return view('pages.productform.edit',[
+            'productform'    => $productform,
+            'productforms'    => Productform::all(),
+        ]);
     }
 
     public function update(Request $request, Productform $productform)

@@ -20,6 +20,15 @@ use App\Http\Controllers\SizeController;
 use App\Http\Controllers\DoseController;
 use App\Http\Controllers\CapitalController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportviewController;
+use App\Http\Controllers\RenewController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\RenewalController;
+use App\Http\Controllers\ExpirydateController;
+use App\Http\Controllers\FiscalyearController;
+
 
 
 /*
@@ -35,21 +44,37 @@ use App\Http\Controllers\ProductController;
 
 
 
-Auth::routes();
-
+Auth::routes([
+    'register' => true,
+]);
 
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    // Route::get('/', function () {
+    //     return view('pages.product.index');
+    //     // return redirect('/product');
+    // });
+    // Route::get('/', [ProductController::class, 'index']);
 
-    Route::get('/home',[HomeController::class, 'index'])->name('home');
+    Route::get('/',[HomeController::class, 'index'])->name('home');
+    Route::get('/profile',[HomeController::class, 'profile'])->name('profile');
+    Route::get('/report-view',[ReportviewController::class, 'index'])->name('report-view');
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('/{user:id}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{user:id}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{user:id}', [UserController::class, 'destroy'])->name('delete');
+        Route::get('/change-password', [UserController::class, 'changePassword'])->name('changePassword');
+        Route::post('/update-password', [UserController::class, 'updatePassword'])->name('updatePassword');
+    });
 
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('/create', [CategoryController::class, 'create'])->name('create');
+        // Route::get('/create', [CategoryController::class, 'create'])->name('create');
         Route::post('/', [CategoryController::class, 'store'])->name('store');
         Route::get('/{category:id}/edit', [CategoryController::class, 'edit'])->name('edit');
         Route::put('/{category:id}', [CategoryController::class, 'update'])->name('update');
@@ -82,6 +107,14 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/{lab:id}', [LabController::class, 'update'])->name('update');
         Route::delete('/{lab:id}', [LabController::class, 'destroy'])->name('delete');
     });
+    Route::group(['prefix' => 'fiscalyear', 'as' => 'fiscalyear.'], function () {
+        Route::get('/', [FiscalyearController::class, 'index'])->name('index');
+        Route::get('/create', [LabController::class, 'create'])->name('create');
+        Route::post('/', [FiscalyearController::class, 'store'])->name('store');
+        Route::get('/{fiscalyear:id}/edit', [FiscalyearController::class, 'edit'])->name('edit');
+        Route::put('/{fiscalyear:id}', [FiscalyearController::class, 'update'])->name('update');
+        Route::delete('/{fiscalyear:id}', [FiscalyearController::class, 'destroy'])->name('delete');
+    });
 
     Route::group(['prefix' => 'manufacturer', 'as' => 'manufacturer.'], function () {
         Route::get('/', [ManufacturerController::class, 'index'])->name('index');
@@ -94,7 +127,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'manufacturer-authority', 'as' => 'manufacturer-authority.'], function () {
         Route::get('/', [ManufacturerauthorityController::class, 'index'])->name('index');
-        Route::get('/create', [ManufacturerauthorityController::class, 'create'])->name('create');
+        // Route::get('/create', [ManufacturerauthorityController::class, 'create'])->name('create');
         Route::post('/', [ManufacturerauthorityController::class, 'store'])->name('store');
         Route::get('/{manufacturerauthority:id}/edit', [ManufacturerauthorityController::class, 'edit'])->name('edit');
         Route::put('/{manufacturerauthority:id}', [ManufacturerauthorityController::class, 'update'])->name('update');
@@ -164,6 +197,15 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{dose:id}', [DoseController::class, 'destroy'])->name('delete');
     });
 
+    Route::group(['prefix' => 'expirydate', 'as' => 'expirydate.'], function () {
+        Route::get('/', [ExpirydateController::class, 'index'])->name('index');
+        Route::get('/create', [ExpirydateController::class, 'create'])->name('create');
+        Route::post('/', [ExpirydateController::class, 'store'])->name('store');
+        Route::get('/{expirydate:id}/edit', [ExpirydateController::class, 'edit'])->name('edit');
+        Route::put('/{expirydate:id}', [ExpirydateController::class, 'update'])->name('update');
+        Route::delete('/{expirydate:id}', [ExpirydateController::class, 'destroy'])->name('delete');
+    });
+
     Route::group(['prefix' => 'size', 'as' => 'size.'], function () {
         Route::get('/', [SizeController::class, 'index'])->name('index');
         Route::get('/create', [SizeController::class, 'create'])->name('create');
@@ -185,10 +227,57 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::get('/fill', [ProductController::class, 'fill'])->name('fill');
         Route::post('/', [ProductController::class, 'store'])->name('store');
         Route::get('/{product:id}/edit', [ProductController::class, 'edit'])->name('edit');
+        Route::get('/{product:id}/display', [ProductController::class, 'display'])->name('display');
         Route::put('/{product:id}', [ProductController::class, 'update'])->name('update');
         Route::delete('/{product:id}', [ProductController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+        Route::get('/', [ReportController::class, 'index'])->name('index');
+        Route::get('/create', [ReportController::class, 'create'])->name('create');
+        Route::post('/', [ReportController::class, 'store'])->name('store');
+        Route::get('/{report:id}/edit', [ReportController::class, 'edit'])->name('edit');
+        Route::get('/{report:id}/pdf', [ReportController::class, 'generatePdf'])->name('pdf');
+        Route::put('/{report:id}', [ReportController::class, 'update'])->name('update');
+        Route::delete('/{report:id}', [ReportController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'renew', 'as' => 'renew.'], function () {
+        Route::get('/', [RenewController::class, 'index'])->name('index');
+        Route::get('/create', [RenewController::class, 'create'])->name('create');
+        Route::post('/', [RenewController::class, 'store'])->name('store');
+        Route::get('/{renew:id}/edit', [RenewController::class, 'edit'])->name('edit');
+        Route::get('/{renew:id}/pdf', [RenewController::class, 'generatePdf'])->name('pdf');
+        Route::put('/{renew:id}', [RenewController::class, 'update'])->name('update');
+        Route::delete('/{renew:id}', [RenewController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
+        Route::get('/', [RegistrationController::class, 'index'])->name('index');
+        Route::get('/create', [RegistrationController::class, 'create'])->name('create');
+        Route::post('/', [RegistrationController::class, 'store'])->name('store');
+        Route::get('/{registration:id}/edit', [RegistrationController::class, 'edit'])->name('edit');
+        Route::get('/{registration:id}/pdf', [RegistrationController::class, 'generatePdf'])->name('pdf');
+        Route::put('/{registration:id}', [RegistrationController::class, 'update'])->name('update');
+        Route::delete('/{registration:id}', [RegistrationController::class, 'destroy'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'renewal', 'as' => 'renewal.'], function () {
+        Route::get('/', [RenewalController::class, 'index'])->name('index');
+        Route::get('/create', [RenewalController::class, 'create'])->name('create');
+        Route::post('/', [RenewalController::class, 'store'])->name('store');
+        Route::get('/{renewal:id}/edit', [RenewalController::class, 'edit'])->name('edit');
+        Route::get('/{renewal:id}/pdf', [RenewalController::class, 'generatePdf'])->name('pdf');
+        Route::put('/{renewal:id}', [RenewalController::class, 'update'])->name('update');
+        Route::delete('/{renewal:id}', [RenewalController::class, 'destroy'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'reportview', 'as' => 'reportview.'], function () {
+        Route::get('/', [ReportviewController::class, 'display'])->name('display');
     });
 
 });

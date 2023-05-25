@@ -1,0 +1,14 @@
+@extends('layouts.main')
+@section('title', 'Product Registration Certificate')
+@section('reportcontent')
+
+@if($certificate)
+<div class="container" style="margin-top: 90px;">
+    <object class="my-5" data="{{ asset('storage/reports/product_registration/' . $certificate .'.pdf') }}" type="application/pdf"
+        width="100%" height="800px">
+        <p>Unable to display PDF file. <a href="{{ asset('storage/reports/product_registration/' . $certificate .'.pdf') }}">Download</a> instead.</p>
+    </object>
+</div>
+@endif
+
+@endsection

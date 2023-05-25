@@ -25,11 +25,11 @@ class ManufacturerauthorityController extends Controller
         ]);
     }
 
-    public function create(Manufacturerauthority $manufacturerauthority)
-    {
-        $this->authorize('create', $manufacturerauthority);
-        return view('pages.manufacturerauthority.create');
-    }
+    // public function create(Manufacturerauthority $manufacturerauthority)
+    // {
+    //     $this->authorize('create', $manufacturerauthority);
+    //     return view('pages.manufacturerauthority.create');
+    // }
 
     public function store(Request $request)
     {
@@ -45,7 +45,10 @@ class ManufacturerauthorityController extends Controller
 
     public function edit(Manufacturerauthority $manufacturerauthority)
     {
-        return view('pages.manufacturerauthority.edit', compact('manufacturerauthority'));
+        return view('pages.manufacturerauthority.edit',[
+            'manufacturerauthority'    => $manufacturerauthority,
+            'manufacturerauthorities'    => Manufacturerauthority::all(),
+        ]);
     }
 
     public function update(Request $request, Manufacturerauthority $manufacturerauthority)

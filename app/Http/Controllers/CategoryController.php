@@ -25,11 +25,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function create(Category $category)
-    {
-        $this->authorize('create', $category);
-        return view('pages.category.create');
-    }
+    // public function create(Category $category)
+    // {
+    //     $this->authorize('create', $category);
+    //     return view('pages.category.create');
+    // }
 
     public function store(Request $request)
     {
@@ -46,7 +46,10 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('pages.category.edit', compact('category'));
+        return view('pages.category.edit',[
+            'category'    => $category,
+            'categories'    => Category::all(),
+        ]);
     }
 
     public function update(Request $request, Category $category)

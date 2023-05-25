@@ -45,7 +45,10 @@ class NutrientcategoryController extends Controller
 
     public function edit(Nutrientcategory $nutrientcategory)
     {
-        return view('pages.nutrientcategory.edit', compact('nutrientcategory'));
+        return view('pages.nutrientcategory.edit', [
+            'nutrientcategory' => $nutrientcategory,
+            'nutrientcategories'    => Nutrientcategory::all(),
+        ]);
     }
 
     public function update(Request $request, Nutrientcategory $nutrientcategory)
