@@ -147,8 +147,8 @@
         </tbody>
     </table>
 
-    <div style="max-width: 1320px; margin: auto;">
-        <h1 style="  border-bottom: 2px solid black;  font-family: roboto; font-size:16px; margin-left:5px; margin-top:10px; margin-bottom: 10px; width: 15%;"> Details</h1>
+    <div style="max-width: 1320px; margin: auto;margin-top: 15px;">
+        <h1 style="  border-bottom: 1px solid black; font-family: roboto; font-size:10px; margin-left:3px; margin-top:10px; margin-bottom:5px; width: 5%;"> Details</h1>
     </div>
 
     <table style="width: 1320px; margin: auto;">
@@ -167,14 +167,14 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 1320px; margin: auto;">
+    <table style="width: 1320px; margin: auto;margin-top: 15px;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size:20px;">Product Type
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->producttype->name }}</h2>
@@ -183,7 +183,7 @@
                     <h1 style=" font-family: roboto; font-size:20px;">Size of pack
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->size->name }}</h2>
@@ -191,14 +191,14 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 1320px; margin: 0 auto;">
+    <table style="width: 1320px; margin: 0 auto;margin-top: 15px;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size:20px;">Form of Product
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->productform->name }}</h2>
@@ -206,14 +206,14 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 1320px; margin: 0 auto;">
+    <table style="width: 1320px; margin: 0 auto;margin-top: 15px;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size:20px;">Dose specified
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->dose->name }}</h2>
@@ -221,14 +221,14 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 1320px; margin:0 auto;">
+    <table style="width: 1320px; margin:0 auto;margin-top: 15px;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size:20px;">Health claim
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->health_claim }}</h2>
@@ -237,7 +237,7 @@
                     <h1 style="m font-family: roboto; font-size:20px;">Nutritional claim
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:25%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->nutritional_claim }}</h2>
@@ -245,14 +245,14 @@
             </tr>
         </tbody>
     </table>
-    <table style="width: 1320px; margin:0 auto;">
+    <table style="width: 1320px; margin:0 auto;margin-top: 15px;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size:20px;">Expiry period claim
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->expirydate->name }}</h2>
@@ -267,7 +267,7 @@
                     <h1 style=" font-family: roboto; font-size:20px;"> Name of Manufacture
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->manufacturer->name }}</h2>
@@ -282,7 +282,7 @@
                     <h1 style=" font-family: roboto; font-size:20px;">Country
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->manufacturer->country->name }}</h2>
@@ -297,7 +297,7 @@
                     <h1 style=" font-family: roboto; font-size:20px;">Manufacturing Lic No.
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->manufacturer->registration_number }}</h2>
@@ -306,7 +306,7 @@
         </tbody>
     </table>
     <div style="max-width: 1320px; margin: auto; padding-top: 15px;">
-        <h1 style="border-bottom: 2px solid black; width: 25%; font-family: roboto; font-size: 14px;">Terms and Condition
+        <h1 style="border-bottom: 1px solid black; width: 16.5%; font-family: roboto; font-size: 11px;">Terms and Condition
         </h1>
         <ol style="list-style-type: number; padding-left: 25px;">
             <li style="font-size:10px; ">This certificate is applicable for the purpose of obtaining permission from the Department for
@@ -339,7 +339,7 @@
         Supplement Regulation Guidelines, 2072)</p>
 
 
-    <div class="footer" style="border-top:1px solid red; margin-top: 30px">
+    <div class="footer" style="border-top:1px solid red; margin-top: 80px">
         <h1 style="text-align: center; font-size: 14px; color:red; margin:10px;">G.P.O Box No. 21265,
             Babarmahal, Kathmandu</h1>
     </div>

@@ -13,12 +13,12 @@
         <div class="form-heading-top">
             <img src="{{ asset('storage/image/np.png') }}" alt="">
             <p class="mt-2">Department of Food Technology and Quality Control<br>
-                Babarmahal,Kathmandu
+               <span> Babarmahal,Kathmandu</span>
             </p>
         </div>
         <form method="POST" action="{{ route('password.email') }}" class="entry-form login-form">
             @csrf
-            <div class="row ">
+            <div class="row fst-row">
                 <h3>Reset Password</h3>
                 <p>Please enter your email address.</p>
             </div>
@@ -32,7 +32,7 @@
                         placeholder="Enter your email address" name="email">
                     @error('email')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <small>{{ $message }}</small>
                     </span>
                     @enderror
                 </div>

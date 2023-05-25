@@ -79,7 +79,7 @@
    
     <table style="width: 1320px; margin: auto;">
         <tbody style="width:100%">
-            <tr style="margin-bottom: 10px;">
+            <tr style="margin-bottom: 10px; margin-top:5px;">
                 <td style="width:25%;">
                         @foreach ($pdfproduct->product->importers as $key => $importer)
                     <h1 style=" font-family: roboto; font-size: 22px;">
@@ -106,7 +106,7 @@
     </div>
    
     <div style="max-width: 1320px; margin: auto;">
-        <h1 style="  border-bottom: 1px solid black;  font-family: roboto; font-size:16px; margin-left:5px; margin-top:10px; margin-bottom: 10px; width: 10%;"> Details</h1>
+        <h2 style="  border-bottom: 1px solid black;  font-family: roboto; font-size:12px; margin-left:5px; margin-top:10px; margin-bottom: 5px; width: 5.7%;"> Details</h2>
     </div>  
     
     <table style="width: 1320px; margin: auto;">
@@ -115,7 +115,7 @@
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size: 20px;"> Product Registration<br> Certification No.</h1>
                 </td>
-                <td style="width: 75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width: 75%; border: 1px solid rgb(220, 220, 220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->registration }}</h2>
                 </td>
@@ -128,7 +128,7 @@
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size: 20px;"> Name of the Product</h1>
                 </td>
-                <td style="width: 75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width: 75%; border: 1px solid rgb(220, 220, 220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding: 10px;">{{ $pdfproduct->product->name }}</h2>
                 </td>
@@ -142,7 +142,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;" >Product Type
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245)
+                <td style="width:25%; border: 1px solid rgb(220, 220, 220)
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->producttype->name }}</h2>
                 </td>
@@ -150,7 +150,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Form of product
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->productform->name }}</h2>
                 </td>
@@ -164,7 +164,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Application No. and Date
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                 <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->application_number }}</h2>
                 </td>
@@ -178,7 +178,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Name of Importer
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         @foreach ($pdfproduct->product->importers as  $key => $importer)
@@ -196,7 +196,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Address of Importer
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                     @foreach ($pdfproduct->product->importers as  $key => $importer)
@@ -214,7 +214,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Pan Number
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                     @foreach ($pdfproduct->product->importers as  $key => $importer)
@@ -226,7 +226,7 @@
                     <h1 style="m font-family: roboto; font-size: 20px;">Size of pack
                     </h1>
                 </td>
-                <td style="width:25%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->size->name }}</h2>
                 </td>
@@ -240,7 +240,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;"> Name of Manufacturer
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->manufacturer->name }}</h2>
                 </td>
@@ -254,7 +254,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Country of Manufacture
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                     {{ $pdfproduct->product->manufacturer->country->name }}</h2>
@@ -269,7 +269,7 @@
                     <h1 style=" font-family: roboto; font-size: 20px;">Active ingredients/: <br> {{ $pdfproduct->product->ingredient_unit }}
                     </h1>
                 </td>
-                <td style="width:75%; border: 0.5px solid rgb(240,242,245);
+                <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
                         {{ $pdfproduct->product->ingredients }}
@@ -336,7 +336,7 @@
         (As per section 2, subsection 13 of the Dietary Supplement Regulation Guidelines, 2072)
     </p>
 
-    <div class="footer" style="border-top:1px solid red; margin-top: 30px">
+    <div class="footer" style="border-top:1px solid red; margin-top: 80px">
         <h1 style="text-align: center; font-size: 14px; color:red; margin:10px;">G.P.O Box No. 21265,
             Babarmahal, Kathmandu</h1>
     </div>

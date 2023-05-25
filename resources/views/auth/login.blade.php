@@ -16,12 +16,12 @@
         <div class="form-heading-top">
             <img src="{{ asset('storage/image/np.png') }}" alt="">
             <p class="mt-2">Department of Food Technology and Quality Control<br>
-                Babarmahal,Kathmandu
+                <span>Babarmahal, Kathmandu</span> 
             </p>
         </div>
         <form method="POST" action="{{ route('login') }}" class="entry-form login-form">
             @csrf
-            <div class="row ">
+            <div class="row fst-row">
                 <h3>Login to your Account</h3>
                 <p>Please put your login credentials below.</p>
             </div>
@@ -35,7 +35,7 @@
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <small>{{ $message }}</small>
                     </span>
                     @enderror
                 </div>
@@ -49,7 +49,7 @@
                         placeholder="Enter your Password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <small>{{ $message }}</small>
                     </span>
                     @enderror
                 </div>

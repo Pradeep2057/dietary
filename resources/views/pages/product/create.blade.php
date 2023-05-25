@@ -13,9 +13,12 @@
 </div>
 
 
-<form action="{{ route('product.fill') }}" method="GET" class="mb-3">
+<form action="{{ route('product.fill') }}" method="GET" class="mb-3 product-search-form">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10" style="position: relative">
+            <span class="material-symbols-outlined prd-search">
+                search
+                </span>
             <select name="productId" class="form-select kit-form-control mySelect" id="prev_product">
                 <option value="1" selected disabled>Select similar product</option>
                 @foreach ($products as $product)
