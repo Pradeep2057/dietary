@@ -89,34 +89,6 @@ class RenewalController extends Controller
    }
 
 
-//    public function generatePdf(Renewal $renewal)
-//    {
-//        $pdf_url = asset('storage/reports/product_renewal/' . $renewal->product->name .'.pdf');
-//        $pdf_path = storage_path('app/public/reports/product_renewal/' . $renewal->product->name . '.pdf');
-
-//        if (file_exists($pdf_path)) {
-//            return response()->download($pdf_path, $renewal->product->name . '.pdf');
-//        }
-   
-//        $renewal->product_renewal = $renewal->product->name . '.pdf';
-//        $renewal->save();
-
-//        $writer = new PngWriter();
-//        $qrCode = new QrCode($pdf_url);
-//        $qrCode->setSize(200);
-//        $result = $writer->write($qrCode);
-//        $dataUri = $result->getDataUri();
-
-//        SnappyPdf::loadView('pages.renewal.pdf', [
-//            'pdfproduct' => $renewal,
-//            'qrCodeImage' => $dataUri,
-//        ])->save($pdf_path);
-       
-       
-
-//        return response()->download($pdf_path, $renewal->product->name . '.pdf');
-//    }
-
 
    public function generatePdf(Renewal $renewal)
    {

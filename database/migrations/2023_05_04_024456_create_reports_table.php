@@ -21,11 +21,19 @@ return new class extends Migration
             $table->string('application_number');
             $table->string('prepared_by');
             $table->string('post');
-            $table->string('certificate_category')->default('Production Registration');
+            $table->string('certificate_category')->default('Registration');
             $table->string('production_report')->nullable();
+            $table->string('production_tippani')->nullable();
             $table->string('status')->default('Processing');
-            // $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->constrained('products');
             $table->foreignId('author_id')->constrained('users');
+
+            $table->foreignId('pending_id')->nullable()->constrained('users');
+            $table->string('pending_at')->nullable();
+
+            $table->foreignId('verifier_id')->nullable()->constrained('users');
+            $table->string('verified_at')->nullable();
+
             $table->timestamps();
         });
     }

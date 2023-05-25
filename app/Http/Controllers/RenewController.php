@@ -136,4 +136,45 @@ class RenewController extends Controller
 
         return response()->download(storage_path('app/public/reports/production_renew/' . $renew->product->name . '.pdf'));
     }
+
+    public function certificate(Renew $renew)
+   {
+       $pdf_url = asset('storage/reports/product_renewal/' . $renew->product->name .'.pdf');
+       $writer = new PngWriter();
+       $qrCode = new QrCode($pdf_url);
+       $qrCode->setSize(100);
+       $result = $writer->write($qrCode);
+       $dataUri = $result->getDataUri();
+
+       
+       $logoImagePath = storage_path('app/public/image/np-min.png');
+       $logoImageContents = file_get_contents($logoImagePath);
+       $logoImageData = base64_encode($logoImageContents);
+       $logoImageMimeType = mime_content_type($logoImagePath);
+       $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
+       $html = view('pages.renewal.pdf', [
+           'pdfproduct' => $renew,
+           'qrCodeImage' => $dataUri,
+           'logo' => $logoImageDataUri,
+           ])->render();
+
+       $mpdf = new Mpdf([
+           'mode' => 'utf-8',
+           'format' => 'A4',
+           'orientation' => 'P',
+           'autoScriptToLang' => false, 
+           'autoLangToFont' => true,
+           'default_font' => 'freesans',
+           'default_font_size' => 12,
+           'showImageErrors' => true,
+       ]);
+       
+       $mpdf->WriteHTML($html);
+       $pdf_path = Storage::disk('public')->put('reports/product_renewal/' . $renew->product->name . '.pdf', $mpdf->Output('', 'S'));
+       $renew->production_renew_tippani = $renew->product->name . '.pdf';
+       $renew->save();
+
+       return response()->download(storage_path('app/public/reports/product_renewal/' . $renew->product->name . '.pdf'));
+   }
 }

@@ -91,6 +91,10 @@
                         <div class="action-btn-view">
                             <a href="{{ route('renew.pdf', $renew->id) }}" method="get">Generate PDF</a>
                         </div>
+
+                        <div class="action-btn-view">
+                            <a href="{{ route('renew.certificate', $renew->id) }}" method="get">Generate Certificate</a>
+                        </div>
                         @endif
 
                         @if (auth()->user()->role == 2 && $renew->status == 'Pending' )

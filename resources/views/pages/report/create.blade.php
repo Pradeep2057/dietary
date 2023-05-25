@@ -7,7 +7,7 @@
         <a href="{{ route('report.index')}}" class="nav-icon me-2">
         <i class="fa-solid fa-angle-left"></i> 
         </a>
-        Certificate<span class="sub-nav ms-2" > > Tippani Registration > Create</span>
+        Certificate<span class="sub-nav ms-2" > > Registration > Create</span>
     </h3>
     <p><a href="{{ route('report.index')}}">View All</a></p>
 </div>

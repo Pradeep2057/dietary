@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-10">
             <select name="productId" class="form-select kit-form-control mySelect" id="prev_product">
-                <option value="1" selected disabled>Select product type</option>
+                <option value="1" selected disabled>Select similar product</option>
                 @foreach ($products as $product)
                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                 @endforeach
@@ -37,8 +37,11 @@
     <div class="row mb-2">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Name of Product</label>
-            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="name"
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter Name of Product" name="name"
                 value="{{ $templateProduct ? $templateProduct->name : '' }}">
+            @error('name')
+                <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
         
         <div class="mb-3 col-md-6">
@@ -161,24 +164,24 @@
         </div>
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP certificate validity upto</label>
-            <input type="date" class="form-control cm" placeholder="Select GMP certificate validity upto"
+            <input type="date" class="form-control cm @error('gmp_validity_upto') is-invalid @enderror" placeholder="Select GMP certificate validity upto"
                 name="gmp_validity_upto">
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Composition</label>
-            <textarea name="compositions" class="form-control cm" cols="30" rows="4"></textarea>
+            <textarea name="compositions" class="form-control cm @error('compositions') is-invalid @enderror" cols="30" rows="4"></textarea>
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Ingredients</label>
-            <textarea name="ingredients" class="form-control cm" cols="30" rows="4"></textarea>
+            <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30" rows="4"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Units per ingredients</label>
-            <input type="text" class="form-control cm" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)"
+            <input type="text" class="form-control cm @error('ingredient_unit') is-invalid @enderror" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)"
                 name="ingredient_unit">
         </div>
         <div class="mb-3 col-md-6">
@@ -289,7 +292,7 @@
         </div>
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">COA thirdparty</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="coa_thirdparty">
+            <select class="form-select kit-form-control " aria-label="Default select example" name="coa_thirdparty">
                 <option value="Attached" selected>Attached</option>
                 <option value="Not Attached">Not Attached</option>
             </select>

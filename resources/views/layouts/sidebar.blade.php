@@ -47,14 +47,10 @@
                             class="accordion-collapse collapse {{ Request::is('registration') || Request::is('registration/create') || Request::is('registration/*/edit') || Request::is('renewal') || Request::is('renewal/create')|| Request::is('renewal/*/edit') || Request::is('report') || Request::is('report/create') || Request::is('report/*/edit') || Request::is('renew')|| Request::is('renew/create')|| Request::is('renew/*/edit') ?  'show' : ' collapsed' }}">
 
                             <div class="accordion-body d-flex flex-column">
-                                <a class="nav-link  {{ Request::is('registration') || Request::is('registration/create')|| Request::is('registration/*/edit') ?  'active' : ' ' }}"
-                                    href="{{ route('registration.index') }}">Product Registration</a>
-                                <a class="nav-link  {{ Request::is('renewal') || Request::is('renewal/create') || Request::is('renewal/*/edit')?  'active' : ' ' }}"
-                                    href="{{ route('renewal.index') }}">Product Renewal</a>
                                 <a class="nav-link {{ Request::is('report') || Request::is('report/create') || Request::is('report/*/edit')?  'active' : ' ' }}"
-                                    href="{{ route('report.index') }}">Tippani Registration</a>
+                                    href="{{ route('report.index') }}">Product Registration</a>
                                 <a class="nav-link {{ Request::is('renew') || Request::is('renew/create')|| Request::is('renew/*/edit') ?  'active' : ' ' }}"
-                                    href="{{ route('renew.index') }}">Tippani Renew</a>
+                                    href="{{ route('renew.index') }}">Product Renewal</a>
                             </div>
                         </div>
                     </div>

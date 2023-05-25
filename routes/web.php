@@ -241,6 +241,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [ReportController::class, 'store'])->name('store');
         Route::get('/{report:id}/edit', [ReportController::class, 'edit'])->name('edit');
         Route::get('/{report:id}/pdf', [ReportController::class, 'generatePdf'])->name('pdf');
+        Route::get('/{report:id}/certificate', [ReportController::class, 'certificate'])->name('certificate');
         Route::put('/{report:id}', [ReportController::class, 'update'])->name('update');
         Route::delete('/{report:id}', [ReportController::class, 'destroy'])->name('delete');
     });
@@ -251,6 +252,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [RenewController::class, 'store'])->name('store');
         Route::get('/{renew:id}/edit', [RenewController::class, 'edit'])->name('edit');
         Route::get('/{renew:id}/pdf', [RenewController::class, 'generatePdf'])->name('pdf');
+        Route::get('/{renew:id}/certificate', [RenewController::class, 'certificate'])->name('certificate');
         Route::put('/{renew:id}', [RenewController::class, 'update'])->name('update');
         Route::delete('/{renew:id}', [RenewController::class, 'destroy'])->name('delete');
     });

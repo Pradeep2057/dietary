@@ -72,11 +72,13 @@ class registrationController extends Controller
         $registration->application_number = $request->application_number;
         $registration->date_of_preparation = $request->date_of_preparation;
         $registration->product_id = $request->product_id;
+
         if($request->status){
             $registration->status = $request->status;
         }else{
             $registration->status = 'Processing';
         }
+        
         $registration->save();
         return redirect()->route('registration.index')->with('successup', 'registration updated successfully.');;
     }

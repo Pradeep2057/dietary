@@ -309,9 +309,7 @@
                             </td>
                             <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                         border-style: dotted;"><h2>
-                            @foreach ($pdfreport->product->compositions as $composition)
-                                {{ $composition->name }},
-                            @endforeach
+                           {{ $pdfreport->compositions }} 
                         </tr>
                     </tbody>
                 </table>
