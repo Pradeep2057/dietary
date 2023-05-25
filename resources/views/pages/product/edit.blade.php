@@ -141,26 +141,12 @@
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Composition</label>
-            <select class="form-select kit-form-control multipleselect" name="compositions[]" multiple="multiple" multiple> 
-                @foreach ($ingredients as $ingredient)
-                <option value="{{ $ingredient->id }}" @if(in_array($ingredient->id, $selectedCompositions)) selected
-                    @endif>
-                    {{ $ingredient->name }}
-                </option>
-                @endforeach
-            </select>
+            <textarea name="compositions" class="form-control cm" cols="30" rows="4">{{ $product->compositions }}</textarea>
         </div>
 
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Ingredients</label>
-            <select class="form-select kit-form-control multipleselect" name="ingredients[]" multiple="multiple" multiple>
-                @foreach ($ingredients as $ingredient)
-                <option value="{{ $ingredient->id }}" @if(in_array($ingredient->id, $selectedIngredients)) selected
-                    @endif>
-                    {{ $ingredient->name }}
-                </option>
-                @endforeach
-            </select>
+            <textarea name="ingredients" class="form-control cm" cols="30" rows="4">{{ $product->ingredients }}</textarea>
         </div>
     </div>
     <div class="row">
@@ -195,32 +181,12 @@
             <input type="file" class="form-control cm" name="new_images[]" id="new_images" multiple>
         </div>
     </div>
-    @if(Auth::user()->role==0 || Auth::user()->role==1)
-    <div class="row">
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Fisical Year</label>
-            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
-                value="{{ $product->fy }}">
-        </div>
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Voucher Number</label>
-            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="{{ $product->voucher_number }}">
-        </div>
-    </div>
-    <div class="row mb-5">
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Voucher Amount</label>
-            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number" value="{{ $product->voucher_amount }}">
-        </div>
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Status</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
-                <option value="Pending" @if($product->status == 'Pending') selected @endif>Pending</option>
-                <option value="Verified" @if($product->status == 'Verified') selected @endif>Verified</option>
-            </select>
-        </div>
-    </div>
+
+    @if(Auth::user()->role==2)
+        <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
+                value="{{ $product->fy }}" hidden>
     @endif
+
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Product specification</label>
@@ -388,10 +354,57 @@
     <div class="row">
         <div class="mb-3 col-md-12">
             <label for="" class="form-label cm">Remarks (if any)</label>
-            <textarea name="remarks"  class="form-control cm" cols="30" rows="4" value="{{ $product->remarks }}"></textarea>
+            <textarea name="remarks"  class="form-control cm" cols="30" rows="4">{{ $product->remarks }}</textarea>
         </div>
     </div>
-   
-    <button type="submit" class="btn btn-primary">Update</button>
+
+    @if(Auth::user()->role==0 || Auth::user()->role==1)
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Submit</button>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered approval-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Fisical Year</label>
+                            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
+                                value="{{ $product->fy }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Number</label>
+                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="{{ $product->voucher_no }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Amount</label>
+                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount" value="{{ $product->voucher_amount }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="mb-3 col-md-12">
+                        <label for="" class="form-label cm">Remarks (if any)</label>
+                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4" value="{{ $product->remarks_1 }}"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="submit" class="btn btn-primary">Verify</button> -->
+                <button type="submit" name="reject" class="btn btn-primary">Reject</button>
+                <button type="submit" name="verify" class="btn btn-primary">Verify</button>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    @else
+        <button type="submit" class="btn btn-primary">Update</button>
+    @endif
 </form>
 @endsection

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Importer;
 use App\Models\Manufacturer;
@@ -44,8 +47,9 @@ class ProductController extends Controller
     {
         $this->authorize('create', $product);
         return view('pages.product.create', [
+            'products' => Product::all(),
             'importers'    => Importer::all(),
-            'manufactures'    => Manufacturer::all(),
+            'manufacturers'    => Manufacturer::all(),
             'agencies'    => Agency::all(),
             'producttypes'    => Producttype::all(),
             'productforms'    => Productform::all(),
@@ -55,8 +59,51 @@ class ProductController extends Controller
             'labs'    => Lab::all(),
             'capitals'    => Capital::all(),
             'expirydates'    => Expirydate::all(),
+            'templateProduct' => null
         ]);
     }
+
+    public function fill(Request $request)
+    {
+        $productId = $request->input('productId');
+        $templateProduct = Product::find($productId);
+
+        $templateImporter = $templateProduct->importer;
+        $templateManufacturer = $templateProduct->Manufacturer;
+        $templateAgency = $templateProduct->agency;
+        $templateProducttype = $templateProduct->producttype;
+        $templateProductform = $templateProduct->productform;
+        $templateDose = $templateProduct->dose;
+        $templateSize = $templateProduct->size;
+        $templateExpirydate = $templateProduct->expirydate;
+
+        return view('pages.product.create', [
+            'products' => Product::all(),
+            'importers'    => Importer::all(),
+            'manufacturers'    => Manufacturer::all(),
+            'agencies'    => Agency::all(),
+            'producttypes'    => Producttype::all(),
+            'productforms'    => Productform::all(),
+            'doses'    => Dose::all(),
+            'sizes'    => Size::all(),
+            'ingredients'    => Ingredient::all(),
+            'labs'    => Lab::all(),
+            'capitals'    => Capital::all(),
+            'expirydates'    => Expirydate::all(),
+            'templateProduct' => $templateProduct,
+            'templateImporter' => $templateImporter,
+            'templateManufacturer' => $templateManufacturer,
+            'templateManufacturer' => $templateManufacturer,
+            'templateAgency' => $templateAgency,
+            'templateProducttype' => $templateProducttype,
+            'templateProductform' => $templateProductform,
+            'templateDose' => $templateDose,
+            'templateSize' => $templateSize,
+            'templateExpirydate' => $templateExpirydate,
+        ]);
+    }
+
+
 
     public function store(Request $request)
     {
@@ -65,8 +112,15 @@ class ProductController extends Controller
         ]);
         $product = new Product;
         $product->name = $validatedData['name'];
-        $product->status = $request->status;
-        // $product->fy = $request->fy;
+
+        if (Auth::user()->role == 0 || Auth::user()->role == 1) {
+            $product->status = 'Verified';
+            $product->verifier_id = Auth::user()->id;
+            $product->verified_at = Carbon::now()->toDateTimeString();
+        }else{
+            $product->status = 'Pending';
+        }
+
         $fiscalyear = Fiscalyear::where('id',1)->first();
         $product->fy =  $fiscalyear->name;
         $lastProduct = Product::where('fy', $product->fy)->orderByDesc('code')->first();
@@ -98,9 +152,15 @@ class ProductController extends Controller
         if($request->remarks){
             $product->remarks = $request->remarks;
         }
+        if($request->remarks1){
+            $product->remarks_1 = $request->remarks1;
+        }
+
+        $product->voucher_no = $request->voucher_number;
+        $product->voucher_amount = $request->voucher_amount;
+
         $product->product_registration_certificate = $request->product_registration_certificate;
         $product->overall_openion = $request->overall_openion;
-        // $product->importer_id = $request->importer_id;
         $product->manufacturer_id = $request->manufacturer_id;
         $product->gmp_id = $request->gmp_id;
         $product->product_type = $request->product_type;
@@ -109,6 +169,8 @@ class ProductController extends Controller
         $product->size_id = $request->size_id;
         $product->lab_id = $request->lab_id;
         $product->capital_id = $request->capital_id;
+        $product->ingredients = $request->ingredients;
+        $product->compositions = $request->compositions;
         $product->author_id = auth()->user()->id;
 
         $product->save();
@@ -133,8 +195,6 @@ class ProductController extends Controller
                 $product->images()->save($image);
             }
         }
-        $product->ingredients()->sync($request->input('ingredients'));
-        $product->compositions()->sync($request->input('compositions'));
         $product->importers()->sync($request->input('importers'));
         return redirect()->route('product.index')->with('successct', 'Product created successfully.');
     }
@@ -151,8 +211,6 @@ class ProductController extends Controller
         $selectedDose = $product->dose;
         $selectedSize = $product->size;
         $selectedExpirydate = $product->expirydate;
-        $selectedIngredients = $product->ingredients->pluck('id')->toArray();
-        $selectedCompositions = $product->compositions->pluck('id')->toArray();
         $selectedImporters = $product->importers->pluck('id')->toArray();
         $selectedLab = $product->lab;
         $selectedCapital = $product->capital;
@@ -176,8 +234,6 @@ class ProductController extends Controller
             'selectedProductform'  => $selectedProductform,
             'selectedDose'  => $selectedDose,
             'selectedSize'  => $selectedSize,
-            'selectedIngredients'  => $selectedIngredients,
-            'selectedCompositions' => $selectedCompositions,
             'selectedLab'  => $selectedLab,
             'selectedCapital'  => $selectedCapital,
             'selectedImporters'  => $selectedImporters,
@@ -196,8 +252,6 @@ class ProductController extends Controller
         $selectedDose = $product->dose;
         $selectedSize = $product->size;
         $selectedExpirydate = $product->expirydate;
-        $selectedIngredients = $product->ingredients->pluck('id')->toArray();
-        $selectedCompositions = $product->compositions->pluck('id')->toArray();
         $selectedImporters = $product->importers->pluck('id')->toArray();
         $selectedLab = $product->lab;
         $selectedCapital = $product->capital;
@@ -221,8 +275,6 @@ class ProductController extends Controller
             'selectedProductform'  => $selectedProductform,
             'selectedDose'  => $selectedDose,
             'selectedSize'  => $selectedSize,
-            'selectedIngredients'  => $selectedIngredients,
-            'selectedCompositions' => $selectedCompositions,
             'selectedLab'  => $selectedLab,
             'selectedCapital'  => $selectedCapital,
             'selectedImporters'  => $selectedImporters,
@@ -252,22 +304,39 @@ class ProductController extends Controller
         }
 
         $product->name = $validatedData['name'];
-        if($request->status){
-            $product->status = $request->status;
-        }else{
-            $product->status = 'Pending';
-        }
-        
+
         $product->fy = $request->fy;
         $product->health_claim = $request->health_claim;
         $product->ingredient_unit = $request->ingredient_unit;
-
         $product->voucher_no = $request->voucher_number;
         $product->voucher_amount = $request->voucher_amount;
 
         if($request->remarks){
             $product->remarks = $request->remarks;
         }
+
+        if($request->remarks1){
+            $product->remarks_1 = $request->remarks1;
+        }
+
+        if ($request->has('verify')) {
+            if (Auth::user()->role == 0 || Auth::user()->role == 1) {
+                $product->status = 'Verified';
+                $product->verifier_id = Auth::user()->id;
+                $product->verified_at = Carbon::now()->toDateTimeString();
+            }else{
+                $product->status = 'Pending';
+            }
+        }elseif ($request->has('reject')){
+            if (Auth::user()->role == 0 || Auth::user()->role == 1) {
+                $product->status = 'Rejected';
+                $product->verifier_id = Auth::user()->id;
+                $product->verified_at = Carbon::now()->toDateTimeString();;
+            }else{
+                $product->status = 'Pending';
+            }
+        }
+        
 
         $product->nutritional_claim = $request->nutritional_claim;
         $product->expirydate_id = $request->expirydate_claim;
@@ -287,9 +356,8 @@ class ProductController extends Controller
         $product->sale_certificate = $request->sale_certificate;
         $product->product_label = $request->product_label;
         $product->product_registration_certificate = $request->product_registration_certificate;
-        $product->compositions()->sync($request->input('compositions'));
+        $product->compositions=$request->compositions;
         $product->overall_openion = $request->overall_openion;
-        // $product->importer_id = $request->importer_id;
         $product->importers()->sync($request->input('importers'));
         $product->manufacturer_id = $request->manufacturer_id;
         $product->gmp_id = $request->gmp_id;
@@ -297,10 +365,10 @@ class ProductController extends Controller
         $product->product_form = $request->product_form;
         $product->dose_id = $request->dose_id;
         $product->size_id = $request->size_id;
-        $product->ingredients()->sync($request->input('ingredients'));
+        // $product->ingredients()->sync($request->input('ingredients'));
+        $product->ingredients=$request->ingredients;
         $product->lab_id = $request->lab_id;
         $product->capital_id = $request->capital_id;
-        $product->author_id = auth()->user()->id;
 
         if ($request->has('remove_images')) {
             foreach ($request->remove_images as $imageId) {

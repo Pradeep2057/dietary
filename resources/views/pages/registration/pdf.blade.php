@@ -158,12 +158,10 @@
                     <h1 style=" font-family: roboto; font-size:20px;"> Active
                         ingredients/:<br>{{ $pdfproduct->product->ingredient_unit }}</h1>
                 </td>
-                <td style="width: 75%; border: 1px solid rgb(220,220,220);
+                <td style="width: 75%; border: 0.5px solid rgb(240,242,245)
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        @foreach ($pdfproduct->product->ingredients as $key => $ingredient)
-                        {{ $ingredient->name }}@if ($key !== count($pdfproduct->product->ingredients) - 1),@endif
-                        @endforeach
+                        {{ $pdfproduct->ingredients }}
                     </h2>
                 </td>
             </tr>

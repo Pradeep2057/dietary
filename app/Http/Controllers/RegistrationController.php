@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
+use Auth;
 // use Barryvdh\Snappy\Facades\SnappyPdf;
 
 class registrationController extends Controller

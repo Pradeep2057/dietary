@@ -126,7 +126,7 @@
                     @endforeach
                 </td>
                 <td>{{ $product->lab->name }}</td>
-                <td ><div class="@if($product->status == 'Pending') pending @else verified @endif">{{ $product->status}}</div></td>
+                <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
                 <td>{{ $product->created_at->format('Y-m-d')}}</td>
 
                 <td>

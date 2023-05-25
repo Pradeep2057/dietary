@@ -18,9 +18,10 @@ return new class extends Migration
             $table->date('date_of_preparation');
             $table->string('product_renewal')->nullable();
             $table->string('certificate_category')->default('Product Renewal');
+            $table->string('tippani_category')->default('Tippani Renewal');
             $table->string('status')->default('Processing');
             $table->string('application_number');
-            $table->foreignId('product_id')->constrained('products');
+            // $table->foreignId('product_id')->constrained('products');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

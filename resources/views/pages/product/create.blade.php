@@ -3,68 +3,94 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm"> 
+    <h3 class="heading-cm">
         <a href="{{ route('product.index')}}" class="nav-icon me-2">
-            <i class="fa-solid fa-angle-left"></i> 
+            <i class="fa-solid fa-angle-left"></i>
         </a>
-        Products<span class="sub-nav ms-2" > > Create</span>
+        Products<span class="sub-nav ms-2"> > Create</span>
     </h3>
     <p><a href="{{ route('product.index')}}">View All</a></p>
 </div>
+
+
+<form action="{{ route('product.fill') }}" method="GET" class="mb-3 product-search-form">
+    <div class="row">
+        <div class="col-md-10" style="position: relative">
+            <span class="material-symbols-outlined prd-search">
+                search
+                </span>
+            <select name="productId" class="form-select kit-form-control mySelect" id="prev_product">
+                <option value="1" selected disabled>Select product type</option>
+                @foreach ($products as $product)
+                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Fill</button>
+        </div>
+    </div>
+</form>
+
+
+
 
 <form action="{{ route('product.store') }}" method="POST" class="form-cm" enctype="multipart/form-data">
     @csrf
     <div class="row mb-2">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Name of Product</label>
-            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="name">
+            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="name"
+                value="{{ $templateProduct ? $templateProduct->name : '' }}">
         </div>
-        <div class="mb-3 col-md-6 d-none">
-            <label for="" class="form-label cm">Status</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
-                <option value="Pending" selected>Pending</option>
-                <option value="Verified">Verified</option>
-            </select>
-        </div>
+        
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Type of Product</label>
             <select name="product_type" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select product type</option>
-            @foreach ($producttypes as $producttype)
-                <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
-            @endforeach
+                <option value="1" selected disabled>Select product type</option>
+                @foreach ($producttypes as $producttype)
+                <option value="{{ $producttype->id }}"
+                    {{ $templateProduct && $templateProducttype->id == $producttype->id ? 'selected' : '' }}>
+                    {{ $producttype->name }}</option>
+                @endforeach
             </select>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Form of Product</label>
             <select name="product_form" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select product form</option>
-            @foreach ($productforms as $productform)
-                <option value="{{ $productform->id }}">{{ $productform->name }}</option>
-            @endforeach
-        </select>
+                <option value="1" selected disabled>Select product form</option>
+                @foreach ($productforms as $productform)
+                <option value="{{ $productform->id }}"
+                    {{ $templateProduct && $templateProductform->id == $productform->id ? 'selected' : '' }}>
+                    {{ $productform->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Dose specified</label>
             <select name="dose_id" class="form-select kit-form-control mySelect" aria-label="Default select example">
-            <option value="1" selected disabled>Select dose</option>
-            @foreach ($doses as $dose)
-                <option value="{{ $dose->id }}">{{ $dose->name }}</option>
-            @endforeach
-        </select>
+                <option value="1" selected disabled>Select dose</option>
+                @foreach ($doses as $dose)
+                <option value="{{ $dose->id }}"
+                    {{ $templateProduct && $templateDose->id == $dose->id ? 'selected' : '' }}>{{ $dose->name }}
+                </option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="row mb-2">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Size of pack</label>
             <select name="size_id" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select size</option>
-            @foreach ($sizes as $size)
-                <option value="{{ $size->id }}">{{ $size->name }}</option>
-            @endforeach
+                <option value="1" selected disabled>Select size</option>
+                @foreach ($sizes as $size)
+                <option value="{{ $size->id }}"
+                    {{ $templateProduct && $templateSize->id == $size->id ? 'selected' : '' }}>{{ $size->name }}
+                </option>
+                @endforeach
             </select>
         </div>
         <div class="mb-3 col-md-6">
@@ -72,7 +98,9 @@
             <select name="expirydate_claim" class="form-select kit-form-control mySelect">
                 <option value="1" selected disabled>Select expiry date</option>
                 @foreach ($expirydates as $expirydate)
-                    <option value="{{ $expirydate->id }}">{{ $expirydate->name }}</option>
+                <option value="{{ $expirydate->id }}"
+                    {{ $templateProduct && $templateExpirydate->id == $expirydate->id ? 'selected' : '' }}>
+                    {{ $expirydate->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -90,7 +118,7 @@
             <label for="" class="form-label cm">Name of Manufacturer</label>
             <select name="manufacturer_id" class="form-select kit-form-control mySelect">
                 <option value="" selected disabled>Select Manufacturer</option>
-                @foreach ($manufactures as $manufacturer)
+                @foreach ($manufacturers as $manufacturer)
                 <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
                 @endforeach
             </select>
@@ -100,7 +128,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Lab</label>
             <select name="lab_id" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select Lab</option>
+                <option value="1" selected disabled>Select Lab</option>
                 @foreach ($labs as $lab)
                 <option value="{{ $lab->id }}">{{ $lab->name }}</option>
                 @endforeach
@@ -109,16 +137,16 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Capital of firm</label>
             <select name="capital_id" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select Capital</option>
+                <option value="1" selected disabled>Select Capital</option>
                 @foreach ($capitals as $capital)
                 <option value="{{ $capital->id }}">{{ $capital->name }}</option>
                 @endforeach
             </select>
         </div>
     </div>
-  
+
     <div class="row">
-    <div class="mb-3 col-md-4">
+        <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP certificate</label>
             <select class="form-select kit-form-control" aria-label="Default select example" name="gmp_certificate">
                 <option value="Attached" selected>Attached</option>
@@ -127,40 +155,34 @@
         </div>
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP Certifying Agency</label>
-            <select name="gmp_id"  class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select GMP Certifying Agency</option>
-            @foreach ($agencies as $agency)
+            <select name="gmp_id" class="form-select kit-form-control mySelect">
+                <option value="1" selected disabled>Select GMP Certifying Agency</option>
+                @foreach ($agencies as $agency)
                 <option value="{{ $agency->id }}">{{ $agency->name }}</option>
-            @endforeach
+                @endforeach
             </select>
         </div>
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP certificate validity upto</label>
-            <input type="date" class="form-control cm" placeholder="Select GMP certificate validity upto" name="gmp_validity_upto">
+            <input type="date" class="form-control cm" placeholder="Select GMP certificate validity upto"
+                name="gmp_validity_upto">
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Composition</label>
-            <select name="compositions[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
-                @foreach ($ingredients as $ingredient)
-                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
-                @endforeach
-            </select>
+            <textarea name="compositions" class="form-control cm" cols="30" rows="4"></textarea>
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Ingredients</label>
-            <select class="form-select kit-form-control multipleselect" name="ingredients[]" multiple="multiple" multiple>
-                @foreach ($ingredients as $ingredient)
-                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
-                @endforeach
-            </select>
+            <textarea name="ingredients" class="form-control cm" cols="30" rows="4"></textarea>
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Units per ingredients</label>
-            <input type="text" class="form-control cm" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)" name="ingredient_unit">
+            <input type="text" class="form-control cm" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)"
+                name="ingredient_unit">
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Label of product</label>
@@ -177,44 +199,19 @@
         </div>
     </div>
 
-    @if(Auth::user()->role==0 || Auth::user()->role==1)
-    <div class="row">
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Fisical Year</label>
-            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy">
-        </div>
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Voucher Number</label>
-            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
-        </div>
-    </div>
-    <div class="row mb-5">
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Voucher Amount</label>
-            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number">
-        </div>
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Status</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
-                <option value="Pending">Pending</option>
-                <option value="Verified">Verified</option>
-            </select>
-        </div>
-    </div>
-    @endif
-
-    
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Product specification</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="product_specification">
+            <select class="form-select kit-form-control" aria-label="Default select example"
+                name="product_specification">
                 <option value="Provided" selected>Provided</option>
                 <option value="Not Provided">Not Provided</option>
             </select>
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Product registration certificate</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="product_registration_certificate">
+            <select class="form-select kit-form-control" aria-label="Default select example"
+                name="product_registration_certificate">
                 <option value="Provided" selected>Provided</option>
                 <option value="Not Provided">Not Provided</option>
             </select>
@@ -271,7 +268,8 @@
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Specification rational</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="specification_rational">
+            <select class="form-select kit-form-control" aria-label="Default select example"
+                name="specification_rational">
                 <option value="Mentioned" selected>Mentioned</option>
                 <option value="Not Mentioned">Not Mentioned</option>
             </select>
@@ -301,7 +299,8 @@
         </div>
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">COA Product Standard</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="coa_product_standard">
+            <select class="form-select kit-form-control" aria-label="Default select example"
+                name="coa_product_standard">
                 <option value="Compiles" selected>Compiles</option>
                 <option value="Not Compiles">Not Compiles</option>
             </select>
@@ -317,7 +316,8 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Authorization letter</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="authorization_letter">
+            <select class="form-select kit-form-control" aria-label="Default select example"
+                name="authorization_letter">
                 <option value="Provided and Attached" selected>Provided and attached</option>
                 <option value="Not Provided">Not Provided</option>
             </select>
@@ -332,12 +332,56 @@
             </select>
         </div>
     </div>
-    <div class="row">
-        <div class="mb-3 col-md-12">
-            <label for="" class="form-label cm">Remarks (if any)</label>
-            <textarea name="remarks"  class="form-control cm" cols="30" rows="4"></textarea>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Submit</button>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered approval-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @if(Auth::user()->role==2)
+            <div class="modal-body">
+                <div class="row">
+                    <div class="mb-3 col-md-12">
+                        <label for="" class="form-label cm">Remarks (if any)</label>
+                        <textarea name="remarks" class="form-control cm" cols="30" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send for Approval</button>
+            </div>
+            @else
+            <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Number</label>
+                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Amount</label>
+                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number">
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="mb-3 col-md-12">
+                        <label for="" class="form-label cm">Remarks (if any)</label>
+                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="reject" class="btn btn-primary">Reject</button>
+                <button type="submit" name="verify" class="btn btn-primary">Verify</button>
+            </div>
+            @endif
+            </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
 </form>
 @endsection

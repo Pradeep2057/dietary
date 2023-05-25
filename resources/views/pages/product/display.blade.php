@@ -113,22 +113,13 @@
         <div class="row mt-4">
             <div class="col-md-12">
                 <h4>Composition</h4>
-                <p>
-                @foreach ($ingredients as $ingredient)
-                    @if(in_array($ingredient->id, $selectedCompositions)) {{ $ingredient->name }} @endif
-                @endforeach
-                </p>
+                <p>{{ $product->compositions }}</p>
             </div>
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
                 <h4>Ingredients</h4>
-                <p>
-                @foreach ($ingredients as $ingredient)
-                @if(in_array($ingredient->id, $selectedIngredients)) {{ $ingredient->name }} @endif    
-                </option>
-                @endforeach
-                </p>
+                <p>{{ $product->compositions }}</p>
             </div>
         </div>
         <div class="row">
@@ -159,7 +150,8 @@
             <h4>Image of Product Label</h4>
             @foreach ($product->images as $image)
             <div class="col-md-3">
-                <img src="{{ Storage::url($image->label_image) }}" alt="{{ $product->name }}">
+                
+                <img src="{{ url('storage/'.$image->label_image) }}" alt="{{ $product->name }}">
             </div>
             @endforeach
         </div>

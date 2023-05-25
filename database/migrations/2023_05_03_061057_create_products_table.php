@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('name');
-            $table->string('fy')->constrained('fiscalyears');;
+            $table->string('name')->unique();
+            $table->string('fy')->constrained('fiscalyears');
             $table->string('registration');
             $table->string('status')->default('Pending');
             $table->string('health_claim');
             $table->string('nutritional_claim');
-            // $table->string('expirydate_claim');
             $table->string('medical_statement');
             $table->string('diagnose_statement');
             $table->string('dietary_supplement');
@@ -37,11 +36,13 @@ return new class extends Migration
             $table->string('sale_certificate');
             $table->string('product_label');
             $table->string('product_registration_certificate');
-            // $table->string('composition')->nullable();
-
             $table->string('overall_openion');
+            $table->string('ingredients');
+            $table->string('compositions');
             $table->string('ingredient_unit');
             $table->string('remarks')->nullable();
+            $table->string('remarks_1')->nullable();
+            $table->string('remarks_2')->nullable();
             $table->string('voucher_no')->nullable();
             $table->string('voucher_amount')->nullable();
             $table->foreignId('expirydate_id')->constrained('expirydates');
@@ -51,10 +52,11 @@ return new class extends Migration
             $table->foreignId('product_form')->constrained('productforms');
             $table->foreignId('dose_id')->constrained('doses');
             $table->foreignId('size_id')->constrained('sizes');
-            // $table->foreignId('ingredient_id')->constrained('ingredients');
             $table->foreignId('lab_id')->constrained('labs');
             $table->foreignId('capital_id')->constrained('capitals');
             $table->foreignId('author_id')->constrained('users');
+            $table->foreignId('verifier_id')->nullable()->constrained('users');
+            $table->string('verified_at')->nullable();
             $table->timestamps();
         });
     }

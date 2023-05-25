@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('certificate_category')->default('Registration Renew');
             $table->string('production_renew')->nullable();
             $table->string('status')->default('Processing');
-            $table->foreignId('product_id')->constrained('products');
+            // $table->foreignId('product_id')->constrained('products');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

@@ -325,7 +325,11 @@ a.nav-link,
 .form-control.cm {
     border-radius: 3px !important;
     font-size: 16px !important;
+<<<<<<< HEAD
     padding: 12px !important;
+=======
+    padding: 13px !important;
+>>>>>>> e74d0623752d3ad341c83cb91c363548925cbfd6
 }
 
 .action-icon {
@@ -949,3 +953,18 @@ tr {
     font-size: 14px;
     padding-left: 14px;
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+/*==================*/
+.approval-modal{
+    max-width: 900px!important;
+}
+>>>>>>> e74d0623752d3ad341c83cb91c363548925cbfd6
