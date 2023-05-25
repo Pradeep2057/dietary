@@ -100,11 +100,6 @@ class ReportController extends Controller
         $report->product_id = $request->product_id;
         $report->prepared_by = $request->prepared_by;
         $report->post = $request->post;
-        // if($request->status){
-        //     $report->status = $request->status;
-        // }else{
-        //     $report->status = 'Processing';
-        // }
         
         if (Auth::user()->role == 0) {
             $report->status = 'Verified';
@@ -136,7 +131,7 @@ class ReportController extends Controller
         $pdf_url = asset('storage/reports/production_report/' . $report->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
-        $qrCode->setSize(200);
+        $qrCode->setSize(150);
         $result = $writer->write($qrCode);
         $dataUri = $result->getDataUri();
 
@@ -204,6 +199,45 @@ class ReportController extends Controller
         $report->save();
  
         return response()->download(storage_path('app/public/reports/product_registration/' . $report->product->name . '.pdf'));
+    }
+
+    public function print(Report $report)
+    {
+        $pdf_url = asset('storage/reports/product_registration_print/' . $report->product->name .'.pdf');
+        $writer = new PngWriter();
+        $qrCode = new QrCode($pdf_url);
+        $qrCode->setSize(150);
+        $result = $writer->write($qrCode);
+        $dataUri = $result->getDataUri();
+ 
+        
+        $logoImagePath = storage_path('app/public/image/np-min.png');
+        $logoImageContents = file_get_contents($logoImagePath);
+        $logoImageData = base64_encode($logoImageContents);
+        $logoImageMimeType = mime_content_type($logoImagePath);
+        $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+ 
+        $html = view('pages.registration.print', [
+            'pdfproduct' => $report,
+            'qrCodeImage' => $dataUri,
+            'logo' => $logoImageDataUri,
+            ])->render();
+ 
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'orientation' => 'P',
+            'autoScriptToLang' => false, 
+            'autoLangToFont' => true,
+            'default_font' => 'freesans',
+            'default_font_size' => 12,
+            'showImageErrors' => true,
+        ]);
+        
+        $mpdf->WriteHTML($html);
+        $pdf_path = Storage::disk('public')->put('reports/product_registration_print/' . $report->product->name . '.pdf', $mpdf->Output('', 'S'));
+ 
+        return response()->download(storage_path('app/public/reports/product_registration_print/' . $report->product->name . '.pdf'));
     }
     
 

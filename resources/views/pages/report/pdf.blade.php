@@ -416,7 +416,7 @@
                     <tbody style="width:100%;">
                         <tr>
                             <td style="width: 50%;"><img src="{{ $qrCodeImage }}" alt="QR code"></td>
-                            <td style="width: 50%; text-align: right;"><h3> {{ $pdfreport->prepared_by}} <br> {{ $pdfreport->post }} <br> {{ $pdfreport->date_of_preparation }} </h3>
+                            <td style="width: 50%; text-align: right;"><h3> {{ $pdfreport->prepared_by }} <br> {{ $pdfreport->post }} <br> {{ $pdfreport->date_of_preparation }} </h3>
                     </td>
                         </tr>
                     </tbody>

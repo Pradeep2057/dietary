@@ -26,6 +26,13 @@ return new class extends Migration
             $table->string('production_renew')->nullable();
             $table->string('production_renew_tippani')->nullable();
             $table->string('status')->default('Processing');
+
+            $table->foreignId('pending_id')->nullable()->constrained('users');
+            $table->string('pending_at')->nullable();
+
+            $table->foreignId('verifier_id')->nullable()->constrained('users');
+            $table->string('verified_at')->nullable();
+            
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();

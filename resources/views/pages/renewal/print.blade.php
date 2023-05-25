@@ -32,51 +32,6 @@
 </head>
 <body> 
 
-
-    <table style="width: 1320px; margin: auto;">
-        <tbody style="width:100%">
-            <tr style="margin-bottom: 10px;">
-                <td style="width:20%;">
-                    <img src="{{ $logo }}" alt="logo" style="width: 150px;">
-                </td>
-                <td style="width:58%; text-align: center;">
-                    <h1 style="text-align: center; font-size: 28px; margin: 0 0 4px; color:red;">Government of Nepal</h1>
-                    <h1 style="text-align: center; font-size: 28px; margin: 0 0 4px; color:red;"> Ministry of Agriculture and Livestock Development </h1>
-                    <h1 style="text-align: center; font-size: 30px; margin: 0 0 4px; color:red; font-family: roboto;">Department of Food Technology and Quality Control</h1>
-                </td>
-                <td style="width:22%; text-align: right; font-size: 20px; font-weight: 500; font-family: roboto;">
-                    <div class="contact">
-                    <table class="phone-num" style="margin-left:auto;">
-                        <tr style="margin-bottom: 10px;">
-                        <td class="phone-num-left" style="color:red;">
-                            Tel.
-                        </td>
-                        <td class="phone-num-right" style="color:red; 	border-left: 1px solid #ff0000; padding-left:20px; font-size: 18px;">
-                            977-1-4-262369<br>
-                            977.1-4-262430<br>
-                            977.1-4-240016<br>
-                            917-1-4-262739
-                        </td>
-                    </tr>
-                    </table>
-                    <div class="fax" style="color:red; font-size: 18px;">
-                        Fax : 977-1-4262337
-                    </div>
-                </div>
-                <div class="site"  >
-                    <p style="margin-bottom:0; color:red; font-size: 18px;"> E-mail: info@dftgc.gov.np </p>
-                    <p style="margin:0; color:red; font-size: 18px;">Webpage:- www.dttqc.gov.np </p>
-                </div>  
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="fill">
-        <h1 style="font-size: 10px; font-family: roboto;  color:red;"> Our Ref. No. <br>
-            Your Ref. No.</h1>
-    </div>
-   
     <table style="width: 1320px; margin: auto;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px; margin-top:5px;">
@@ -336,10 +291,7 @@
         (As per section 2, subsection 13 of the Dietary Supplement Regulation Guidelines, 2072)
     </p>
 
-    <div class="footer" style="border-top:1px solid red; margin-top: 80px">
-        <h1 style="text-align: center; font-size: 14px; color:red; margin:10px;">G.P.O Box No. 21265,
-            Babarmahal, Kathmandu</h1>
-    </div>
+
 
 
   

@@ -242,6 +242,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{report:id}/edit', [ReportController::class, 'edit'])->name('edit');
         Route::get('/{report:id}/pdf', [ReportController::class, 'generatePdf'])->name('pdf');
         Route::get('/{report:id}/certificate', [ReportController::class, 'certificate'])->name('certificate');
+        Route::get('/{report:id}/print', [ReportController::class, 'print'])->name('print');
         Route::put('/{report:id}', [ReportController::class, 'update'])->name('update');
         Route::delete('/{report:id}', [ReportController::class, 'destroy'])->name('delete');
     });
@@ -253,29 +254,30 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{renew:id}/edit', [RenewController::class, 'edit'])->name('edit');
         Route::get('/{renew:id}/pdf', [RenewController::class, 'generatePdf'])->name('pdf');
         Route::get('/{renew:id}/certificate', [RenewController::class, 'certificate'])->name('certificate');
+        Route::get('/{renew:id}/print', [RenewController::class, 'print'])->name('print');
         Route::put('/{renew:id}', [RenewController::class, 'update'])->name('update');
         Route::delete('/{renew:id}', [RenewController::class, 'destroy'])->name('delete');
     });
 
-    Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
-        Route::get('/', [RegistrationController::class, 'index'])->name('index');
-        Route::get('/create', [RegistrationController::class, 'create'])->name('create');
-        Route::post('/', [RegistrationController::class, 'store'])->name('store');
-        Route::get('/{registration:id}/edit', [RegistrationController::class, 'edit'])->name('edit');
-        Route::get('/{registration:id}/pdf', [RegistrationController::class, 'generatePdf'])->name('pdf');
-        Route::put('/{registration:id}', [RegistrationController::class, 'update'])->name('update');
-        Route::delete('/{registration:id}', [RegistrationController::class, 'destroy'])->name('delete');
-    });
+    // Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
+    //     Route::get('/', [RegistrationController::class, 'index'])->name('index');
+    //     Route::get('/create', [RegistrationController::class, 'create'])->name('create');
+    //     Route::post('/', [RegistrationController::class, 'store'])->name('store');
+    //     Route::get('/{registration:id}/edit', [RegistrationController::class, 'edit'])->name('edit');
+    //     Route::get('/{registration:id}/pdf', [RegistrationController::class, 'generatePdf'])->name('pdf');
+    //     Route::put('/{registration:id}', [RegistrationController::class, 'update'])->name('update');
+    //     Route::delete('/{registration:id}', [RegistrationController::class, 'destroy'])->name('delete');
+    // });
 
-    Route::group(['prefix' => 'renewal', 'as' => 'renewal.'], function () {
-        Route::get('/', [RenewalController::class, 'index'])->name('index');
-        Route::get('/create', [RenewalController::class, 'create'])->name('create');
-        Route::post('/', [RenewalController::class, 'store'])->name('store');
-        Route::get('/{renewal:id}/edit', [RenewalController::class, 'edit'])->name('edit');
-        Route::get('/{renewal:id}/pdf', [RenewalController::class, 'generatePdf'])->name('pdf');
-        Route::put('/{renewal:id}', [RenewalController::class, 'update'])->name('update');
-        Route::delete('/{renewal:id}', [RenewalController::class, 'destroy'])->name('delete');
-    });
+    // Route::group(['prefix' => 'renewal', 'as' => 'renewal.'], function () {
+    //     Route::get('/', [RenewalController::class, 'index'])->name('index');
+    //     Route::get('/create', [RenewalController::class, 'create'])->name('create');
+    //     Route::post('/', [RenewalController::class, 'store'])->name('store');
+    //     Route::get('/{renewal:id}/edit', [RenewalController::class, 'edit'])->name('edit');
+    //     Route::get('/{renewal:id}/pdf', [RenewalController::class, 'generatePdf'])->name('pdf');
+    //     Route::put('/{renewal:id}', [RenewalController::class, 'update'])->name('update');
+    //     Route::delete('/{renewal:id}', [RenewalController::class, 'destroy'])->name('delete');
+    // });
 
 
     Route::group(['prefix' => 'reportview', 'as' => 'reportview.'], function () {
