@@ -45,7 +45,10 @@ class DoseController extends Controller
 
     public function edit(Dose $dose)
     {
-        return view('pages.dose.edit', compact('dose'));
+        return view('pages.dose.edit',[
+            'dose'    => $dose,
+            'doses'    => Dose::all(),
+        ]);
     }
 
     public function update(Request $request, Dose $dose)

@@ -47,7 +47,10 @@ class CountryController extends Controller
 
     public function edit(Country $country)
     {
-        return view('pages.country.edit', compact('country'));
+        return view('pages.country.edit',[
+            'country'    => $country,
+            'countries'    => Country::all(),
+        ]);
     }
 
     public function update(Request $request, Country $country)

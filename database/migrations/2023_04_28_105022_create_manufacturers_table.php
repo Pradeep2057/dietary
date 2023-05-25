@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('registration_number');
             $table->date('registration_validity');
-            $table->string('registration_authority')->constrained('manufacturerauthorities');
-            $table->foreignId('country_id')->constrained('countries');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

@@ -45,7 +45,10 @@ class SizeController extends Controller
 
     public function edit(Size $size)
     {
-        return view('pages.size.edit', compact('size'));
+        return view('pages.size.edit',[
+            'size'    => $size,
+            'sizes'    => Size::all(),
+        ]);
     }
 
     public function update(Request $request, Size $size)

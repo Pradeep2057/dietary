@@ -1,22 +1,31 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Size Form')
 
 @section('content')
-    <form class="row g-3" action="{{ route('agency.store') }}" method="POST">
-    @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Agency Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+<div class="add-heading">
+    <h3 class="heading-cm">Certifying Agency</h3>
+    <p><a href="{{ route('agency.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('agency.store') }}" method="POST" class="form-cm">
+@csrf
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Agency Name</label>
+            <input type="text" class="form-control cm" placeholder="Enter Size Name" name="name">
+        </div>
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Agency Address</label>
+            <input type="text" class="form-control cm" placeholder="Enter Size Name" name="address">
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Address</label>
-        <input type="text" class="form-control" id="inputPassword2" name="address">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <label for="" class="form-label cm">Agency Description</label>
+            <textarea type="text" class="form-control cm" placeholder="Enter Size Name" name="description" style="height: 120px;"></textarea>
+        </div>
     </div>
-    <div class="col-auto">
-        <label for="inputPassword2">Description</label>
-        <input type="text" class="form-control" id="inputPassword2" name="description">
-    </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection
+

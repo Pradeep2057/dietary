@@ -1,1 +1,343 @@
-create
+@extends('layouts.main')
+@section('title', 'Create Product Type')
+
+@section('content')
+<div class="add-heading">
+    <h3 class="heading-cm"> 
+        <a href="{{ route('product.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Products<span class="sub-nav ms-2" > > Create</span>
+    </h3>
+    <p><a href="{{ route('product.index')}}">View All</a></p>
+</div>
+
+<form action="{{ route('product.store') }}" method="POST" class="form-cm" enctype="multipart/form-data">
+    @csrf
+    <div class="row mb-2">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Name of Product</label>
+            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="name">
+        </div>
+        <div class="mb-3 col-md-6 d-none">
+            <label for="" class="form-label cm">Status</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
+                <option value="Pending" selected>Pending</option>
+                <option value="Verified">Verified</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Type of Product</label>
+            <select name="product_type" class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select product type</option>
+            @foreach ($producttypes as $producttype)
+                <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
+            @endforeach
+            </select>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Form of Product</label>
+            <select name="product_form" class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select product form</option>
+            @foreach ($productforms as $productform)
+                <option value="{{ $productform->id }}">{{ $productform->name }}</option>
+            @endforeach
+        </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Dose specified</label>
+            <select name="dose_id" class="form-select kit-form-control mySelect" aria-label="Default select example">
+            <option value="1" selected disabled>Select dose</option>
+            @foreach ($doses as $dose)
+                <option value="{{ $dose->id }}">{{ $dose->name }}</option>
+            @endforeach
+        </select>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Size of pack</label>
+            <select name="size_id" class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select size</option>
+            @foreach ($sizes as $size)
+                <option value="{{ $size->id }}">{{ $size->name }}</option>
+            @endforeach
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Expirydate Claim</label>
+            <select name="expirydate_claim" class="form-select kit-form-control mySelect">
+                <option value="1" selected disabled>Select expiry date</option>
+                @foreach ($expirydates as $expirydate)
+                    <option value="{{ $expirydate->id }}">{{ $expirydate->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Name of Importer</label>
+            <select name="importers[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
+                @foreach ($importers as $importer)
+                <option value="{{ $importer->id }}">{{ $importer->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Name of Manufacturer</label>
+            <select name="manufacturer_id" class="form-select kit-form-control mySelect">
+                <option value="" selected disabled>Select Manufacturer</option>
+                @foreach ($manufactures as $manufacturer)
+                <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Lab</label>
+            <select name="lab_id" class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select Lab</option>
+                @foreach ($labs as $lab)
+                <option value="{{ $lab->id }}">{{ $lab->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Capital of firm</label>
+            <select name="capital_id" class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select Capital</option>
+                @foreach ($capitals as $capital)
+                <option value="{{ $capital->id }}">{{ $capital->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+  
+    <div class="row">
+    <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">GMP certificate</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="gmp_certificate">
+                <option value="Attached" selected>Attached</option>
+                <option value="Not Attached">Not Attached</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">GMP Certifying Agency</label>
+            <select name="gmp_id"  class="form-select kit-form-control mySelect">
+            <option value="1" selected disabled>Select GMP Certifying Agency</option>
+            @foreach ($agencies as $agency)
+                <option value="{{ $agency->id }}">{{ $agency->name }}</option>
+            @endforeach
+            </select>
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">GMP certificate validity upto</label>
+            <input type="date" class="form-control cm" placeholder="Select GMP certificate validity upto" name="gmp_validity_upto">
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Composition</label>
+            <select name="compositions[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
+                @foreach ($ingredients as $ingredient)
+                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Ingredients</label>
+            <select class="form-select kit-form-control multipleselect" name="ingredients[]" multiple="multiple" multiple>
+                @foreach ($ingredients as $ingredient)
+                <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Units per ingredients</label>
+            <input type="text" class="form-control cm" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)" name="ingredient_unit">
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Label of product</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="product_label">
+                <option value="Provided" selected>Provided</option>
+                <option value="Not Provided">Not Provided</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="mb-3 col-md-12">
+            <label for="" class="form-label cm">Image of Product Label</label>
+            <input type="file" class="form-control cm" name="images[]" multiple>
+        </div>
+    </div>
+
+    @if(Auth::user()->role==0 || Auth::user()->role==1)
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Fisical Year</label>
+            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy">
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Voucher Number</label>
+            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Voucher Amount</label>
+            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number">
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Status</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
+                <option value="Pending">Pending</option>
+                <option value="Verified">Verified</option>
+            </select>
+        </div>
+    </div>
+    @endif
+
+    
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Product specification</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="product_specification">
+                <option value="Provided" selected>Provided</option>
+                <option value="Not Provided">Not Provided</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Product registration certificate</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="product_registration_certificate">
+                <option value="Provided" selected>Provided</option>
+                <option value="Not Provided">Not Provided</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Health Claim</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="health_claim">
+                <option value="Allowed" selected>Allowed</option>
+                <option value="Not Allowed">Not Allowed</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Nutritional Claim</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="nutritional_claim">
+                <option value="Verified" selected>Verified</option>
+                <option value="Not Verified">Not Verified</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Statement of Not for medical use</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="medical_statement">
+                <option value="Stated" selected>Stated</option>
+                <option value="Not Stated">Not Stated</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Process flow chart</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="process_flow">
+                <option value="Attached" selected>Attached</option>
+                <option value="Not Attached">Not Attached</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">This product is not intended to treat, cure or diagnose</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="diagnose_statement">
+                <option value="Mentioned" selected>Mentioned</option>
+                <option value="Not Mentioned">Not Mentioned</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Dietary supplement or similar</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="dietary_supplement">
+                <option value="Mentioned" selected>Mentioned</option>
+                <option value="Not Mentioned">Not Mentioned</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Specification rational</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="specification_rational">
+                <option value="Mentioned" selected>Mentioned</option>
+                <option value="Not Mentioned">Not Mentioned</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Active ingredients analysis method</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="analysis_method">
+                <option value="Mentioned" selected>Mentioned</option>
+                <option value="Not Mentioned">Not Mentioned</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">COA inhouse</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="coa_inhouse">
+                <option value="Attached" selected>Attached</option>
+                <option value="Not Attached">Not Attached</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">COA thirdparty</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="coa_thirdparty">
+                <option value="Attached" selected>Attached</option>
+                <option value="Not Attached">Not Attached</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-4">
+            <label for="" class="form-label cm">COA Product Standard</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="coa_product_standard">
+                <option value="Compiles" selected>Compiles</option>
+                <option value="Not Compiles">Not Compiles</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Free sale certificate</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="sale_certificate">
+                <option value="Attached" selected>Attached</option>
+                <option value="Not Attached">Not Attached</option>
+            </select>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="" class="form-label cm">Authorization letter</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="authorization_letter">
+                <option value="Provided and Attached" selected>Provided and attached</option>
+                <option value="Not Provided">Not Provided</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-12">
+            <label for="" class="form-label cm">Overall opinion</label>
+            <select class="form-select kit-form-control" aria-label="Default select example" name="overall_openion">
+                <option value="Recommend for approval" selected>Recommend for approval</option>
+                <option value="Not Recommend for approval">Not Recommend for approval</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-12">
+            <label for="" class="form-label cm">Remarks (if any)</label>
+            <textarea name="remarks"  class="form-control cm" cols="30" rows="4"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+@endsection

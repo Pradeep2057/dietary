@@ -9,12 +9,12 @@ class SizePolicy
 {
     public function create(User $user)
     {
-        return $user->role == '0' || $user->role == '1';
+        $user->role == '0' || $user->role == '1' || $user->role == '2';
     }
 
     public function update(User $user, Size $size)
     {
-        return $user->id == $size->author_id || $user->role == '0';
+        $user->role == '0' || $user->role == '1' || $user->role == '2';
     }
 
     public function delete(User $user, Size $size)

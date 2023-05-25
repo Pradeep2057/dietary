@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Ingredient extends Model
 {
@@ -16,6 +17,7 @@ class Ingredient extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        // return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_ingredient');
     }
 }

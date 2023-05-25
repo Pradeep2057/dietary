@@ -45,7 +45,10 @@ class IngredientController extends Controller
 
     public function edit(Ingredient $ingredient)
     {
-        return view('pages.ingredient.edit', compact('ingredient'));
+        return view('pages.ingredient.edit', [
+            'ingredient' => $ingredient,
+            'ingredients'    => Ingredient::all(),
+        ]);
     }
 
     public function update(Request $request, Ingredient $ingredient)

@@ -56,7 +56,7 @@ class ManufacturerController extends Controller
     {
         $this->authorize('update', $manufacturer);
         $selectedCountry = $manufacturer->country;
-        $selectedManufacturerauthority = $manufacturer->manufacturerauthority;
+        $selectedManufacturerauthority = $manufacturer->manufacturerauthority->id;
         return view('pages.manufacturer.edit',[
             'manufacturer'            => $manufacturer,
             'countries'        => Country::all(),

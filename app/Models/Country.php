@@ -24,4 +24,5 @@ class Country extends Model
     {
         return $this->hasMany(Lab::class);
     }
+    
 }

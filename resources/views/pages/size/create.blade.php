@@ -1,14 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', 'Create Size Form')
 
 @section('content')
-    <form class="row g-3" action="{{ route('size.store') }}" method="POST">
-    @csrf
-    <div class="col-auto">
-        <label for="staticEmail2">Size Name</label>
-        <input type="text"  class="form-control" id="staticEmail2" name="name">
+<div class="add-heading">
+    <h3 class="heading-cm">Size</h3>
+    <p><a href="{{ route('size.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+</div>
+
+<form action="{{ route('size.store') }}" method="POST" class="form-cm">
+@csrf
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="" class="form-label cm">Size Name</label>
+            <input type="text" class="form-control cm" placeholder="Enter Size Name" name="name">
+        </div>
     </div>
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Create</button>
-    </div>
-    </form>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 @endsection
+

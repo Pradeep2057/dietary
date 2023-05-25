@@ -9,12 +9,12 @@ class ProductformPolicy
 {
     public function create(User $user)
     {
-        return $user->role == '0' || $user->role == '1';
+        return $user->role == '0' || $user->role == '1' || $user->role == '2';
     }
 
     public function update(User $user, Productform $productform)
     {
-        return $user->id == $productform->author_id || $user->role == '0';
+        return $user->role == '0' || $user->role == '1' || $user->role == '2';
     }
 
     public function delete(User $user, Productform $productform)
