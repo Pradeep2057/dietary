@@ -88,6 +88,17 @@ class RenewController extends Controller
         ]);
     }
 
+    public function display(Renew $renew)
+    {
+        $this->authorize('update', $renew);
+        $selectedProduct = $renew->product;
+        return view('pages.renew.display', [
+            'renew'            => $renew,
+            'products'        => Product::all(),
+            'selectedProduct'  => $selectedProduct,
+        ]);
+    }
+
     public function update(Request $request, Renew $renew)
     {
         $this->authorize('update', $renew);

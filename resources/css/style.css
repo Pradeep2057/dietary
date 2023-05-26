@@ -659,7 +659,7 @@ button.btn.btn-primary {
 
 .dataTables_wrapper {
     background-color: white !important;
-    padding: 2rem;
+    padding: 24px!important;
     border-radius: 8px;
 }
 

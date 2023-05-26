@@ -33,8 +33,6 @@
 </form>
 
 
-
-
 <form action="{{ route('product.store') }}" method="POST" class="form-cm" enctype="multipart/form-data">
     @csrf
     <div class="row mb-2">
@@ -332,7 +330,10 @@
         </div>
     </div>
     
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Submit</button>
+    <div class="row">
+        <div class="col-md-12 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button></div>
+    </div>
+    
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered approval-modal">
@@ -375,7 +376,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" name="reject" class="btn btn-primary">Reject</button>
+                <button type="submit" name="reject" class="btn btn-primary reject-btn">Reject</button>
                 <button type="submit" name="verify" class="btn btn-primary">Verify</button>
             </div>
             @endif

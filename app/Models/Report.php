@@ -24,4 +24,19 @@ class Report extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function verifier(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'verifier_id');
+    }
+
+    public function pending(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'pending_id');
+    }
 }

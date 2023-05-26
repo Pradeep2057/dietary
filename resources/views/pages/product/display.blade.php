@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Edit Product')
+@section('title', 'View Product')
 
 @section('content')
 <div class="add-heading">
@@ -7,13 +7,50 @@
         <a href="{{ route('product.index')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i>
         </a>
-        Products<span class="sub-nav ms-2"> > View</span>
+        Products<span class="sub-nav ms-2"> > {{ $product->name }} > View</span>
     </h3>
-    <p><a href="{{ route('product.index')}}">View All</a></p>
+    <p><a href="{{ route('product.index')}}">View Products</a></p>
 </div>
 
-<div class="form-cm">
-    <div class="view-page">
+<div class="product-search-form mb-3">
+   <div class="row log-details">
+    <div class="col-md-2">
+        <p>Created By</p>
+        <h4>{{ $product->author->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Created at</p>
+        <h4>{{ $product->created_at}}</h4>
+    </div>
+    @if($product->status == 'Verified')
+    <div class="col-md-2">
+        <p>Verified By</p>
+        <h4>{{ $product->verifier->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Verified at</p>
+        <h4>{{ $product->verified_at }}</h4>
+    </div>
+    @elseif($product->status == 'Rejected')
+    <div class="col-md-2">
+        <p>Rejected By</p>
+        <h4>{{ $product->verifier->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Rejected at</p>
+        <h4>{{ $product->verified_at }}</h4>
+    </div>
+    @else
+    <div class="col-md-4"></div>
+    @endif
+    <div class="col-md-4 log-status">
+        <div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div>
+    </div>
+   </div>
+</div>
+
+<div class="view-page mb-4">
+<h3 class="create-form-heading">Product Details</h3>
         <div class="row">
             <div class="col-md-4">
                 <h4>Name of Product</h4>
@@ -150,8 +187,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <h4>Remarks</h4>
-                <p>{{ $product->remarks }}</p>
+                <h4>Overall opinion</h4>
+                <p>{{ $product->overall_openion }}</p>
             </div>
             @if(Auth::user()->role==0 || Auth::user()->role==1)
             <div class="col-md-4">
@@ -234,13 +271,18 @@
                 <p>{{ $product->authorization_letter }}</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Overall opinion</h4>
-                <p>{{ $product->overall_openion }}</p>
+        <div class="row remarks-border">
+            <div class="col-md-6">
+                <h4>Remarks by <br><span class="remarks-by">Data Entry Operator ({{ $product->author->name }})</span></h4>
+                <p>@if($product->remarks != null){{ $product->remarks }} @else N/A @endif</p>
             </div>
+            @if($product->remarks_1 != null)
+            <div class="col-md-6">
+                <h4>Remarks by <br><span class="remarks-by">Verifier ({{ $product->verifier->name }})</span></h4>
+                <p>{{ $product->remarks_1 }}</p>
+            </div>
+            @endif
         </div>
-    </div>
 </div>
 
 @endsection

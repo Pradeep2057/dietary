@@ -104,10 +104,7 @@
                 <th>Importer</th>
                 <th>Lab</th>
                 <th>Status</th>
-                <th>Created By</th>
                 <th>Date</th>
-                <th>Verified By</th>
-                <th>Verified Date</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -131,10 +128,7 @@
                     </td>
                     <td>{{ $product->lab->name }}</td>
                     <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
-                    <td>{{ $product->author->name }}</td>
                     <td>{{ $product->created_at->format('Y-m-d') }}</td>
-                    <td>{{ $product->verifier->name }}</td>
-                    <td>{{ $product->verified_at }}</td>
 
                     <td>
                         <div class="d-flex kit-action-com">

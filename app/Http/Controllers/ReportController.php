@@ -88,6 +88,17 @@ class ReportController extends Controller
         ]);
     }
 
+    public function display(Report $report)
+    {
+        $this->authorize('update', $report);
+        $selectedProduct = $report->product;
+        return view('pages.report.display', [
+            'report'            => $report,
+            'products'        => Product::all(),
+            'selectedProduct'  => $selectedProduct,
+        ]);
+    }
+
     public function update(Request $request, Report $report)
     {
         $this->authorize('update', $report);

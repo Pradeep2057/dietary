@@ -240,6 +240,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [ReportController::class, 'create'])->name('create');
         Route::post('/', [ReportController::class, 'store'])->name('store');
         Route::get('/{report:id}/edit', [ReportController::class, 'edit'])->name('edit');
+        Route::get('/{report:id}/display', [ReportController::class, 'display'])->name('display');
         Route::get('/{report:id}/pdf', [ReportController::class, 'generatePdf'])->name('pdf');
         Route::get('/{report:id}/certificate', [ReportController::class, 'certificate'])->name('certificate');
         Route::get('/{report:id}/print', [ReportController::class, 'print'])->name('print');
@@ -252,6 +253,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [RenewController::class, 'create'])->name('create');
         Route::post('/', [RenewController::class, 'store'])->name('store');
         Route::get('/{renew:id}/edit', [RenewController::class, 'edit'])->name('edit');
+        Route::get('/{renew:id}/display', [RenewController::class, 'display'])->name('display');
         Route::get('/{renew:id}/pdf', [RenewController::class, 'generatePdf'])->name('pdf');
         Route::get('/{renew:id}/certificate', [RenewController::class, 'certificate'])->name('certificate');
         Route::get('/{renew:id}/print', [RenewController::class, 'print'])->name('print');
