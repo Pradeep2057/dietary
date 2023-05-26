@@ -7,9 +7,9 @@
         <a href="{{ route('renew.index')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i>
         </a>
-        Certificate<span class="sub-nav ms-2" > > Tippani Renew > Create</span>
+        Certificate<span class="sub-nav ms-2" > > Renew Certificate > Create</span>
     </h3>
-    <p><a href="{{ route('renew.index')}}">View All</a></p>
+    <p><a href="{{ route('renew.index')}}">View Certificates</a></p>
 </div>
 
 <form action="{{ route('renew.store') }}" method="POST" class="form-cm">

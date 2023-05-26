@@ -148,8 +148,8 @@ body {
     font-size: 18px;
     font-family: poppins;
     font-weight: 600;
-    color: #0d68f9;
-    border-bottom: 2px solid;
+    color: #2460b9;
+    border-bottom: 2px solid #a8b0bf;
     padding-bottom: 10px;
     margin-bottom: 30px
 }
@@ -400,7 +400,9 @@ body {
 }
 
 .db-navbar li .nav-link {
-    font-weight: 500 !important
+    font-weight: 500 !important;
+    display: flex;
+    align-items: center;
 }
 
 .db-navbar li .nav-link:hover {
@@ -526,14 +528,15 @@ p.accordion-button {
     background-color: #0d68f9
 }
 
-tbody,
-td,
-tfoot,
-th,
-thead,
+
 tr {
-    border-style: none;
-    border-bottom: 1px solid #d6d6d6
+    border: 0.8px solid #e2e2e2;
+}
+table.dataTable.no-footer{
+    border: none!important;
+}
+td{
+    vertical-align: middle;
 }
 
 .row.main {
@@ -903,14 +906,27 @@ button.btn.btn-primary:hover {
     padding: 26px
 }
 
-.sorting {
+/* .sorting {
     background-color: #e7f0f7 !important
+} */
+.table>thead{
+    vertical-align: middle;
 }
-
+tfoot {
+    border-bottom: none!important;
+}
+table.dataTable thead th{
+    font-weight: 600;
+}
 #sampleTable {
     margin-top: 4rem
 }
-
+.hover-table tbody tr.odd:hover{
+    background-color: #f5f5f5!important;
+}
+.hover-table tbody tr.even:hover{
+    background-color: #f5f5f5!important;
+}
 .accordion-button {
     transition: none !important
 }
@@ -925,14 +941,6 @@ button.btn.btn-primary:hover {
     background-color: #fff !important
 }
 
-tbody,
-td,
-tfoot,
-th,
-thead,
-tr {
-    border-width: 1px
-}
 
 .view-page {
     background-color: #fff
@@ -1067,10 +1075,6 @@ tr {
     margin: 0
 }
 
-.table-row .odd,
-.table-row .even {
-    line-height: 2;
-}
 
 .rep-industry .right {
     font-size: 18px;
@@ -1597,4 +1601,14 @@ span#select2-prev_product-container {
 
 .approval-modal{
     max-width: 900px!important;
+}
+
+button.dt-button, div.dt-button, a.dt-button, input.dt-button{
+    border: 1px solid #a8b0bf!important;
+    color: #000!important;
+    border-radius: 4px!important;
+    background: none!important;
+}
+.dt-button:hover{
+    border: 1px solid #0d68f9!important;
 }

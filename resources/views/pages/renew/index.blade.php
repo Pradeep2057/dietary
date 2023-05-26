@@ -7,7 +7,7 @@
         <a href="{{ route('home')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i>
         </a>
-        Certificate<span class="sub-nav ms-2" > > Tippani Renew</span>
+        Certificate<span class="sub-nav ms-2" > > Renewal</span>
     </h3>
     <p><a href="{{ route('renew.create')}}"> <i class="fa-solid fa-plus"></i> Create Certificate</a></p>
 </div>

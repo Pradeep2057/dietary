@@ -92,7 +92,7 @@
     </div>
 
 
-    <table id="sampleTable" class="table table-hover" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>
@@ -116,62 +116,64 @@
             $i = 1;
             @endphp
             @foreach ($products as $product)
-            <tr>
-                <td>{{ $i }}</td>
-                <td>{{ $product->registration }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->producttype->name }}</td>
-                <td>{{ $product->productform->name }}</td>
-                <td>{{ $product->manufacturer->name }}</td>
-                <td>
-                    @foreach ($product->importers as $importer)
-                        {{ $importer->name }}
-                    @endforeach
-                </td>
-                <td>{{ $product->lab->name }}</td>
-                <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
-                <td>{{ $product->author->name }}</td>
-                <td>{{ $product->created_at->format('Y-m-d') }}</td>
-                <td>{{ $product->verifier->name }}</td>
-                <td>{{ $product->verified_at }}</td>
+            <a href="{{ route('product.display', $product->id) }}">
+                <tr>
+                    <td>{{ $i }}</td>
+                    <td>{{ $product->registration }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->producttype->name }}</td>
+                    <td>{{ $product->productform->name }}</td>
+                    <td>{{ $product->manufacturer->name }}</td>
+                    <td>
+                        @foreach ($product->importers as $importer)
+                            {{ $importer->name }}
+                        @endforeach
+                    </td>
+                    <td>{{ $product->lab->name }}</td>
+                    <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
+                    <td>{{ $product->author->name }}</td>
+                    <td>{{ $product->created_at->format('Y-m-d') }}</td>
+                    <td>{{ $product->verifier->name }}</td>
+                    <td>{{ $product->verified_at }}</td>
 
-                <td>
-                    <div class="d-flex kit-action-com">
-                        <div class="action-btn-view">
-                            <a href="{{ route('product.display', $product->id) }}">
-                                <span class="material-symbols-outlined">
-                                    visibility
-                                    </span>
-                            </a>
-                        </div>
+                    <td>
+                        <div class="d-flex kit-action-com">
+                            <div class="action-btn-view">
+                                <a href="{{ route('product.display', $product->id) }}">
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                        </span>
+                                </a>
+                            </div>
 
-                        @if (auth()->user()->role == 2 && $product->status == 'Pending')
-                        <div class="action-btn-pen">
-                            <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
-                                edit
-                                </span></a>
-                        </div>
-                        @elseif (auth()->user()->role == 0 || auth()->user()->role == 1 )
-                        <div class="action-btn-pen">
-                            <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
-                                edit
-                                </span></a>
-                        </div>
-                        @else
-                        @endif
+                            @if (auth()->user()->role == 2 && $product->status == 'Pending')
+                            <div class="action-btn-pen">
+                                <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
+                                    edit
+                                    </span></a>
+                            </div>
+                            @elseif (auth()->user()->role == 0 || auth()->user()->role == 1 )
+                            <div class="action-btn-pen">
+                                <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
+                                    edit
+                                    </span></a>
+                            </div>
+                            @else
+                            @endif
 
-                        @if (auth()->user()->role == 0)
-                        <form class="action-btn-dlt" action="{{ route('product.delete', $product->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                        </form>
-                        @endif
-                    </div>
-                </td>
-            </tr>
+                            @if (auth()->user()->role == 0)
+                            <form class="action-btn-dlt" action="{{ route('product.delete', $product->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </button>
+                            </form>
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+            </a>
             @php
             $i++;
             @endphp

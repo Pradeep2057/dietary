@@ -9,7 +9,7 @@
         </a>
         Certificate<span class="sub-nav ms-2" > > Registration > Create</span>
     </h3>
-    <p><a href="{{ route('report.index')}}">View All</a></p>
+    <p><a href="{{ route('report.index')}}">View Certificates</a></p>
 </div>
 
 <form action="{{ route('report.store') }}" method="POST" class="form-cm">

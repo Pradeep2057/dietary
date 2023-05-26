@@ -9,7 +9,7 @@
         </a>
         Products<span class="sub-nav ms-2"> > Create</span>
     </h3>
-    <p><a href="{{ route('product.index')}}">View All</a></p>
+    <p><a href="{{ route('product.index')}}">View Products</a></p>
 </div>
 
 
@@ -364,7 +364,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number">
+                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount">
                         </div>
                     </div>
                     <div class="row">

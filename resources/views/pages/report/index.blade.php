@@ -7,7 +7,7 @@
         <a href="{{ route('home')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i> 
         </a>
-        Certificate<span class="sub-nav ms-2" > > Tippani Registration</span>
+        Certificate<span class="sub-nav ms-2" > > Registration</span>
     </h3>
     <p><a href="{{ route('report.create')}}"> <i class="fa-solid fa-plus"></i> Create Certificate</a></p>
 </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>
