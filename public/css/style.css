@@ -1647,6 +1647,7 @@ button.dt-button, div.dt-button, a.dt-button, input.dt-button{
     background: #f44336!important;
     border-color: #f44336!important;
 }
+
 .reject-btn:hover{
     background: #d40101!important;
 }
