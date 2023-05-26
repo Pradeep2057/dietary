@@ -1594,3 +1594,7 @@ span#select2-prev_product-container {
     border-radius: 10px;
     padding: 26px;
 }
+
+.approval-modal{
+    max-width: 900px!important;
+}

@@ -109,38 +109,19 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255|unique:products',
-            // 'product_type' => 'required',
-            // 'health_claim' => 'required',
-            'ingredient_unit' => 'required',
-            // 'nutritional_claim' => 'required',
-            // 'expirydate_id' => 'required',
-            // 'medical_statement' => 'required',
-            // 'diagnose_statement' => 'required',
-            // 'dietary_supplement' => 'required',
-            // 'product_specification' => 'required',
-            // 'specification_rational' => 'required',
-            // 'analysis_method' => 'required',
-            // 'process_flow' => 'required',
-            // 'gmp_certificate' => 'required',
+            // 'product_type' => 'required|not_in:0',
+            // 'ingredient_unit' => 'required',
+            // 'expirydate_id' => 'required|not_in:0',
             // 'gmp_validity_upto' => 'required',
-            // 'coa_inhouse' => 'required',
-            // 'coa_thirdparty' => 'required',
-            // 'coa_product_standard' => 'required',
-            // 'authorization_letter' => 'required',
-            // 'sale_certificate' => 'required',
-            // 'product_label' => 'required',
-            // 'remarks' => 'required',
-            // 'product_registration_certificate' => 'required',
-            // 'overall_openion' => 'required',
-            // 'manufacturer_id' => 'required',
-            // 'gmp_id' => 'required',
-            // 'product_form' => 'required',
-            // 'dose_id' => 'required',
-            // 'size_id' => 'required',
-            // 'lab_id' => 'required',
-            // 'capital_id' => 'required',
-            'ingredients' => 'required',
-            'compositions' => 'required',
+            // 'manufacturer_id' => 'required|not_in:0',
+            // 'gmp_id' => 'required|not_in:0',
+            // 'product_form' => 'required|not_in:0',
+            // 'dose_id' => 'required|not_in:0',
+            // 'size_id' => 'required|not_in:0',
+            // 'lab_id' => 'required|not_in:0',
+            // 'capital_id' => 'required|not_in:0',
+            // 'ingredients' => 'required',
+            // 'importers' => 'required',
         ]);
         $product = new Product;
         $product->name = $validatedData['name'];
@@ -202,7 +183,7 @@ class ProductController extends Controller
         $product->lab_id = $request->lab_id;
         $product->capital_id = $request->capital_id;
         $product->ingredients = $request->ingredients;
-        $product->compositions = $request->compositions;
+        // $product->compositions = $request->compositions;
         $product->author_id = auth()->user()->id;
 
         $product->save();
@@ -227,6 +208,7 @@ class ProductController extends Controller
                 $product->images()->save($image);
             }
         }
+        
         $product->importers()->sync($request->input('importers'));
         return redirect()->route('product.index')->with('successct', 'Product created successfully.');
     }

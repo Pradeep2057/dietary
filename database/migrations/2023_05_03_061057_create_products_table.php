@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('product_registration_certificate');
             $table->string('overall_openion');
             $table->string('ingredients');
-            $table->string('compositions');
+            // $table->string('compositions');
             $table->string('ingredient_unit');
             $table->string('remarks')->nullable();
             $table->string('remarks_1')->nullable();
