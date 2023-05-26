@@ -89,7 +89,15 @@
                     <div class="d-flex kit-action-com">
                         @if((auth()->user()->role == 0 || auth()->user()->role == 1) && $renew->status == 'Verified' )
                         <div class="action-btn-view">
-                            <a href="{{ route('renew.pdf', $renew->id) }}" method="get">Generate PDF</a>
+                            <a href="{{ route('renew.pdf', $renew->id) }}" method="get">Tippani</a>
+                        </div>
+
+                        <div class="action-btn-view">
+                            <a href="{{ route('renew.certificate', $renew->id) }}" method="get">Certificate</a>
+                        </div>
+
+                        <div class="action-btn-view">
+                            <a href="{{ route('renew.print', $renew->id) }}" method="get">Print Certificate</a>
                         </div>
                         @endif
 

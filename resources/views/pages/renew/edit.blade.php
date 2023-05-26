@@ -69,20 +69,7 @@
         </div>
     </div>
 
-    @if(Auth::user()->role==0 || Auth::user()->role==1)
-    <div class="row mb-3">
-        <div class="mb-3 col-md-4">
-            <label for="" class="form-label cm">Status</label>
-            <select class="form-select kit-form-control" aria-label="Default select example" name="status">
-                <option value="Processing" @if($renew->status == 'Pending') selected @endif>Processing</option>
-                <option value="Pending" @if($renew->status == 'Pending') selected @endif>Pending</option>
-                @if(Auth::user()->role==0)
-                <option value="Verified" @if($renew->status == 'Verified') selected @endif>Verified</option>
-                @endif
-            </select>
-        </div>
-    </div>
-    @endif
+
     
     <button type="submit" class="btn btn-primary">Update</button>
 </form>

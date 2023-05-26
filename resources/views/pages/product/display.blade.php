@@ -110,16 +110,10 @@
                 <p>{{ $product->ingredient_unit }}</p>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <h4>Composition</h4>
-                <p>{{ $product->compositions }}</p>
-            </div>
-        </div>
         <div class="row mb-4">
             <div class="col-md-12">
                 <h4>Ingredients</h4>
-                <p>{{ $product->compositions }}</p>
+                <p>{{ $product->ingredients }}</p>
             </div>
         </div>
         <div class="row">
@@ -150,8 +144,7 @@
             <h4>Image of Product Label</h4>
             @foreach ($product->images as $image)
             <div class="col-md-3">
-                
-                <img src="{{ url('storage/'.$image->label_image) }}" alt="{{ $product->name }}">
+                <img src="{{ asset(str_replace('public', 'storage', $image->label_image)) }}" alt="{{ $product->name }}">
             </div>
             @endforeach
         </div>

@@ -1382,7 +1382,7 @@ th.sorting {
 
 .verified:hover{
     background-color: rgb(0, 200, 83);
-    color: rgba(185, 246, 202, 0.376);
+    color: #ffffff;
 }
 
 .rejected {
@@ -1593,4 +1593,8 @@ span#select2-prev_product-container {
     background-color: white;
     border-radius: 10px;
     padding: 26px;
+}
+
+.approval-modal{
+    max-width: 900px!important;
 }

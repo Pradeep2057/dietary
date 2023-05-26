@@ -135,4 +135,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Importer::class, 'product_importer')->withTimestamps();
     }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function verifier(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'verifier_id');
+    }
 }

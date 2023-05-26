@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/kantggjb/dietary.kantipurinfotech.com.np
+    - /bin/cp -r * $DEPLOYPATH

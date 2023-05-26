@@ -108,7 +108,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:products',
+            // 'product_type' => 'required|not_in:0',
+            // 'ingredient_unit' => 'required',
+            // 'expirydate_id' => 'required|not_in:0',
+            // 'gmp_validity_upto' => 'required',
+            // 'manufacturer_id' => 'required|not_in:0',
+            // 'gmp_id' => 'required|not_in:0',
+            // 'product_form' => 'required|not_in:0',
+            // 'dose_id' => 'required|not_in:0',
+            // 'size_id' => 'required|not_in:0',
+            // 'lab_id' => 'required|not_in:0',
+            // 'capital_id' => 'required|not_in:0',
+            // 'ingredients' => 'required',
+            // 'importers' => 'required',
         ]);
         $product = new Product;
         $product->name = $validatedData['name'];
@@ -170,7 +183,7 @@ class ProductController extends Controller
         $product->lab_id = $request->lab_id;
         $product->capital_id = $request->capital_id;
         $product->ingredients = $request->ingredients;
-        $product->compositions = $request->compositions;
+        // $product->compositions = $request->compositions;
         $product->author_id = auth()->user()->id;
 
         $product->save();
@@ -195,6 +208,7 @@ class ProductController extends Controller
                 $product->images()->save($image);
             }
         }
+        
         $product->importers()->sync($request->input('importers'));
         return redirect()->route('product.index')->with('successct', 'Product created successfully.');
     }

@@ -309,9 +309,7 @@
                             </td>
                             <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                         border-style: dotted;"><h2>
-                            @foreach ($pdfreport->product->compositions as $composition)
-                                {{ $composition->name }},
-                            @endforeach
+                           {{ $pdfreport->compositions }} 
                         </tr>
                     </tbody>
                 </table>
@@ -418,7 +416,7 @@
                     <tbody style="width:100%;">
                         <tr>
                             <td style="width: 50%;"><img src="{{ $qrCodeImage }}" alt="QR code"></td>
-                            <td style="width: 50%; text-align: right;"><h3> {{ $pdfreport->prepared_by}} <br> {{ $pdfreport->post }} <br> {{ $pdfreport->date_of_preparation }} </h3>
+                            <td style="width: 50%; text-align: right;"><h3> {{ $pdfreport->prepared_by }} <br> {{ $pdfreport->post }} <br> {{ $pdfreport->date_of_preparation }} </h3>
                     </td>
                         </tr>
                     </tbody>

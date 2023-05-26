@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Mpdf\Mpdf;
 use App\Models\Renew;
 use App\Models\Product;
@@ -47,6 +49,19 @@ class RenewController extends Controller
     public function store(Request $request)
     {
         $renew = new Renew;
+
+        if (Auth::user()->role == 0) {
+            $renew->status = 'Verified';
+            $renew->verifier_id = Auth::user()->id;
+            $renew->verified_at = Carbon::now()->toDateTimeString();
+        }elseif(Auth::user()->role == 1){
+            $renew->status = 'Pending';
+            $renew->pending_id = Auth::user()->id;
+            $renew->pending_at = Carbon::now()->toDateTimeString();
+        }else{
+            $renew->status = 'Processing';
+        }
+
         $renew->date_of_grant = $request->date_of_grant;
         $renew->renew_valid = $request->renew_valid;
         $renew->application_number = $request->application_number;
@@ -87,8 +102,14 @@ class RenewController extends Controller
         $renew->prepared_by = $request->prepared_by;
         $renew->post = $request->post;
 
-        if($request->status){
-            $renew->status = $request->status;
+        if (Auth::user()->role == 0) {
+            $renew->status = 'Verified';
+            $renew->verifier_id = Auth::user()->id;
+            $renew->verified_at = Carbon::now()->toDateTimeString();
+        }elseif(Auth::user()->role == 1){
+            $renew->status = 'Pending';
+            $renew->pending_id = Auth::user()->id;
+            $renew->pending_at = Carbon::now()->toDateTimeString();
         }else{
             $renew->status = 'Processing';
         }
@@ -110,7 +131,7 @@ class RenewController extends Controller
         $pdf_url = asset('storage/reports/production_renew/' . $renew->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
-        $qrCode->setSize(200);
+        $qrCode->setSize(150);
         $result = $writer->write($qrCode);
         $dataUri = $result->getDataUri();
 
@@ -135,5 +156,84 @@ class RenewController extends Controller
         $renew->save();
 
         return response()->download(storage_path('app/public/reports/production_renew/' . $renew->product->name . '.pdf'));
+    }
+
+    public function certificate(Renew $renew)
+    {
+        $pdf_url = asset('storage/reports/product_renewal/' . $renew->product->name .'.pdf');
+        $writer = new PngWriter();
+        $qrCode = new QrCode($pdf_url);
+        $qrCode->setSize(150);
+        $result = $writer->write($qrCode);
+        $dataUri = $result->getDataUri();
+
+        
+        $logoImagePath = storage_path('app/public/image/np-min.png');
+        $logoImageContents = file_get_contents($logoImagePath);
+        $logoImageData = base64_encode($logoImageContents);
+        $logoImageMimeType = mime_content_type($logoImagePath);
+        $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
+        $html = view('pages.renewal.pdf', [
+            'pdfproduct' => $renew,
+            'qrCodeImage' => $dataUri,
+            'logo' => $logoImageDataUri,
+            ])->render();
+
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'orientation' => 'P',
+            'autoScriptToLang' => false, 
+            'autoLangToFont' => true,
+            'default_font' => 'freesans',
+            'default_font_size' => 12,
+            'showImageErrors' => true,
+        ]);
+        
+        $mpdf->WriteHTML($html);
+        $pdf_path = Storage::disk('public')->put('reports/product_renewal/' . $renew->product->name . '.pdf', $mpdf->Output('', 'S'));
+        $renew->production_renew_tippani = $renew->product->name . '.pdf';
+        $renew->save();
+
+        return response()->download(storage_path('app/public/reports/product_renewal/' . $renew->product->name . '.pdf'));
+    }
+
+    public function print(Renew $renew)
+    {
+        $pdf_url = asset('storage/reports/product_renew_print/' . $renew->product->name .'.pdf');
+        $writer = new PngWriter();
+        $qrCode = new QrCode($pdf_url);
+        $qrCode->setSize(150);
+        $result = $writer->write($qrCode);
+        $dataUri = $result->getDataUri();
+
+        
+        $logoImagePath = storage_path('app/public/image/np-min.png');
+        $logoImageContents = file_get_contents($logoImagePath);
+        $logoImageData = base64_encode($logoImageContents);
+        $logoImageMimeType = mime_content_type($logoImagePath);
+        $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
+        $html = view('pages.renewal.print', [
+            'pdfproduct' => $renew,
+            'qrCodeImage' => $dataUri,
+            'logo' => $logoImageDataUri,
+            ])->render();
+
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'orientation' => 'P',
+            'autoScriptToLang' => false, 
+            'autoLangToFont' => true,
+            'default_font' => 'freesans',
+            'default_font_size' => 12,
+            'showImageErrors' => true,
+        ]);
+        
+        $mpdf->WriteHTML($html);
+        $pdf_path = Storage::disk('public')->put('reports/product_renew_print/' . $renew->product->name . '.pdf', $mpdf->Output('', 'S'));
+        return response()->download(storage_path('app/public/reports/product_renew_print/' . $renew->product->name . '.pdf'));
     }
 }

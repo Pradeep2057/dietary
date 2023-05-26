@@ -188,9 +188,7 @@
                         </td>
                         <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>@foreach ($pdfrenew->product->compositions as $composition)
-                                {{ $composition->name }},
-                            @endforeach</h2>
+                            <h2>$pdfrenew->product->compositions</h2>
                         </td>
                     </tr>
                 </tbody>
@@ -242,7 +240,7 @@
                         </td>
                         <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>{{ $pdfrenew->product->validity_from }}</h2>
+                            <h2>{{ $pdfrenew->validity_from }}</h2>
                         </td>
                     </tr>
                 </tbody>
