@@ -15,6 +15,9 @@ class Manufacturer extends Model
         'name',
         'registration_number',
         'registration_validity',  
+        'registration_authority',  
+        'country_id',  
+        'author_id',  
     ];
 
     public function country(): BelongsTo

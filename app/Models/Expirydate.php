@@ -10,7 +10,8 @@ class Expirydate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'author_id'
     ];
 
     public function products()

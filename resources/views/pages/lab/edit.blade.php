@@ -31,9 +31,15 @@
             <select class="form-select kit-form-control mySelect" aria-label="Default select example" name="country_id">
                 <option value="1" selected disabled>Select</option>
                 @foreach ($countries as $country)
+                @if($selectedCountry != null)
                 <option value="{{ $country->id }}" @if($country->id == $selectedCountry->id) selected @endif>
                         {{ $country->name }}
                 </option>
+                @else
+                <option value="{{ $country->id }}">
+                        {{ $country->name }}
+                </option>
+                @endif
                 @endforeach
             </select>
         </div>

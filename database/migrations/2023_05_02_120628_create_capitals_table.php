@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('capitals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('amount');
+            $table->string('amount')->nullable();
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

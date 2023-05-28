@@ -14,6 +14,7 @@ class Agency extends Model
         'name',
         'address',
         'description',
+        'author_id',
     ];
 
     public function products()

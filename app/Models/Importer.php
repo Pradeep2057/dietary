@@ -19,6 +19,7 @@ class Importer extends Model
         'exim_code',
         'contact_number',
         'contact_person',
+        'author_id',
     ];
 
     // public function products()

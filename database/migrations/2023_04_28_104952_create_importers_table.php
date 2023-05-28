@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('importers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->string('pan');
-            $table->string('firm_no')->default('');
-            $table->string('exim_code')->default('');
-            $table->string('contact_number')->default('');
-            $table->string('contact_person')->default('');
+            $table->string('address')->nullable();
+            $table->string('pan')->nullable();
+            $table->string('firm_no')->nullable();
+            $table->string('exim_code')->nullable();
+            $table->string('contact_person')->nullable();
+            $table->string('contact_number')->nullable();
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

@@ -28,6 +28,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\ExpirydateController;
 use App\Http\Controllers\FiscalyearController;
+use App\Http\Controllers\ImportController;
 
 
 
@@ -56,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
     //     // return redirect('/product');
     // });
     // Route::get('/', [ProductController::class, 'index']);
+
+    Route::post('/import-category',[ImportController::class, 'importCategory'])->name('importCat');
+    Route::get('/import-category',[ImportController::class, 'index'])->name('import');
+
 
     Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('/profile',[HomeController::class, 'profile'])->name('profile');

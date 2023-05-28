@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('manufacturers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('registration_number');
-            $table->date('registration_validity');
+            $table->string('registration_number')->nullable();
+            $table->date('registration_validity')->nullable();
+            $table->foreignId('registration_authority')->nullable()->constrained('manufacturerauthorities');
+            $table->foreignId('country_id')->nullable()->constrained('countries');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

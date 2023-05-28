@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('production_report')->nullable();
             $table->string('production_tippani')->nullable();
             $table->string('status')->default('Processing');
-            $table->foreignId('product_id')->constrained('products');
+            // $table->foreignId('product_id')->constrained('products');
             $table->foreignId('author_id')->constrained('users');
 
             $table->foreignId('pending_id')->nullable()->constrained('users');

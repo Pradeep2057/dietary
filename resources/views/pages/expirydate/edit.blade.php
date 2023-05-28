@@ -46,7 +46,7 @@
         <div class="col-md-9">
             @if(!empty($expirydates))
 
-            <table id="sampleTable" class="table table-striped" style="width:100%">
+            <table id="sampleTable" class="table hover-table" style="width:100%">
                 <thead>
                     <tr>
                         <th>S No.</th>
@@ -74,7 +74,9 @@
                                 </div>
                                 <div class="action-btn-pen">
                                     <a href="{{ route('expirydate.edit', $expirydate->id) }}"
-                                        method="put"><button>Edit</button></a>
+                                        method="put"><span class="material-symbols-outlined">
+                                            edit
+                                            </span></a>
                                 </div>
 
                                 @if (auth()->user()->role == 0)

@@ -41,7 +41,9 @@
             <select id="authority" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Registration Authority</option>
                 @foreach ($manufacturers->unique('manufacturerauthority.name') as $manufacturer)
+                @if($manufacturer->manufacturerauthority != null)
                 <option value="{{ $manufacturer->manufacturerauthority->name }}">{{ $manufacturer->manufacturerauthority->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -49,7 +51,9 @@
             <select id="country" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Country</option>
                 @foreach ($manufacturers->unique('country.name') as $manufacturer)
+                @if($manufacturer->country != null)
                 <option value="{{ $manufacturer->country->name }}">{{ $manufacturer->country->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -64,7 +68,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>
@@ -87,8 +91,16 @@
                 <td>{{ $manufacturer->name }} </td>
                 <td>{{ $manufacturer->registration_number }} </td>
                 <td>{{ $manufacturer->registration_validity }} </td>
+                @if($manufacturer->manufacturerauthority != null)
                 <td>{{ $manufacturer->manufacturerauthority->name }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+                @if($manufacturer->country != null)
                 <td>{{ $manufacturer->country->name }} </td>
+                @else
+                <td>N/A</td>
+                @endif
                 <td>{{ $manufacturer->created_at->format('Y-m-d') }} </td>
 
                 <td>
