@@ -7,7 +7,7 @@
         <a href="{{ route('product.index')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i> 
         </a>
-        Products<span class="sub-nav ms-2" > > Edit</span>
+        Products<span class="sub-nav ms-2" > > {{ $product->name }} > Edit</span>
     </h3>
     <p><a href="{{ route('product.index')}}">View All</a></p>
 </div>
@@ -139,12 +139,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="mb-3 col-md-6">
-            <label for="" class="form-label cm">Composition</label>
-            <textarea name="compositions" class="form-control cm" cols="30" rows="4">{{ $product->compositions }}</textarea>
-        </div>
-
-        <div class="mb-3 col-md-6">
+        <div class="mb-3 col-md-12">
             <label for="" class="form-label cm">Ingredients</label>
             <textarea name="ingredients" class="form-control cm" cols="30" rows="4">{{ $product->ingredients }}</textarea>
         </div>

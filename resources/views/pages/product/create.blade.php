@@ -9,18 +9,18 @@
         </a>
         Products<span class="sub-nav ms-2"> > Create</span>
     </h3>
-    <p><a href="{{ route('product.index')}}">View All</a></p>
+    <p><a href="{{ route('product.index')}}">View Products</a></p>
 </div>
 
 
 <form action="{{ route('product.fill') }}" method="GET" class="mb-3 product-search-form">
     <div class="row">
-        <div class="col-md-10" style="position: relative">
+        <div class="col-md-8" style="position: relative">
             <span class="material-symbols-outlined prd-search">
                 search
                 </span>
             <select name="productId" class="form-select kit-form-control mySelect" id="prev_product">
-                <option value="1" selected disabled>Select similar product</option>
+                <option value="0" selected disabled>Select similar product</option>
                 @foreach ($products as $product)
                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                 @endforeach
@@ -29,13 +29,17 @@
         <div class="col-md-2">
             <button type="submit" class="btn btn-primary w-100">Fill</button>
         </div>
+        <div class="col-md-2">
+            <input type="reset" value="Reset form" id="reset">
+        </div>
     </div>
 </form>
 
 
 
 
-<form action="{{ route('product.store') }}" method="POST" class="form-cm" enctype="multipart/form-data">
+
+<form action="{{ route('product.store') }}" method="POST" class="form-cm" enctype="multipart/form-data" id="myForm">
     @csrf
     <div class="row mb-2">
         <div class="mb-3 col-md-6">
@@ -50,7 +54,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Type of Product</label>
             <select name="product_type" class="form-select kit-form-control mySelect @error('product_type') is-invalid @enderror">
-                <option value="1" selected disabled>Select product type</option>
+                <option value="0" selected disabled>Select product type</option>
                 @foreach ($producttypes as $producttype)
                 <option value="{{ $producttype->id }}"
                     {{ $templateProduct && $templateProducttype->id == $producttype->id ? 'selected' : '' }}>
@@ -64,7 +68,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Form of Product</label>
             <select name="product_form" class="form-select kit-form-control mySelect @error('product_form') is-invalid @enderror">
-                <option value="1" selected disabled>Select product form</option>
+                <option value="0" selected >Select product form</option>
                 @foreach ($productforms as $productform)
                 <option value="{{ $productform->id }}"
                     {{ $templateProduct && $templateProductform->id == $productform->id ? 'selected' : '' }}>
@@ -75,7 +79,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Dose specified</label>
             <select name="dose_id" class="form-select kit-form-control mySelect @error('dose_id') is-invalid @enderror" aria-label="Default select example">
-                <option value="1" selected disabled>Select dose</option>
+                <option value="0" selected disabled>Select dose</option>
                 @foreach ($doses as $dose)
                 <option value="{{ $dose->id }}"
                     {{ $templateProduct && $templateDose->id == $dose->id ? 'selected' : '' }}>{{ $dose->name }}
@@ -88,7 +92,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Size of pack</label>
             <select name="size_id" class="form-select kit-form-control mySelect @error('size_id') is-invalid @enderror">
-                <option value="1" selected disabled>Select size</option>
+                <option value="0" selected disabled>Select size</option>
                 @foreach ($sizes as $size)
                 <option value="{{ $size->id }}"
                     {{ $templateProduct && $templateSize->id == $size->id ? 'selected' : '' }}>{{ $size->name }}
@@ -99,7 +103,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Expirydate Claim</label>
             <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_claim') is-invalid @enderror">
-                <option value="1" selected disabled>Select expiry date</option>
+                <option value="0" selected disabled>Select expiry date</option>
                 @foreach ($expirydates as $expirydate)
                 <option value="{{ $expirydate->id }}"
                     {{ $templateProduct && $templateExpirydate->id == $expirydate->id ? 'selected' : '' }}>
@@ -131,7 +135,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Lab</label>
             <select name="lab_id" class="form-select kit-form-control mySelect @error('lab_id') is-invalid @enderror">
-                <option value="1" selected disabled>Select Lab</option>
+                <option value="0" selected disabled>Select Lab</option>
                 @foreach ($labs as $lab)
                 <option value="{{ $lab->id }}">{{ $lab->name }}</option>
                 @endforeach
@@ -140,7 +144,7 @@
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Capital of firm</label>
             <select name="capital_id" class="form-select kit-form-control mySelect @error('capital_id') is-invalid @enderror">
-                <option value="1" selected disabled>Select Capital</option>
+                <option value="0" selected disabled>Select Capital</option>
                 @foreach ($capitals as $capital)
                 <option value="{{ $capital->id }}">{{ $capital->name }}</option>
                 @endforeach
@@ -159,7 +163,7 @@
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP Certifying Agency</label>
             <select name="gmp_id" class="form-select kit-form-control mySelect @error('gmp_id') is-invalid @enderror">
-                <option value="1" selected disabled>Select GMP Certifying Agency</option>
+                <option value="0" selected disabled>Select GMP Certifying Agency</option>
                 @foreach ($agencies as $agency)
                 <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                 @endforeach
@@ -364,7 +368,7 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_number">
+                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount">
                         </div>
                     </div>
                     <div class="row">
@@ -383,4 +387,20 @@
         </div>
     </div>
 </form>
+@endsection
+
+
+@section ('custom-js')
+<script>
+    $(document).ready(function() {
+      $("#reset").on("click", function () {
+        $('#myForm')[0].reset();
+        $('#myForm input[type="text"]').val('');
+        $('.form-select').val('0').trigger('change.select2'); 
+        $("select").each(function() {
+          $(this).val($(this).find("option:first").val());
+        }); 
+      });
+    });
+</script>
 @endsection

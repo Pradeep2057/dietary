@@ -90,6 +90,21 @@
                 placeholder: 'Select'
             });
         });
+
+     
+    $(document).ready(function() {
+        // Get the success alert element
+        var successAlert = $(".alert");
+
+        // Check if the alert element exists
+        if (successAlert.length > 0) {
+            // Hide the alert after 10 seconds
+            setTimeout(function() {
+                successAlert.alert('close');
+            }, 5000);
+        }
+    });
+
     </script>
 
     @yield('custom-js')
