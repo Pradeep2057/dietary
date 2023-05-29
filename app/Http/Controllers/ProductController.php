@@ -97,10 +97,9 @@ class ProductController extends Controller
     {
         $productId = $request->input('productId');
         $templateProduct = Product::find($productId);
-
-        $templatedImporters = $templateProduct->importer;
-        $templateImporters = $templatedImporters ? $templatedImporters->pluck('id')->toArray() : [];
         
+        $templateImporters = $templateProduct->importers->pluck('id')->toArray();
+
         $templateManufacturer = $templateProduct->Manufacturer;
         $templateAgency = $templateProduct->agency;
         $templateProducttype = $templateProduct->producttype;

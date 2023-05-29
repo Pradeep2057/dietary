@@ -63,9 +63,9 @@
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                                 border-style: dotted;">
-                                <h2>
-                                @foreach ($pdfreport->product->importers as $importer)
-                                    {{ $importer->firm_no }},
+                                <h2> 
+                                @foreach ($importers as $importer)
+                                        {{ $importer->firm_no }}
                                 @endforeach
                                 </h2>
                             </td>
@@ -102,7 +102,10 @@
                                 </h1>
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
-                        border-style: dotted;"><h2>{{ $pdfreport->product->dose->name }}</h2></td>
+                        border-style: dotted;"><h2>
+                            @if($pdfreport->product->dose != null)
+                            {{ $pdfreport->product->dose->name }}</h2>
+                        @endif</td>
                         </tr>
                     </tbody>
                 </table>
@@ -309,7 +312,7 @@
                             </td>
                             <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                         border-style: dotted;"><h2>
-                           {{ $pdfreport->compositions }} 
+                           {{ $pdfreport->product->ingredients }} 
                         </tr>
                     </tbody>
                 </table>

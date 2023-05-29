@@ -136,12 +136,12 @@
                 <td style="width:25%;">
                     <h1 style="font-family: roboto; font-size: 24px; font-style: italic; text-decoration: underline; margin-bottom: 10px;"> Date of
                         approval</h1>
-                    <h2 style="padding: 0 10px;margin: 5px;  font-size:24px;">{{ $pdfproduct->valid_from }}</h2>
+                    <h2 style="padding: 0 10px;margin: 5px;  font-size:24px;">{{ $pdfproduct->validity_from }}</h2>
                 </td>
                 <td style="width:25%;">
                     <h1 style="font-family: roboto; font-size: 24px; font-style: italic; text-decoration: underline; margin-bottom: 10px;"> Validity
                     </h1>
-                    <h2 style="padding: 0;margin: 5px;  font-size:24px;">{{ $pdfproduct->valid_to }}</h2>
+                    <h2 style="padding: 0;margin: 5px;  font-size:24px;">{{ $pdfproduct->validity_to }}</h2>
                 </td>
             </tr>
         </tbody>
@@ -161,7 +161,7 @@
                 <td style="width: 75%; border: 0.5px solid rgb(240,242,245)
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->ingredients }}
+                        {{ $pdfproduct->product->ingredients }}
                     </h2>
                 </td>
             </tr>
@@ -216,7 +216,9 @@
                 <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product->dose != null)
                         {{ $pdfproduct->product->dose->name }}</h2>
+                    @endif
                 </td>
             </tr>
         </tbody>

@@ -111,7 +111,7 @@
             <label for="" class="form-label cm">Name of Importer</label>
             <select name="importers[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
                 @foreach ($importers as $importer)
-                <option value="{{ $importer->id }}" @if (in_array($importer->id, $templateImporters)) selected @endif>{{ $importer->name }}</option>
+                    <option value="{{ $importer->id }}" @if($templateProduct && (in_array($importer->id, $templateImporters))) selected @endif>{{ $importer->name }} </option>
                 @endforeach
             </select>
         </div>

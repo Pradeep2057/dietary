@@ -114,7 +114,7 @@
                 <td style="width: 75%; border: 0.5px solid rgb(240,242,245)
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->ingredients }}
+                        {{ $pdfproduct->product->ingredients }}
                     </h2>
                 </td>
             </tr>

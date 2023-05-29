@@ -111,3 +111,11 @@
 </form>
 @endsection
 
+@section('custom-js')
+    <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}"></script>
+    <script>
+		jQuery(document).ready(function () {
+			$('.date-picker').nepaliDatePicker();
+		})
+	</script>
+@endsection

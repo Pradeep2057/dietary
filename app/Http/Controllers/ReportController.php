@@ -150,9 +150,13 @@ class ReportController extends Controller
         $result = $writer->write($qrCode);
         $dataUri = $result->getDataUri();
 
-        
+        $importers = $report->product->importers;
+
+        // dd($importers);
+
         $html = view('pages.report.pdf', [
             'pdfreport' => $report,
+            'importers'=> $importers,
             'qrCodeImage' => $dataUri
             ])->render();
 
