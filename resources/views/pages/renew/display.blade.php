@@ -118,6 +118,16 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                <h4>Voucher Number</h4>
+                <p>{{ $renew->voucher_number}}</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Voucher Amount</h4>
+                <p>{{ $renew->voucher_amount }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
                 <h4>Date of Preparation</h4>
                 <p>{{ $renew->date_of_preparation}}</p>
             </div>

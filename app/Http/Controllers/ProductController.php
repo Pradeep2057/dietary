@@ -22,6 +22,8 @@ use App\Models\Fiscalyear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use DataTables;
+
 class ProductController extends Controller
 {
     /**
@@ -42,6 +44,34 @@ class ProductController extends Controller
             'importers'    => Importer::all(),
         ]);
     }
+
+    // public function data(Request $request)
+    // {
+    //     $query = Product::query();
+
+    //     return DataTables::eloquent($query)
+    //         ->addColumn('producttype', function(Product $product) {
+    //             return $product->producttype->name;
+    //         })
+    //         ->addColumn('productform', function(Product $product) {
+    //             return $product->productform->name;
+    //         })
+    //         ->addColumn('manufacturer', function(Product $product) {
+    //             return $product->manufacturer->name;
+    //         })
+    //         ->addColumn('importers', function(Product $product) {
+    //             return $product->importers->name;
+    //         })
+    //         ->addColumn('lab', function(Product $product) {
+    //             return $product->lab->name;
+    //         })
+    //         ->addColumn('action', function(Product $product) {
+    //             // Add your custom action button(s) here
+    //             return '<button>Edit</button>';
+    //         })
+    //         ->rawColumns(['action'])
+    //         ->make(true);
+    // }
 
     public function create(Product $product)
     {
@@ -67,15 +97,20 @@ class ProductController extends Controller
     {
         $productId = $request->input('productId');
         $templateProduct = Product::find($productId);
+        
+        $templateImporters = $templateProduct->importers->pluck('id')->toArray();
 
-        $templateImporter = $templateProduct->importer;
         $templateManufacturer = $templateProduct->Manufacturer;
         $templateAgency = $templateProduct->agency;
         $templateProducttype = $templateProduct->producttype;
         $templateProductform = $templateProduct->productform;
         $templateDose = $templateProduct->dose;
         $templateSize = $templateProduct->size;
+        $templateLab = $templateProduct->lab;
+        $templateCapital = $templateProduct->capital;
         $templateExpirydate = $templateProduct->expirydate;
+        $templateIngredients = $templateProduct->ingredients;
+        $templateIngredientsunit = $templateProduct->ingredient_unit;
 
         return view('pages.product.create', [
             'products' => Product::all(),
@@ -91,8 +126,7 @@ class ProductController extends Controller
             'capitals'    => Capital::all(),
             'expirydates'    => Expirydate::all(),
             'templateProduct' => $templateProduct,
-            'templateImporter' => $templateImporter,
-            'templateManufacturer' => $templateManufacturer,
+            'templateImporters' => $templateImporters,
             'templateManufacturer' => $templateManufacturer,
             'templateAgency' => $templateAgency,
             'templateProducttype' => $templateProducttype,
@@ -100,6 +134,10 @@ class ProductController extends Controller
             'templateDose' => $templateDose,
             'templateSize' => $templateSize,
             'templateExpirydate' => $templateExpirydate,
+            'templateLab' => $templateLab,
+            'templateCapital'=>$templateCapital,
+            'templateIngredients'=>$templateIngredients,
+            'templateIngredientsunit'=>$templateIngredientsunit,
         ]);
     }
 
@@ -157,8 +195,8 @@ class ProductController extends Controller
             $product->remarks_1 = $request->remarks1;
         }
 
-        $product->voucher_no = $request->voucher_number;
-        $product->voucher_amount = $request->voucher_amount;
+        // $product->voucher_no = $request->voucher_number;
+        // $product->voucher_amount = $request->voucher_amount;
 
         $product->product_registration_certificate = $request->product_registration_certificate;
         $product->overall_openion = $request->overall_openion;
@@ -196,6 +234,7 @@ class ProductController extends Controller
                 $product->images()->save($image);
             }
         }
+
         $product->importers()->sync($request->input('importers'));
         return redirect()->route('product.index')->with('successct', 'Product created successfully.');
     }
@@ -309,8 +348,8 @@ class ProductController extends Controller
         $product->fy = $request->fy;
         $product->health_claim = $request->health_claim;
         $product->ingredient_unit = $request->ingredient_unit;
-        $product->voucher_no = $request->voucher_number;
-        $product->voucher_amount = $request->voucher_amount;
+        // $product->voucher_no = $request->voucher_number;
+        // $product->voucher_amount = $request->voucher_amount;
 
         if($request->remarks){
             $product->remarks = $request->remarks;
@@ -341,6 +380,7 @@ class ProductController extends Controller
 
         $product->nutritional_claim = $request->nutritional_claim;
         $product->expirydate_id = $request->expirydate_claim;
+        $product->category_id = $request->cat;
         $product->medical_statement = $request->medical_statement;
         $product->diagnose_statement = $request->diagnose_statement;
         $product->dietary_supplement = $request->dietary_supplement;
@@ -392,6 +432,7 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('successup', 'Product edited successfully.');
     }
+
 
     public function destroy(Product $product)
     {

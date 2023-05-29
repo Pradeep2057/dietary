@@ -44,8 +44,6 @@
         <h3 class="create-form-heading">Create Product</h3>
     </div>
     @csrf
-
-
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item mb-4">
           <h2 class="accordion-header cm">
@@ -82,7 +80,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Form of Product</label>
                         <select name="product_form" class="form-select kit-form-control mySelect @error('product_form') is-invalid @enderror">
-                            <option value="0" selected >Select product form</option>
+                            <option value="1" selected disabled>Select product form</option>
                             @foreach ($productforms as $productform)
                             <option value="{{ $productform->id }}"
                                 {{ $templateProduct && $templateProductform->id == $productform->id ? 'selected' : '' }}>
@@ -93,7 +91,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Dose specified</label>
                         <select name="dose_id" class="form-select kit-form-control mySelect @error('dose_id') is-invalid @enderror" aria-label="Default select example">
-                            <option value="0" selected disabled>Select dose</option>
+                            <option value="1" selected disabled>Select dose</option>
                             @foreach ($doses as $dose)
                             <option value="{{ $dose->id }}"
                                 {{ $templateProduct && $templateDose->id == $dose->id ? 'selected' : '' }}>{{ $dose->name }}
@@ -106,7 +104,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Size of pack</label>
                         <select name="size_id" class="form-select kit-form-control mySelect @error('size_id') is-invalid @enderror">
-                            <option value="0" selected disabled>Select size</option>
+                            <option value="1" selected disabled>Select size</option>
                             @foreach ($sizes as $size)
                             <option value="{{ $size->id }}"
                                 {{ $templateProduct && $templateSize->id == $size->id ? 'selected' : '' }}>{{ $size->name }}
@@ -117,7 +115,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Expirydate Claim</label>
                         <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_claim') is-invalid @enderror">
-                            <option value="0" selected disabled>Select expiry date</option>
+                            <option value="1" selected disabled>Select expiry date</option>
                             @foreach ($expirydates as $expirydate)
                             <option value="{{ $expirydate->id }}"
                                 {{ $templateProduct && $templateExpirydate->id == $expirydate->id ? 'selected' : '' }}>
@@ -127,20 +125,22 @@
                     </div>
                 </div>
                 <div class="row">
+
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Name of Importer</label>
                         <select name="importers[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
                             @foreach ($importers as $importer)
-                            <option value="{{ $importer->id }}">{{ $importer->name }}</option>
+                                <option value="{{ $importer->id }}" @if($templateProduct && (in_array($importer->id, $templateImporters))) selected @endif>{{ $importer->name }} </option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Name of Manufacturer</label>
                         <select name="manufacturer_id" class="form-select kit-form-control mySelect @error('manufacturer_id') is-invalid @enderror">
                             <option value="" selected disabled>Select Manufacturer</option>
                             @foreach ($manufacturers as $manufacturer)
-                            <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                            <option value="{{ $manufacturer->id }}" {{ $templateProduct && $templateManufacturer->id == $manufacturer->id ? 'selected' : '' }}>{{ $manufacturer->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -149,18 +149,18 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Lab</label>
                         <select name="lab_id" class="form-select kit-form-control mySelect @error('lab_id') is-invalid @enderror">
-                            <option value="0" selected disabled>Select Lab</option>
+                            <option value="1" selected disabled>Select Lab</option>
                             @foreach ($labs as $lab)
-                            <option value="{{ $lab->id }}">{{ $lab->name }}</option>
+                            <option value="{{ $lab->id }}" {{ $templateProduct && $templateLab->id == $lab->id ? 'selected' : '' }}>{{ $lab->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Capital of firm</label>
                         <select name="capital_id" class="form-select kit-form-control mySelect @error('capital_id') is-invalid @enderror">
-                            <option value="0" selected disabled>Select Capital</option>
+                            <option value="1" selected disabled>Select Capital</option>
                             @foreach ($capitals as $capital)
-                            <option value="{{ $capital->id }}">{{ $capital->name }}</option>
+                            <option value="{{ $capital->id }}" {{ $templateProduct && $templateCapital->id == $capital->id ? 'selected' : '' }}>{{ $capital->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -394,22 +394,9 @@
             @else
             <div class="modal-body">
                     <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Number</label>
-                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Remarks (if any)</label>
-                            <textarea name="remarks1" class="form-control cm" cols="30" rows="4"></textarea>
-                        </div>  
+                    <div class="mb-3 col-md-12">
+                        <label for="" class="form-label cm">Remarks (if any)</label>
+                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4"></textarea>
                     </div>
             </div>
             <div class="modal-footer">

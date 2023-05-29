@@ -104,6 +104,16 @@
         </div>
         <div class="row">
             <div class="col-md-4">
+                <h4>Voucher Number</h4>
+                <p>{{ $report->voucher_number }}</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Voucher Amount</h4>
+                <p>{{ $report->voucher_amount }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
                 <h4>Prepared By</h4>
                 <p>{{ $report->prepared_by }}</p>
             </div>

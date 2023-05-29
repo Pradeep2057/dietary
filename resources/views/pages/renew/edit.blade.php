@@ -35,22 +35,22 @@
         </div>
         <div class="col-md-3">
             <label for="" class="form-label cm">Date of Grant</label>
-            <input type="date" class="form-control cm" placeholder="Enter Date of Grant" name="date_of_grant" value="{{ $renew->date_of_grant }}">
+            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="date_of_grant" value="{{ $renew->date_of_grant }}">
         </div>
         <div class="col-md-3">
             <label for="" class="form-label cm">Renew Valid Till</label>
-            <input type="date" class="form-control cm" placeholder="Enter Date of Grant" name="renew_valid" value="{{ $renew->renew_valid }}">
+            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="renew_valid" value="{{ $renew->renew_valid }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="" class="form-label cm">Certificate Validity from</label>
-            <input type="date" class="form-control cm" placeholder="Enter Certificate Validity from" name="validity_from" value="{{ $renew->validity_from }}">
+            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="validity_from" value="{{ $renew->validity_from }}">
         </div>
 
         <div class="col-md-4">
             <label for="" class="form-label cm"> Certificate Validity to</label>
-            <input type="date" class="form-control cm" placeholder="Enter Certificate Validity to" name="validity_to" value="{{ $renew->validity_to }}">
+            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="validity_to" value="{{ $renew->validity_to }}">
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">GMP Validity upto </label>
@@ -68,12 +68,67 @@
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">Date of Preparation</label>
-            <input type="date" class="form-control cm" placeholder="Select Date" name="date_of_preparation" value="{{ $renew->date_of_preparation }}">
+            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="date_of_preparation" value="{{ $renew->date_of_preparation }}">
         </div>
     </div>
 
 
     
-    <button type="submit" class="btn btn-primary">Update</button>
+    @if(Auth::user()->role==2)
+    <div class="row">
+        <div class="col-md-12 text-end"><button type="submit" class="btn btn-primary" >Update</button></div>
+    </div>
+    @else
+    <div class="row">
+        <div class="col-md-12 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button></div>
+    </div>
+    @endif
+    
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered approval-modal">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Number</label>
+                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="{{ $renew->voucher_number }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Voucher Amount</label>
+                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount" value="{{ $renew->voucher_amount }}">
+                        </div>
+                    </div>
+            </div>
+            @if(Auth::user()->role==1)
+            <div class="modal-footer">
+                <button type="submit" name="verify" class="btn btn-primary">Update</button>
+            </div>
+            @elseif(Auth::user()->role==0)
+            <div class="modal-footer">
+                <button type="submit" name="verify" class="btn btn-primary">Update</button>
+            </div>
+            @endif
+            </div>
+        </div>
+    </div>
 </form>
+@endsection
+
+
+@section('custom-js')
+
+    <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}"></script>
+    <script>
+		jQuery(document).ready(function () {
+			$('.date-picker').nepaliDatePicker();
+		})
+	</script>
+
 @endsection

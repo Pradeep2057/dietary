@@ -28,6 +28,7 @@
         
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('datepicker/nepali-date-picker.min.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -77,6 +78,11 @@
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
+    @yield('custom-js')
+
+
     <script>
         $(document).ready(function () {
                 $('.mySelect').select2({
@@ -93,12 +99,9 @@
 
      
     $(document).ready(function() {
-        // Get the success alert element
         var successAlert = $(".alert");
 
-        // Check if the alert element exists
         if (successAlert.length > 0) {
-            // Hide the alert after 10 seconds
             setTimeout(function() {
                 successAlert.alert('close');
             }, 5000);
@@ -107,7 +110,9 @@
 
     </script>
 
-    @yield('custom-js')
+    
+
+
 </body>
 
 </html>
