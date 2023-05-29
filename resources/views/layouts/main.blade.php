@@ -28,6 +28,7 @@
         
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('datepicker/nepali-date-picker.min.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -77,6 +78,9 @@
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}">
+
     <script>
         $(document).ready(function () {
                 $('.mySelect').select2({
@@ -91,6 +95,14 @@
             });
         });
     </script>
+
+ 
+    <script>
+		jQuery(document).ready(function () {
+			$('.date-picker').nepaliDatePicker();
+		})
+	</script>
+
 
     @yield('custom-js')
 </body>

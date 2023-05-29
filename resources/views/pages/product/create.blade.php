@@ -357,18 +357,6 @@
             @else
             <div class="modal-body">
                     <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Number</label>
-                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount">
-                        </div>
-                    </div>
-                    <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Remarks (if any)</label>
                         <textarea name="remarks1" class="form-control cm" cols="30" rows="4"></textarea>

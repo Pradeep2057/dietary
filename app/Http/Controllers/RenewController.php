@@ -62,6 +62,9 @@ class RenewController extends Controller
             $renew->status = 'Processing';
         }
 
+        $renew->voucher_number = $request->voucher_number;
+        $renew->voucher_amount = $request->voucher_amount;
+
         $renew->date_of_grant = $request->date_of_grant;
         $renew->renew_valid = $request->renew_valid;
         $renew->application_number = $request->application_number;
@@ -124,6 +127,9 @@ class RenewController extends Controller
         }else{
             $renew->status = 'Processing';
         }
+
+        $renew->voucher_number = $request->voucher_number;
+        $renew->voucher_amount = $request->voucher_amount;
 
         $renew->save();
         return redirect()->route('renew.index')->with('successup', 'renew updated successfully.');;

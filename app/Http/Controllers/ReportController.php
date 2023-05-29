@@ -62,6 +62,8 @@ class ReportController extends Controller
             $report->status = 'Processing';
         }
 
+        $report->voucher_number = $request->voucher_number;
+        $report->voucher_amount = $request->voucher_amount;
 
         $report->date_of_grant = $request->date_of_grant;
         $report->validity_from = $request->validity_from;
@@ -124,6 +126,8 @@ class ReportController extends Controller
             $report->status = 'Processing';
         }
 
+        $report->voucher_number = $request->voucher_number;
+        $report->voucher_amount = $request->voucher_amount;
 
         $report->save();
         return redirect()->route('report.index')->with('successup', 'report updated successfully.');;

@@ -340,8 +340,8 @@ class ProductController extends Controller
         $product->fy = $request->fy;
         $product->health_claim = $request->health_claim;
         $product->ingredient_unit = $request->ingredient_unit;
-        $product->voucher_no = $request->voucher_number;
-        $product->voucher_amount = $request->voucher_amount;
+        // $product->voucher_no = $request->voucher_number;
+        // $product->voucher_amount = $request->voucher_amount;
 
         if($request->remarks){
             $product->remarks = $request->remarks;

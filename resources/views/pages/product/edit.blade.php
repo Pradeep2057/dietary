@@ -412,18 +412,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Number</label>
-                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="{{ $product->voucher_no }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-12">
-                            <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount" value="{{ $product->voucher_amount }}">
-                        </div>
-                    </div>
-                    <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Remarks (if any)</label>
                         <textarea name="remarks1" class="form-control cm" cols="30" rows="4" value="{{ $product->remarks_1 }}"></textarea>
