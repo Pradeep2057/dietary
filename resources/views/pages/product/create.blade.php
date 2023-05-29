@@ -111,7 +111,7 @@
             <label for="" class="form-label cm">Name of Importer</label>
             <select name="importers[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
                 @foreach ($importers as $importer)
-                <option value="{{ $importer->id }}">{{ $importer->name }}</option>
+                <option value="{{ $importer->id }}" @if (in_array($importer->id, $templateImporters)) selected @endif>{{ $importer->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -120,7 +120,7 @@
             <select name="manufacturer_id" class="form-select kit-form-control mySelect @error('manufacturer_id') is-invalid @enderror">
                 <option value="" selected disabled>Select Manufacturer</option>
                 @foreach ($manufacturers as $manufacturer)
-                <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
+                <option value="{{ $manufacturer->id }}" {{ $templateProduct && $templateManufacturer->id == $manufacturer->id ? 'selected' : '' }}>{{ $manufacturer->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -131,7 +131,7 @@
             <select name="lab_id" class="form-select kit-form-control mySelect @error('lab_id') is-invalid @enderror">
                 <option value="1" selected disabled>Select Lab</option>
                 @foreach ($labs as $lab)
-                <option value="{{ $lab->id }}">{{ $lab->name }}</option>
+                <option value="{{ $lab->id }}" {{ $templateProduct && $templateLab->id == $lab->id ? 'selected' : '' }}>{{ $lab->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -140,7 +140,7 @@
             <select name="capital_id" class="form-select kit-form-control mySelect @error('capital_id') is-invalid @enderror">
                 <option value="1" selected disabled>Select Capital</option>
                 @foreach ($capitals as $capital)
-                <option value="{{ $capital->id }}">{{ $capital->name }}</option>
+                <option value="{{ $capital->id }}" {{ $templateProduct && $templateCapital->id == $capital->id ? 'selected' : '' }}>{{ $capital->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -159,7 +159,7 @@
             <select name="gmp_id" class="form-select kit-form-control mySelect @error('gmp_id') is-invalid @enderror">
                 <option value="1" selected disabled>Select GMP Certifying Agency</option>
                 @foreach ($agencies as $agency)
-                <option value="{{ $agency->id }}">{{ $agency->name }}</option>
+                <option value="{{ $agency->id }}" {{ $templateProduct && $templateAgency->id == $agency->id ? 'selected' : '' }}>{{ $agency->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -172,14 +172,14 @@
     <div class="row">
         <div class="mb-3 col-md-12">
             <label for="" class="form-label cm">Active ingredients and its quantity</label>
-            <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30" rows="4"></textarea>
+            <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30" rows="4">@if( $templateProduct && $templateIngredients ) {{ $templateIngredients }} @endif</textarea>
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Units per ingredients</label>
             <input type="text" class="form-control cm @error('ingredient_unit') is-invalid @enderror" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)"
-                name="ingredient_unit">
+                name="ingredient_unit" value="@if( $templateProduct && $templateIngredientsunit ) {{ $templateIngredientsunit }} @endif">
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Label of product</label>

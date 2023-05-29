@@ -98,14 +98,20 @@ class ProductController extends Controller
         $productId = $request->input('productId');
         $templateProduct = Product::find($productId);
 
-        $templateImporter = $templateProduct->importer;
+        $templatedImporters = $templateProduct->importer;
+        $templateImporters = $templatedImporters ? $templatedImporters->pluck('id')->toArray() : [];
+        
         $templateManufacturer = $templateProduct->Manufacturer;
         $templateAgency = $templateProduct->agency;
         $templateProducttype = $templateProduct->producttype;
         $templateProductform = $templateProduct->productform;
         $templateDose = $templateProduct->dose;
         $templateSize = $templateProduct->size;
+        $templateLab = $templateProduct->lab;
+        $templateCapital = $templateProduct->capital;
         $templateExpirydate = $templateProduct->expirydate;
+        $templateIngredients = $templateProduct->ingredients;
+        $templateIngredientsunit = $templateProduct->ingredient_unit;
 
         return view('pages.product.create', [
             'products' => Product::all(),
@@ -121,8 +127,7 @@ class ProductController extends Controller
             'capitals'    => Capital::all(),
             'expirydates'    => Expirydate::all(),
             'templateProduct' => $templateProduct,
-            'templateImporter' => $templateImporter,
-            'templateManufacturer' => $templateManufacturer,
+            'templateImporters' => $templateImporters,
             'templateManufacturer' => $templateManufacturer,
             'templateAgency' => $templateAgency,
             'templateProducttype' => $templateProducttype,
@@ -130,6 +135,10 @@ class ProductController extends Controller
             'templateDose' => $templateDose,
             'templateSize' => $templateSize,
             'templateExpirydate' => $templateExpirydate,
+            'templateLab' => $templateLab,
+            'templateCapital'=>$templateCapital,
+            'templateIngredients'=>$templateIngredients,
+            'templateIngredientsunit'=>$templateIngredientsunit,
         ]);
     }
 
