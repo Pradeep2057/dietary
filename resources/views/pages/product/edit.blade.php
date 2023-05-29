@@ -9,7 +9,7 @@
         </a>
         Products<span class="sub-nav ms-2" > > {{ $product->name }} > Edit</span>
     </h3>
-    <p><a href="{{ route('product.index')}}">View All</a></p>
+    <p><a href="{{ route('product.index')}}"><i class="fa-regular fa-eye"></i>View Products</a></p>
 </div>
 
 <div class="product-search-form mb-3">
@@ -50,6 +50,9 @@
 </div>
 
 <form action="{{ route('product.update', $product) }}" method="post" class="form-cm" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Product</h3>
+    </div>
     @csrf
     @method('PUT')
     <div class="row mb-2">

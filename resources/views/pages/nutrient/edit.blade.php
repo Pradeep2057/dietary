@@ -9,10 +9,13 @@
         </a>
         Product Details<span class="sub-nav ms-2" > > Nutrient > Edit</span>
     </h3>
-    <p><a href="{{ route('nutrient.index')}}">View All</a></p>
+    <p><a href="{{ route('nutrient.index')}}"> <i class="fa-regular fa-eye"></i>View All</a></p>
 </div>
 
 <form action="{{ route('nutrient.update', $nutrients) }}" method="post" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Product Details</h3>
+    </div>
     @csrf
     @method('put')
     <div class="row mb-3">

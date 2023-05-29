@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>
@@ -101,11 +101,11 @@
                         </div>
                         @endif
 
-                        @if (auth()->user()->role == 2 && $renew->status == 'Pending' )
                         <div class="action-btn-pen">
-                        <a href="" method="put"><button>View</button></a>
+                        <a href="" method="put"><span class="material-symbols-outlined">
+                            visibility
+                            </span></a>
                         </div>
-                        @endif
                         
                         @if (auth()->user()->role == 2 && $renew->status == 'Processing' )
                         <div class="action-btn-pen">

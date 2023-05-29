@@ -3,7 +3,12 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Importers</h3>
+    <h3 class="heading-cm"> 
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Importer
+    </h3>
     <p><a href="{{ route('importer.create')}}"> <i class="fa-solid fa-plus"></i>Add Importer</a></p>
 </div>
 

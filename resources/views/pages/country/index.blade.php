@@ -3,8 +3,13 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Country</h3>
-    <p><a href="{{ route('capital.create')}}"> <i class="fa-solid fa-plus"></i>Add Capital</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Manufacturer<span class="sub-nav ms-2" > > Country</span>
+    </h3>
+    {{-- <p><a href="{{ route('country.create')}}"> <i class="fa-solid fa-plus"></i>Add Country</a></p> --}}
 </div>
 
 <div class="form-cm">

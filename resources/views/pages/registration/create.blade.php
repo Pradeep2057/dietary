@@ -13,6 +13,7 @@
 </div>
 
 <form action="{{ route('registration.store') }}" method="POST" class="form-cm">
+    
     @csrf
     <div class="row mb-3">
         <div class="col-md-4">

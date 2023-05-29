@@ -9,6 +9,7 @@
         </a>
         Manufacturer <span class="sub-nav ms-2" > > Manufacturer authorities </span>
     </h3>
+    {{-- <p><a href="{{ route('manufacturer-authority.create')}}"> <i class="fa-solid fa-plus"></i>Add Manufacturer Author</a></p> --}}
 
 </div>
 

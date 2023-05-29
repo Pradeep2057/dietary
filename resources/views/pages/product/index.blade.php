@@ -119,7 +119,6 @@
             $i = 1;
             @endphp
             @foreach ($products as $product)
-            <a href="{{ route('product.display', $product->id) }}">
                 <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $product->registration }}</td>
@@ -191,7 +190,6 @@
                         </div>
                     </td>
                 </tr>
-            </a>
             @php
             $i++;
             @endphp

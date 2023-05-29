@@ -9,10 +9,13 @@
         </a>
         Manufacturer<span class="sub-nav ms-2" > > Edit</span>
     </h3>
-    <p><a href="{{ route('manufacturer.index')}}">View All</a></p>
+    <p><a href="{{ route('manufacturer.index')}}"> <i class="fa-regular fa-eye"></i>View Manufacturers</a></p>
 </div>
 
 <form class="form-cm" action="{{ route('manufacturer.update', $manufacturer) }}" method="post">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Manufacturer</h3>
+    </div>
     @csrf
     @method('PUT')
     <div class="row mb-3">

@@ -9,10 +9,13 @@
         </a>
         Certificate<span class="sub-nav ms-2" > > Registration > Create</span>
     </h3>
-    <p><a href="{{ route('report.index')}}">View Certificates</a></p>
+    <p><a href="{{ route('report.index')}}"> <i class="fa-regular fa-eye"></i>View Certificates</a></p>
 </div>
 
 <form action="{{ route('report.store') }}" method="POST" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Certificate</h3>
+    </div>
     @csrf
     <div class="row mb-3">
         <div class="col-md-4">
@@ -111,11 +114,15 @@
 </form>
 @endsection
 
+
+
 @section('custom-js')
+
     <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}"></script>
     <script>
 		jQuery(document).ready(function () {
 			$('.date-picker').nepaliDatePicker();
 		})
 	</script>
+
 @endsection

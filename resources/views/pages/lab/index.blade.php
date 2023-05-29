@@ -3,7 +3,12 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Lab</h3>
+    <h3 class="heading-cm"> 
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Lab
+    </h3>
     <p><a href="{{ route('lab.create')}}"> <i class="fa-solid fa-plus"></i>Add Lab</a></p>
 </div>
 

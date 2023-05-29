@@ -9,10 +9,13 @@
         </a>
         Product Details<span class="sub-nav ms-2" > > Nutrient > Create</span>
     </h3>
-    <p><a href="{{ route('nutrient.index')}}">View All</a></p>
+    <p><a href="{{ route('nutrient.index')}}"> <i class="fa-regular fa-eye"></i>View Products Detail</a></p>
 </div>
 
 <form action="{{ route('nutrient.store') }}" method="POST" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Product Details</h3>
+    </div>
     @csrf
     <div class="row mb-3">
         <div class="col-md-6">

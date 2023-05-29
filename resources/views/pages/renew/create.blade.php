@@ -9,10 +9,13 @@
         </a>
         Certificate<span class="sub-nav ms-2" > > Renew Certificate > Create</span>
     </h3>
-    <p><a href="{{ route('renew.index')}}">View Certificates</a></p>
+    <p><a href="{{ route('renew.index')}}"> <i class="fa-regular fa-eye"></i>View Certificates</a></p>
 </div>
 
 <form action="{{ route('renew.store') }}" method="POST" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Certificate</h3>
+    </div>
     @csrf
     <div class="row mb-3">
         <div class="col-md-3">

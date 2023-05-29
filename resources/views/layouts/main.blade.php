@@ -79,8 +79,8 @@
     <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-    @yield('custom-js')
-    
+    <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}">
+
     <script>
         $(document).ready(function () {
             $('.mySelect').select2({
@@ -94,9 +94,29 @@
                 placeholder: 'Select'
             });
         });
+
+     
+    $(document).ready(function() {
+        var successAlert = $(".alert");
+
+        if (successAlert.length > 0) {
+            setTimeout(function() {
+                successAlert.alert('close');
+            }, 5000);
+        }
+    });
+
     </script>
 
-    
+ 
+    <script>
+		jQuery(document).ready(function () {
+			$('.date-picker').nepaliDatePicker();
+		})
+	</script>
+
+
+    @yield('custom-js')
 </body>
 
 </html>

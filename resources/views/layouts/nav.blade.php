@@ -1,8 +1,10 @@
 <div class="container-fluid db-top-bar">
     <div class="db-lims-logo">
-        <div class="logo">
-            <img src="{{ asset('storage/image/np.png') }}" alt="">
-        </div>
+        <a href="/">
+            <div class="logo">
+                <img src="{{ asset('storage/image/np.png') }}" alt="">
+            </div>
+        </a>
         <p>Department of Food Technology <br> and Quality Control
         </p>
     </div>

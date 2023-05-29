@@ -87,7 +87,9 @@
                                 
                                 <div class="action-btn-pen">
                                     <a href="{{ route('category.edit', $category->id) }}"
-                                        method="put"><button>Edit</button></a>
+                                        method="put"><span class="material-symbols-outlined">
+                                            edit
+                                            </span></a>
                                 </div>
                                 
 
