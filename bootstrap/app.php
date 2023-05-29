@@ -10,6 +10,8 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
+ini_set('memory_limit', '1000024M');
+set_time_limit(18000);
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -51,5 +53,6 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
+
 
 return $app;

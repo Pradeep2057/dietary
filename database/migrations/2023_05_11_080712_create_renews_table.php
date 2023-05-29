@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('production_renew_tippani')->nullable();
             $table->string('status')->default('Processing');
 
+            $table->string('voucher_number')->nullable();
+            $table->string('voucher_amount')->nullable();
+
             $table->foreignId('pending_id')->nullable()->constrained('users');
             $table->string('pending_at')->nullable();
 

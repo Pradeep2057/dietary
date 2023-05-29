@@ -42,7 +42,9 @@
                 <select id="product_type" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Type</option>
                     @foreach ($products->unique('producttype.name') as $product)
+                    @if($product->producttype != null)
                     <option value="{{ $product->producttype->name }}">{{ $product->producttype->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -50,7 +52,9 @@
                 <select id="product_form" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Form</option>
                     @foreach ($products->unique('productform.name') as $product)
+                    @if($product->productform != null)
                     <option value="{{ $product->productform->name }}">{{ $product->productform->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -58,7 +62,9 @@
                 <select id="manufacturer" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Manufacturer</option>
                     @foreach ($products->unique('manufacturer.name') as $product)
+                    @if($product->manufacturer != null)
                     <option value="{{ $product->manufacturer->name }}">{{ $product->manufacturer->name }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
@@ -118,15 +124,33 @@
                     <td>{{ $i }}</td>
                     <td>{{ $product->registration }}</td>
                     <td>{{ $product->name }}</td>
+                    @if($product->producttype != null)
                     <td>{{ $product->producttype->name }}</td>
+                    @else
+                    <td>N/A</td>
+                    @endif
+
+                    @if($product->productform != null)
                     <td>{{ $product->productform->name }}</td>
+                    @else
+                    <td>N/A</td>
+                    @endif
+
+                    @if($product->manufacturer !=null)
                     <td>{{ $product->manufacturer->name }}</td>
+                    @else
+                    <td>N/A</td>
+                    @endif
                     <td>
                         @foreach ($product->importers as $importer)
                             {{ $importer->name }}
                         @endforeach
                     </td>
+                    @if($product->lab != null)
                     <td>{{ $product->lab->name }}</td>
+                    @else
+                    <td>N/A</td>
+                    @endif
                     <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
                     <td>{{ $product->created_at->format('Y-m-d') }}</td>
 

@@ -16,9 +16,23 @@ class Product extends Model
         'name',
         'fy',
         'status',
+        'registration',
         'health_claim',
         'nutritional_claim',
-        'expirydate_claim',
+
+        'expirydate_id',
+        'manufacturer_id',
+        'category_id',
+        'capital_id',
+        'lab_id',
+        'size_id',
+        'dose_id',
+        'product_form',
+        'product_type',
+        'gmp_id',
+        'manufacturer_id',
+        'expirydate_id',
+
         'gmp_validity_upto',
         'coa_inhouse',
         'coa_thirdparty',
@@ -27,7 +41,9 @@ class Product extends Model
         'sale_certificate',
         'product_label',
         'product_registration_certificate',
-        'composition',
+        'ingredients',
+        'ingredient_unit',
+        'remarks',
         'overall_openion',
         'diagnose_statement',
         'medical_statement',
@@ -36,7 +52,12 @@ class Product extends Model
         'specification_rational',
         'analysis_method',
         'process_flow',
-        'gmp_certificate'
+        'gmp_certificate',
+        
+        'verifier_id',
+        'verified_at',
+        'author_id'
+
     ];
 
     public function importer(): BelongsTo
@@ -133,7 +154,7 @@ class Product extends Model
     }
     public function importers()
     {
-        return $this->belongsToMany(Importer::class, 'product_importer')->withTimestamps();
+        return $this->belongsToMany(Importer::class, 'productimporters')->withTimestamps();
     }
 
     public function author(): BelongsTo

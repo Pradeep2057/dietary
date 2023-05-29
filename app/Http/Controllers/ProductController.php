@@ -22,6 +22,8 @@ use App\Models\Fiscalyear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use DataTables;
+
 class ProductController extends Controller
 {
     /**
@@ -42,6 +44,34 @@ class ProductController extends Controller
             'importers'    => Importer::all(),
         ]);
     }
+
+    // public function data(Request $request)
+    // {
+    //     $query = Product::query();
+
+    //     return DataTables::eloquent($query)
+    //         ->addColumn('producttype', function(Product $product) {
+    //             return $product->producttype->name;
+    //         })
+    //         ->addColumn('productform', function(Product $product) {
+    //             return $product->productform->name;
+    //         })
+    //         ->addColumn('manufacturer', function(Product $product) {
+    //             return $product->manufacturer->name;
+    //         })
+    //         ->addColumn('importers', function(Product $product) {
+    //             return $product->importers->name;
+    //         })
+    //         ->addColumn('lab', function(Product $product) {
+    //             return $product->lab->name;
+    //         })
+    //         ->addColumn('action', function(Product $product) {
+    //             // Add your custom action button(s) here
+    //             return '<button>Edit</button>';
+    //         })
+    //         ->rawColumns(['action'])
+    //         ->make(true);
+    // }
 
     public function create(Product $product)
     {
@@ -157,8 +187,8 @@ class ProductController extends Controller
             $product->remarks_1 = $request->remarks1;
         }
 
-        $product->voucher_no = $request->voucher_number;
-        $product->voucher_amount = $request->voucher_amount;
+        // $product->voucher_no = $request->voucher_number;
+        // $product->voucher_amount = $request->voucher_amount;
 
         $product->product_registration_certificate = $request->product_registration_certificate;
         $product->overall_openion = $request->overall_openion;
@@ -342,6 +372,7 @@ class ProductController extends Controller
 
         $product->nutritional_claim = $request->nutritional_claim;
         $product->expirydate_id = $request->expirydate_claim;
+        $product->category_id = $request->cat;
         $product->medical_statement = $request->medical_statement;
         $product->diagnose_statement = $request->diagnose_statement;
         $product->dietary_supplement = $request->dietary_supplement;

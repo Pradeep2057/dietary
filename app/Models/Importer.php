@@ -29,6 +29,6 @@ class Importer extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_importer');
+        return $this->belongsToMany(Product::class, 'productimporters');
     }
 }

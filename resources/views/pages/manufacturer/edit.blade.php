@@ -70,7 +70,7 @@
             <option value="{{ $country->id }}">
                 {{ $country->name }}
             </option>
-            @endforeach
+            @endforeach 
             @endif
             </select>
         </div>
