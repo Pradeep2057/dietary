@@ -9,10 +9,13 @@
         </a>
         Certificate<span class="sub-nav ms-2" > > Tippani Renew > Edit</span>
     </h3>
-    <p><a href="{{ route('renew.index')}}">View All</a></p>
+    <p><a href="{{ route('renew.index')}}"> <i class="fa-regular fa-eye"></i>View Certificates</a></p>
 </div>
 
 <form action="{{ route('renew.update', $renew) }}" method="post" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Certificate</h3>
+    </div>
     @csrf
     @method('PUT')
     <div class="row mb-3">

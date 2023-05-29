@@ -12,6 +12,7 @@ class Producttype extends Model
 
     protected $fillable = [
         'name',
+        'author_id'
     ];
 
     public function products()

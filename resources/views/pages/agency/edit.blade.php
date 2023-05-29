@@ -3,11 +3,19 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm">Certifying Agency</h3>
-    <p><a href="{{ route('agency.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('agency.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Certifying Agency <span class="sub-nav ms-2" > > Edit</span>
+    </h3>
+    <p><a href="{{ route('agency.index')}}"> <i class="fa-regular fa-eye"></i>View Certifying Agencies</a></p>
 </div>
 
 <form action="{{ route('agency.update', $agency) }}" method="post" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Certifying Agency</h3>
+    </div>
 @csrf
     @method('PUT')
     <div class="row mb-3">

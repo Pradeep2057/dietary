@@ -3,11 +3,19 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm">Lab</h3>
-    <p><a href="{{ route('lab.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('lab.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Lab<span class="sub-nav ms-2" > > Create</span>
+    </h3>
+    <p><a href="{{ route('lab.index')}}"> <i class="fa-regular fa-eye"></i>View Labs</a></p>
 </div>
 
 <form action="{{ route('lab.store') }}" method="POST" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Lab</h3>
+    </div>
     @csrf
     <div class="row mb-3">
     <div class="col-md-6">

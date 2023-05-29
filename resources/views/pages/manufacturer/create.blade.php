@@ -9,10 +9,13 @@
         </a>
         Manufacturer<span class="sub-nav ms-2" > > Create</span>
     </h3>
-    <p><a href="{{ route('manufacturer.index')}}">View All</a></p>
+    <p><a href="{{ route('manufacturer.index')}}"> <i class="fa-regular fa-eye"></i>View Manufacturers</a></p>
 </div>
 
 <form action="{{ route('manufacturer.store') }}" method="POST" class="form-cm">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Create Manufacturer</h3>
+    </div>
     @csrf
     <div class="row mb-3">
         <div class="col-md-6">

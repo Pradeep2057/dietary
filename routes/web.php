@@ -28,6 +28,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\ExpirydateController;
 use App\Http\Controllers\FiscalyearController;
+use App\Http\Controllers\ImportController;
 
 
 
@@ -56,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
     //     // return redirect('/product');
     // });
     // Route::get('/', [ProductController::class, 'index']);
+
+    Route::post('/import-category',[ImportController::class, 'importCategory'])->name('importCat');
+    Route::get('/import-category',[ImportController::class, 'index'])->name('import');
+
 
     Route::get('/',[HomeController::class, 'index'])->name('home');
     Route::get('/profile',[HomeController::class, 'profile'])->name('profile');
@@ -240,6 +245,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [ReportController::class, 'create'])->name('create');
         Route::post('/', [ReportController::class, 'store'])->name('store');
         Route::get('/{report:id}/edit', [ReportController::class, 'edit'])->name('edit');
+        Route::get('/{report:id}/display', [ReportController::class, 'display'])->name('display');
         Route::get('/{report:id}/pdf', [ReportController::class, 'generatePdf'])->name('pdf');
         Route::get('/{report:id}/certificate', [ReportController::class, 'certificate'])->name('certificate');
         Route::get('/{report:id}/print', [ReportController::class, 'print'])->name('print');
@@ -252,6 +258,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [RenewController::class, 'create'])->name('create');
         Route::post('/', [RenewController::class, 'store'])->name('store');
         Route::get('/{renew:id}/edit', [RenewController::class, 'edit'])->name('edit');
+        Route::get('/{renew:id}/display', [RenewController::class, 'display'])->name('display');
         Route::get('/{renew:id}/pdf', [RenewController::class, 'generatePdf'])->name('pdf');
         Route::get('/{renew:id}/certificate', [RenewController::class, 'certificate'])->name('certificate');
         Route::get('/{renew:id}/print', [RenewController::class, 'print'])->name('print');

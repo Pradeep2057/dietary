@@ -9,6 +9,7 @@
         </a>
         Manufacturer <span class="sub-nav ms-2" > > Manufacturer authorities </span>
     </h3>
+    {{-- <p><a href="{{ route('manufacturer-authority.create')}}"> <i class="fa-solid fa-plus"></i>Add Manufacturer Author</a></p> --}}
 
 </div>
 
@@ -53,7 +54,7 @@
         </div>
         @if(!empty($manufacturerauthorities))
         <div class="col-md-9">
-            <table id="sampleTable" class="table table-striped" style="width:100%">
+            <table id="sampleTable" class="table hover-table" style="width:100%">
                 <thead>
                     <tr>
                         <th>S No.</th>

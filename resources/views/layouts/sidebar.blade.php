@@ -84,8 +84,6 @@
                                     href="{{ route('nutrient-category.index') }}">Nutrient Category</a>
                                 <a class="nav-link {{ Request::is('nutrient') || Request::is('nutrient/create') || Request::is('nutrient/*/edit') ?  'active' : ' ' }}"
                                     href="{{ route('nutrient.index') }}">Nutrient</a>
-                                <a class="nav-link {{ Request::is('ingredient') || Request::is('ingredient/create') || Request::is('ingredient/*/edit')?  'active' : ' ' }}"
-                                    href="{{ route('ingredient.index') }}">Ingredient</a>
                                 <a class="nav-link {{ Request::is('expirydate') || Request::is('expirydate/create') || Request::is('expirydate/*/edit')?  'active' : ' ' }}"
                                     href="{{ route('expirydate.index') }}">Expiry Date</a>
                             </div>
@@ -106,16 +104,16 @@
                                 aria-controls="details-collapsefour">
                                 <span class="material-symbols-outlined">
                                     factory
-                                </span>Manufacture
+                                </span>Manufacturer
                             </p>
                         </h2>
                         <div id="details-collapsefour"
                             class="accordion-collapse collapse {{ Request::is('manufacturer') || Request::is('manufacturer/create') || Request::is('manufacturer/*/edit') || Request::is('manufacturer-authority')|| Request::is('manufacturer-authority/create') || Request::is('manufacturer-authority/*/edit') || Request::is('capital') || Request::is('capital/create') || Request::is('capital/*/edit') || Request::is('country')|| Request::is('country/create') || Request::is('country/*/edit')?  'show' : ' collapsed' }}">
                             <div class="accordion-body d-flex flex-column">
                                 <a class="nav-link {{ Request::is('manufacturer') || Request::is('manufacturer/create') || Request::is('manufacturer/*/edit')?  'active' : ' ' }}"
-                                    href="{{ route('manufacturer.index') }}">Manufacture</a>
+                                    href="{{ route('manufacturer.index') }}">Manufacturer</a>
                                 <a class="nav-link {{ Request::is('manufacturer-authority') || Request::is('manufacturer-authority/create') || Request::is('manufacturer-authority/*/edit')?  'active' : ' ' }}"
-                                    href="{{ route('manufacturer-authority.index') }}">Manufacture
+                                    href="{{ route('manufacturer-authority.index') }}">Manufacturer
                                     Authority</a>
                                 <a class="nav-link {{ Request::is('capital') || Request::is('capital/create') || Request::is('capital/*/edit')?  'active' : ' ' }}"
                                     href="{{ route('capital.index') }}">Capital</a>

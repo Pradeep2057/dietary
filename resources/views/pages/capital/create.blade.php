@@ -3,8 +3,13 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm">Capital</h3>
-    <p><a href="{{ route('capital.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('capital.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Manufacturer<span class="sub-nav ms-2" > > Capital > Create</span>
+    </h3>
+    <p><a href="{{ route('capital.index')}}"> <i class="fa-regular fa-eye"></i>View Capital</a></p>
 </div>
 
 <form action="{{ route('capital.store') }}" method="POST" class="form-cm">

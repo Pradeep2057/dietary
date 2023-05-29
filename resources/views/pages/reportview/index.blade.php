@@ -3,7 +3,12 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Product Certificates</h3>
+    <h3 class="heading-cm"> 
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Product Certificates
+    </h3>
 </div>
 
 <div class="table-row">
@@ -51,7 +56,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>

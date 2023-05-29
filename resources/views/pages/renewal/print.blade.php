@@ -32,6 +32,8 @@
 </head>
 <body> 
 
+    <h1 style="text-align: center; font-size:70px; color:white;">Not Visible</h1>
+
     <table style="width: 1320px; margin: auto;">
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px; margin-top:5px;">
@@ -61,7 +63,7 @@
     </div>
    
     <div style="max-width: 1320px; margin: auto;">
-        <h2 style="  border-bottom: 1px solid black;  font-family: roboto; font-size:12px; margin-left:5px; margin-top:10px; margin-bottom: 5px; width: 5.7%;"> Details</h2>
+        <h2 style="  border-bottom: 1px solid black;  font-family: roboto; font-size:10px; margin-left:3px; margin-top:10px; margin-bottom: 5px; width: 5.2%;"> Details</h2>
     </div>  
     
     <table style="width: 1320px; margin: auto;">
@@ -279,7 +281,7 @@
                 registration certficate.</li>
         </ol>
     </div>
-    <table style="width: 1320px; margin: auto; margin-top: 20px;">
+    <table style="width: 1320px; margin: auto; margin-top: 10px;">
         <tbody style="width:100%;">
             <tr style="margin-bottom: 10px;">
             <td style="width: 50%;"><img src="{{ $qrCodeImage }}" alt="QR code"></td>

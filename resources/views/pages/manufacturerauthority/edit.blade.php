@@ -79,11 +79,17 @@
                                     </a>
                                 </div> -->
                                 
-                                <div class="action-btn-pen">
+                                {{-- <div class="action-btn-pen">
                                     <a href="{{ route('manufacturer-authority.edit', $manufacturerauthority->id) }}"
                                         method="put"><button>Edit</button></a>
-                                </div>
+                                </div> --}}
                                
+                                <div class="action-btn-pen">
+                                    <a href="{{ route('manufacturer-authority.edit', $manufacturerauthority->id) }}"
+                                        method="put"><span class="material-symbols-outlined">
+                                edit
+                                </span></a>
+                                </div>
 
                                 @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt"

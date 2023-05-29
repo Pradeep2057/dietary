@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('labs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('recognized_agency')->default('');
-            $table->string('website')->default('');
+            $table->string('recognized_agency')->nullable();
+            $table->string('website')->nullable();
+            $table->foreignId('country_id')->nullable()->constrained('countries');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

@@ -3,7 +3,12 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Lab</h3>
+    <h3 class="heading-cm"> 
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Lab
+    </h3>
     <p><a href="{{ route('lab.create')}}"> <i class="fa-solid fa-plus"></i>Add Lab</a></p>
 </div>
 
@@ -35,7 +40,9 @@
             <select id="agency" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Recognized Agency</option>
                 @foreach ($labs->unique('recognized_agency') as $lab)
+                @if(!empty($lab->recognized_agency))
                 <option value="{{ $lab->recognized_agency }}">{{ $lab->recognized_agency }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -43,7 +50,9 @@
             <select id="country" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Country</option>
                 @foreach ($labs->unique('country.name') as $lab)
+                @if($lab->country != null)
                 <option value="{{ $lab->country->name }}">{{ $lab->country->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -58,7 +67,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%;">
+    <table id="sampleTable" class="table hover-table" style="width:100%;">
         <thead>
             <tr>
                 <th>S No.</th>
@@ -78,7 +87,11 @@
             <tr>
                 <td>{{ $i }}</td>
                 <td>{{ $lab->name }} </td>
+                @if($lab->country != null)
                 <td>{{ $lab->country->name }} </td>
+                @else
+                <td>N/A</td>
+                @endif
                 <td>{{ $lab->website }} </td>
                 <td>{{ $lab->recognized_agency }} </td>
                 <td>{{ $lab->created_at->format('Y-m-d') }} </td>

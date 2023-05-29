@@ -20,6 +20,8 @@ class Nutrients extends Model
         'permissable_overage',
         'caution',
         'usable_part',
+        'nutrient_category',
+        'author_id',
     ];
 
     public function nutrientcategory(): BelongsTo

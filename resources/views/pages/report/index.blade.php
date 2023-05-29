@@ -101,11 +101,13 @@
                         </div>
                         @endif
 
-                        @if(auth()->user()->role == 2)
+                        
                         <div class="action-btn-view">
-                            <a href="{{ route('report.pdf', $report->id) }}" method="get">View</a>
+                            <a href="{{ route('report.display', $report->id) }}" method="get"><span class="material-symbols-outlined">
+                                visibility
+                                </span></a>
                         </div>
-                        @endif
+                        
 
                         @if (auth()->user()->role == 2 && $report->status == 'Processing' )
                         <div class="action-btn-pen">

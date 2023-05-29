@@ -15,6 +15,8 @@ class Lab extends Model
         'name',
         'recognized_agency',
         'website',
+        'country_id',
+        'author_id',
     ];
 
     public function country(): BelongsTo

@@ -3,11 +3,19 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm">Importers</h3>
-    <p><a href="{{ route('importer.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('importer.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Importer<span class="sub-nav ms-2" > > Edit</span>
+    </h3>
+    <p><a href="{{ route('importer.index')}}"> <i class="fa-regular fa-eye"></i>View Importers</a></p>
 </div>
 
 <form class="form-cm"  action="{{ route('importer.update', $importer) }}" method="post">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Importer</h3>
+    </div>
     @csrf
     @method('PUT')
     <div class="row mb-3">

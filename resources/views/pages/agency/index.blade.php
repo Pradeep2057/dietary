@@ -3,8 +3,13 @@
 @section('content')
 
 <div class="add-heading">
-    <h3 class="heading-cm">Certifying Agency</h3>
-    <p><a href="{{ route('agency.create')}}"> <i class="fa-solid fa-plus"></i>Add Agency</a></p>
+    <h3 class="heading-cm"> 
+        <a href="{{ route('home')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Certifying Agency
+    </h3>
+    <p><a href="{{ route('agency.create')}}"> <i class="fa-solid fa-plus"></i>Add Certifying Agency </a></p>
 </div>
 
 <div class="table-row">

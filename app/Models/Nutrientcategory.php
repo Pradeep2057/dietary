@@ -12,6 +12,7 @@ class Nutrientcategory extends Model
 
     protected $fillable = [
         'name',
+        'author_id',
     ];
 
     public function nutrients()

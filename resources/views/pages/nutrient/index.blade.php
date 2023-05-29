@@ -41,7 +41,9 @@
             <select id="nutrientcategory" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Nutrient Category </option>
                 @foreach ($nutrients->unique('nutrientcategory.name') as $nutrient)
-                <option value="{{ $nutrient->nutrientcategory->name }}">{{ $nutrient->nutrientcategory->name }}</option>
+                @if($nutrient->nutrientcategory != null)
+                    <option value="{{ $nutrient->nutrientcategory->name }}">{{ $nutrient->nutrientcategory->name }}</option>
+                @endif
                 @endforeach
             </select>
         </div>
@@ -56,7 +58,7 @@
         </div>
     </div>
 
-    <table id="sampleTable" class="table table-striped" style="width:100%">
+    <table id="sampleTable" class="table hover-table" style="width:100%">
         <thead>
             <tr>
                 <th>S No.</th>
@@ -83,14 +85,46 @@
                 <td>{{ $i }}</td>
                 <td>{{ $nutrient->name }} </td>
                 <td>{{ $nutrient->common_name }} </td>
+
+                @if(!empty($nutrient->unit_of_expression))
                 <td>{{ $nutrient->unit_of_expression }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+                
                 <td>{{ $nutrient->rda }} </td>
                 <td>{{ $nutrient->minimum }} </td>
+
+                @if(!empty($nutrient->permissable_unit))
                 <td>{{ $nutrient->permissable_unit }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+                
+                @if(!empty($nutrient->permissable_overage))
                 <td>{{ $nutrient->permissable_overage }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+                
+                @if(!empty($nutrient->caution))
                 <td>{{ $nutrient->caution }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+
+                @if(!empty($nutrient->usable_part))
                 <td>{{ $nutrient->usable_part }} </td>
+                @else
+                <td>N/A</td>
+                @endif
+
+            
+                @if($nutrient->nutrientcategory != null)
                 <td>{{ $nutrient->nutrientcategory->name }} </td>
+                @else
+                <td>N/A</td>
+                @endif
                 <td>{{ $nutrient->created_at->format('Y-m-d') }} </td>
 
                 <td>

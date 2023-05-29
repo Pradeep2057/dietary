@@ -79,7 +79,9 @@
                                 </div> -->
                                 <div class="action-btn-pen">
                                     <a href="{{ route('type-of-product.edit', $producttype->id) }}"
-                                        method="put"><button>Edit</button></a>
+                                        method="put"><span class="material-symbols-outlined">
+                                            edit
+                                        </span></a>
                                 </div>
 
                                 @if (auth()->user()->role == 0)

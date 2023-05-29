@@ -14,6 +14,7 @@ class Country extends Model
         'name',
         'population',
         'area',
+        'author_id'
     ];
 
     public function manufacturers()

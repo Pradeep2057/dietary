@@ -9,6 +9,7 @@
         </a>
         Manufacturer<span class="sub-nav ms-2" > > Capital</span>
     </h3>
+    {{-- <p><a href="{{ route('capital.create')}}"> <i class="fa-solid fa-plus"></i>Add Capital</a></p> --}}
 </div>
 
 <div class="form-cm">

@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col-md-3">
-            <h3 class="create-form-heading">Create Size</h3>
+            <h3 class="create-form-heading">Create Nutrient Category</h3>
             <form action="{{ route('nutrient-category.store') }}" method="POST">
                 @csrf
                 <div class="row mb-3">
@@ -50,7 +50,7 @@
         <div class="col-md-9">
             @if(!empty($nutrientcategories))
 
-            <table id="sampleTable" class="table table-striped" style="width:100%">
+            <table id="sampleTable" class="table hover-table" style="width:100%">
                 <thead>
                     <tr>
                         <th>S No.</th>

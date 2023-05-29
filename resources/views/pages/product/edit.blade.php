@@ -9,10 +9,50 @@
         </a>
         Products<span class="sub-nav ms-2" > > {{ $product->name }} > Edit</span>
     </h3>
-    <p><a href="{{ route('product.index')}}">View All</a></p>
+    <p><a href="{{ route('product.index')}}"><i class="fa-regular fa-eye"></i>View Products</a></p>
+</div>
+
+<div class="product-search-form mb-3">
+   <div class="row log-details">
+    <div class="col-md-2">
+        <p>Created By</p>
+        <h4>{{ $product->author->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Created at</p>
+        <h4>{{ $product->created_at}}</h4>
+    </div>
+    @if($product->status == 'Verified')
+    <div class="col-md-2">
+        <p>Verified By</p>
+        <h4>{{ $product->verifier->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Verified at</p>
+        <h4>{{ $product->verified_at }}</h4>
+    </div>
+    @elseif($product->status == 'Rejected')
+    <div class="col-md-2">
+        <p>Rejected By</p>
+        <h4>{{ $product->verifier->name }}</h4>
+    </div>
+    <div class="col-md-2">
+        <p>Rejected at</p>
+        <h4>{{ $product->verified_at }}</h4>
+    </div>
+    @else
+    <div class="col-md-4"></div>
+    @endif
+    <div class="col-md-4 log-status">
+        <div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div>
+    </div>
+   </div>
 </div>
 
 <form action="{{ route('product.update', $product) }}" method="post" class="form-cm" enctype="multipart/form-data">
+    <div class="col-md-12">
+        <h3 class="create-form-heading">Edit Product</h3>
+    </div>
     @csrf
     @method('PUT')
     <div class="row mb-2">
@@ -354,7 +394,11 @@
     </div>
 
     @if(Auth::user()->role==0 || Auth::user()->role==1)
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Submit</button>
+    <div class="row">
+        <div class="col-md-12 text-end">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button>
+        </div>
+    </div>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered approval-modal">
             <div class="modal-content">
@@ -390,8 +434,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <!-- <button type="submit" class="btn btn-primary">Verify</button> -->
-                <button type="submit" name="reject" class="btn btn-primary">Reject</button>
+                <button type="submit" name="reject" class="btn btn-primary reject-btn">Reject</button>
                 <button type="submit" name="verify" class="btn btn-primary">Verify</button>
             </div>
             </div>

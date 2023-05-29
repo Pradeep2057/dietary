@@ -12,6 +12,7 @@ class Manufacturerauthority extends Model
 
     protected $fillable = [
         'name',
+        'author_id',
     ];
 
     public function manufacturers()

@@ -3,8 +3,13 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm">Expiry Date</h3>
-    <p><a href="{{ route('expirydate.index')}}"> <i class="fa-solid fa-plus"></i>View All</a></p>
+    <h3 class="heading-cm">
+        <a href="{{ route('expirydate.index')}}" class="nav-icon me-2">
+            <i class="fa-solid fa-angle-left"></i> 
+        </a>
+        Expirydate<span class="sub-nav ms-2" > > Create</span>
+    </h3>
+    <p><a href="{{ route('expirydate.index')}}"> <i class="fa-regular fa-eye"></i>View Expirydate</a></p>
 </div>
 
 <form action="{{ route('expirydate.store') }}" method="POST" class="form-cm">
