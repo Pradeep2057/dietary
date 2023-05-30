@@ -14,7 +14,6 @@
             <div class="usersmimage-div"> <img
                     src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&rounded=true&background=FB802C&color=ffffff&size=28&bold=true"
                     alt=""></div>
-            ​
             <div class="db-user-profile-right dropdown main">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <h3 class="username"> {{ Auth::user()->name }}</h3>

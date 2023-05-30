@@ -40,38 +40,127 @@ class ProductController extends Controller
     public function index()
     {
         return view('pages.product.index',[
-            'products'    => Product::all(),
+            'producttypes' => Producttype::all(),
+            'productforms' => Productform::all(),
+            'manufacturers' => Manufacturer::all(),
             'importers'    => Importer::all(),
         ]);
     }
 
-    // public function data(Request $request)
-    // {
-    //     $query = Product::query();
 
-    //     return DataTables::eloquent($query)
-    //         ->addColumn('producttype', function(Product $product) {
-    //             return $product->producttype->name;
-    //         })
-    //         ->addColumn('productform', function(Product $product) {
-    //             return $product->productform->name;
-    //         })
-    //         ->addColumn('manufacturer', function(Product $product) {
-    //             return $product->manufacturer->name;
-    //         })
-    //         ->addColumn('importers', function(Product $product) {
-    //             return $product->importers->name;
-    //         })
-    //         ->addColumn('lab', function(Product $product) {
-    //             return $product->lab->name;
-    //         })
-    //         ->addColumn('action', function(Product $product) {
-    //             // Add your custom action button(s) here
-    //             return '<button>Edit</button>';
-    //         })
-    //         ->rawColumns(['action'])
-    //         ->make(true);
-    // }
+
+    public function data(Request $request)
+    {
+        if ($request->ajax()) {
+            // \Log::debug($request->all());
+            $query = Product::with('Producttype', 'Productform', 'Manufacturer', 'Importer', 'Lab')->latest();
+            if ($request->has('product_type')) {
+                $query->where('product_type', $request->product_type);
+            }
+            if ($request->has('product_form')) {
+                $query->where('product_form', $request->product_form);
+            }
+            if ($request->has('manufacturer')) {
+                $query->where('manufacturer', $request->manufacturer);
+            }
+            if ($request->has('importer')) {
+                $query->where('importer', $request->importer);
+            }
+            if ($request->has('status')) {
+                $query->where('status', $request->status);
+            }
+            if ($request->has('min')) {
+                $query->where('created_at', '>=', $request->min);
+            }
+            if ($request->has('max')) {
+                $query->where('created_at', '<=', $request->max);
+            }
+
+            return Datatables::of($query)
+                ->addColumn('DT_RowIndex', function ($row) {
+                    return $row->getKey() + 1;
+                })
+                ->addColumn('registration', function($row) {
+                    return $row->registration; 
+                })
+                ->addColumn('name', function($row) {
+                    return $row->name; 
+                })
+                ->addColumn('product_type', function($row) {
+                    return $row->Producttype->name ?? "N/A" ;
+                })
+                ->addColumn('product_form', function($row) {
+                    return $row->Productform->name ?? "N/A"; 
+                })
+                ->addColumn('manufacturer', function($row) {
+                    return $row->Manufacturer->name ?? "N/A"; 
+                })
+                ->addColumn('importer', function($row) {
+                    $importerNames = $row->importers->pluck('name')->implode(', ');
+                    return $importerNames ?: "N/A"; 
+                })
+                // ->addColumn('lab', function($row) {
+                //     return $row->Lab->name ?? "N/A"; 
+                // })
+                ->addColumn('status', function($row) {
+                    $statusClass = '';
+                    if ($row->status == 'Pending') {
+                        $statusClass = 'pending';
+                    } elseif ($row->status == 'Verified') {
+                        $statusClass = 'verified';
+                    } else {
+                        $statusClass = 'rejected';
+                    }
+                    return '<div class="' . $statusClass . '">' . $row->status . '</div>';
+                })
+                ->addColumn('created_at', function($row) {
+                    return $row->created_at->format('Y-m-d');
+                })
+                ->addColumn('action', function($row) {
+                    $html = '<div class="d-flex kit-action-com">';
+                    $html .= '<div class="action-btn-view">';
+                    $html .= '<a href="'.route('product.display', $row->id).'">';
+                    $html .= '<span class="material-symbols-outlined">visibility</span>';
+                    $html .= '</a>';
+                    $html .= '</div>';
+    
+                    if (auth()->user()->role == 2 && $row->status == 'Pending') {
+                        $html .= '<div class="action-btn-pen">';
+                        $html .= '<a href="'.route('product.edit', $row->id).'" method="put">';
+                        $html .= '<span class="material-symbols-outlined">edit</span>';
+                        $html .= '</a>';
+                        $html .= '</div>';
+                    } elseif (auth()->user()->role == 0 || auth()->user()->role == 1) {
+                        $html .= '<div class="action-btn-pen">';
+                        $html .= '<a href="'.route('product.edit', $row->id).'" method="put">';
+                        $html .= '<span class="material-symbols-outlined">edit</span>';
+                        $html .= '</a>';
+                        $html .= '</div>';
+                    }
+    
+                    if (auth()->user()->role == 0) {
+                        $html .= '<form class="action-btn-dlt" action="'.route('product.delete', $row->id).'" method="post">';
+                        $html .= csrf_field();
+                        $html .= method_field('delete');
+                        $html .= '<button type="submit">';
+                        $html .= '<i class="fa-regular fa-trash-can"></i>';
+                        $html .= '</button>';
+                        $html .= '</form>';
+                    }
+    
+                    $html .= '</div>';
+    
+                    return $html;
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
+    }
+
+
+
+
+
 
     public function create(Product $product)
     {

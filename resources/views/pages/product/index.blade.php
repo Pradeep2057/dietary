@@ -34,42 +34,36 @@
     </div>
     @endif
 
-    @if(!empty($products))
+
 
     <div class="row mb-4 filter-row filters">
         <div class="row mb-2">
             <div class="col-md-3">
-                <select id="product_type" class="form-select kit-form-control">
+                <select id="product_type" name="product_type" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Type</option>
-                    @foreach ($products->unique('producttype.name') as $product)
-                    @if($product->producttype != null)
-                    <option value="{{ $product->producttype->name }}">{{ $product->producttype->name }}</option>
-                    @endif
+                    @foreach ($producttypes->unique('name') as $producttype)
+                    <option value="{{ $producttype->name }}">{{ $producttype->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
-                <select id="product_form" class="form-select kit-form-control">
+                <select id="product_form" name="product_form" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Form</option>
-                    @foreach ($products->unique('productform.name') as $product)
-                    @if($product->productform != null)
-                    <option value="{{ $product->productform->name }}">{{ $product->productform->name }}</option>
-                    @endif
+                    @foreach ($productforms->unique('name') as $productform)
+                    <option value="{{ $productform->name }}">{{ $productform->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
-                <select id="manufacturer" class="form-select kit-form-control">
+                <select id="manufacturer"  name="manufacturer" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Manufacturer</option>
-                    @foreach ($products->unique('manufacturer.name') as $product)
-                    @if($product->manufacturer != null)
-                    <option value="{{ $product->manufacturer->name }}">{{ $product->manufacturer->name }}</option>
-                    @endif
+                    @foreach ($manufacturers->unique('name') as $manufacturer)
+                    <option value="{{ $manufacturer->name }}">{{ $manufacturer->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
-                <select id="importer" class="form-select kit-form-control">
+                <select id="importer" name="importer" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Importer</option>
                     @foreach ($importers->unique('name') as $importer)
                     <option value="{{ $importer->name }}">{{ $importer->name }}</option>
@@ -79,7 +73,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <select id="status" class="form-select kit-form-control">
+                <select id="status" name="status" class="form-select kit-form-control">
                     <option value="" disabled selected>Select Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Verified">Verified</option>
@@ -108,215 +102,138 @@
                 <th>Product Form</th>
                 <th>Manufacturer</th>
                 <th>Importer</th>
-                <th>Lab</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @php
-            $i = 1;
-            @endphp
-            @foreach ($products as $product)
-                <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $product->registration }}</td>
-                    <td>{{ $product->name }}</td>
-                    @if($product->producttype != null)
-                    <td>{{ $product->producttype->name }}</td>
-                    @else
-                    <td>N/A</td>
-                    @endif
-
-                    @if($product->productform != null)
-                    <td>{{ $product->productform->name }}</td>
-                    @else
-                    <td>N/A</td>
-                    @endif
-
-                    @if($product->manufacturer !=null)
-                    <td>{{ $product->manufacturer->name }}</td>
-                    @else
-                    <td>N/A</td>
-                    @endif
-                    <td>
-                        @foreach ($product->importers as $importer)
-                            {{ $importer->name }}
-                        @endforeach
-                    </td>
-                    @if($product->lab != null)
-                    <td>{{ $product->lab->name }}</td>
-                    @else
-                    <td>N/A</td>
-                    @endif
-                    <td ><div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div></td>
-                    <td>{{ $product->created_at->format('Y-m-d') }}</td>
-
-                    <td>
-                        <div class="d-flex kit-action-com">
-                            <div class="action-btn-view">
-                                <a href="{{ route('product.display', $product->id) }}">
-                                    <span class="material-symbols-outlined">
-                                        visibility
-                                        </span>
-                                </a>
-                            </div>
-
-                            @if (auth()->user()->role == 2 && $product->status == 'Pending')
-                            <div class="action-btn-pen">
-                                <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
-                                    edit
-                                    </span></a>
-                            </div>
-                            @elseif (auth()->user()->role == 0 || auth()->user()->role == 1 )
-                            <div class="action-btn-pen">
-                                <a href="{{ route('product.edit', $product->id) }}" method="put"><span class="material-symbols-outlined">
-                                    edit
-                                    </span></a>
-                            </div>
-                            @else
-                            @endif
-
-                            @if (auth()->user()->role == 0)
-                            <form class="action-btn-dlt" action="{{ route('product.delete', $product->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit">
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </button>
-                            </form>
-                            @endif
-                        </div>
-                    </td>
-                </tr>
-            @php
-            $i++;
-            @endphp
-            @endforeach
-            @else
-            <p>No product!</p>
-            @endif
-            @endsection
         </tbody>
     </table>
+
+            @endsection
 </div>
 
 @section('custom-js')
 
+
+
+
 <script>
-    var minDate, maxDate;
-
-    $.fn.dataTable.ext.search.push(
-        function(settings, data, dataIndex) {
-            var min = minDate.val();
-            var max = maxDate.val();
-            var date = new Date(data[9]);
-            if (
-                (min === null && max === null) ||
-                (min === null && date <= max) ||
-                (min <= date && max === null) ||
-                (min <= date && date <= max)
-            ) {
-                return true;
-            }
-            return false;
-        }
-    );
-
-    $(document).ready(function() {
-        minDate = new DateTime($('#min'), {
-            format: 'YYYY-MM-DD'
-        });
-
-        maxDate = new DateTime($('#max'), {
-            format: 'YYYY-MM-DD'
-        });
-
+    $(document).ready(function () {
         var table = $('#sampleTable').DataTable({
-            dom: 'Bfrtip',
+
+            drawCallback: function() {
+                var api = this.api();
+                var startIndex = api.context[0]._iDisplayStart;
+                api.column(0, {search: 'applied', order: 'applied'}).nodes().each(function(cell, i) {
+                    cell.innerHTML = startIndex + i + 1;
+                });
+            },
+
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            dom: 'Bfrtipl',
+            language: {
+                info: '',
+                lengthMenu: 'Show _MENU_ entries',
+            },
             buttons: [{
                     extend: 'copy',
-                    // text: '<span class="material-symbols-outlined">content_copy</span> Copy',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
                     }
                 },
                 {
                     extend: 'csv',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
                     }
                 },
                 {
                     extend: 'excel',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
                     }
                 },
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
                     }
                 },
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8]
                     }
                 }
             ],
-            columnDefs: [
-            {
-                targets: -1,
-                visible: true,
+            ajax: "{{ route('product.data') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', title: 'S.No'},
+                {data: 'registration', name: 'registration' ,orderable: false, searchable: true},
+                {data: 'name', name: 'name' ,orderable: false, searchable: true},
+                {data: 'product_type', name: 'product_type' ,orderable: false, searchable: true},
+                {data: 'product_form', name: 'product_form' ,orderable: false, searchable: true},
+                {data: 'manufacturer', name: 'manufacturer' ,orderable: false, searchable: true},
+                {data: 'importer', name: 'importer' ,orderable: false, searchable: true},
+                {data: 'status', name: 'status' ,orderable: false, searchable: true},
+                {data: 'created_at', name: 'created_at' ,orderable: false, searchable: true},
+                {data: 'action', name: 'action', orderable: false, searchable: true},
+            ],
+
+            initComplete: function () {
+                applyFilters();
             }
-        ]
         });
 
-
-        $('#product_type').on('change', function() {
-            var type = $(this).val();
-            table.columns(3).search(type).draw();
-        });
-        $('#product_form').on('change', function() {
-            var type = $(this).val();
-            table.columns(4).search(type).draw();
-        });
-        $('#manufacturer').on('change', function() {
-            var type = $(this).val();
-            table.columns(5).search(type).draw();
-        });
-        $('#importer').on('change', function() {
-            var type = $(this).val();
-            table.columns(6).search(type).draw();
+        $('#product_type, #product_form, #manufacturer, #importer, #status, #min, #max').on('change', function () {
+            applyFilters();
         });
 
-        $('#status').on('change', function() {
-            var type = $(this).val();
-            table.columns(8).search(type).draw();
+        $('#reset').on('click', function () {
+            resetFilters();
         });
 
-        $('#min, #max').on('change', function() {
+        function applyFilters() {
+            var product_type = $('#product_type').val();
+            var product_form = $('#product_form').val();
+            var manufacturer = $('#manufacturer').val();
+            var importer = $('#importer').val();
+            var status = $('#status').val();
+            var min = $('#min').val();
+            var max = $('#max').val();
+
+            table.column(3).search(product_type);
+            table.column(4).search(product_form);
+            table.column(5).search(manufacturer);
+            table.column(6).search(importer);
+            table.column(7).search(status);
+
+            if (min !== '') {
+                table.column(8).min(min);
+            } else {
+                table.column(8).search('');
+            }
+
+            if (max !== '') {
+                table.column(8).max(max);
+            } else {
+                table.column(8).search('');
+            }
+
             table.draw();
-        });
+        }
 
-        $('#reset').on('click', function() {
-            $('#min').val('');
-            $('#max').val('');
-            $('#product_type').val('');
-            $('#product_form').val('');
-            $('#manufacturer').val('');
-            $('#importer').val('');
-            $('#status').val('');
-
+        function resetFilters() {
+            $('#product_type, #product_form, #manufacturer, #importer, #status, #min, #max').val('');
             table.columns().search('').draw();
-            minDate.val('');
-            maxDate.val('');
-            table.draw();
-        });
+        }
 
     });
+
 </script>
+
 @endsection

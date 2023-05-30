@@ -234,7 +234,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::get('/fill', [ProductController::class, 'fill'])->name('fill');
         Route::post('/', [ProductController::class, 'store'])->name('store');
-        Route::post('/data', [ProductController::class, 'data'])->name('data');
+        Route::get('/data', [ProductController::class, 'data'])->name('data');
         Route::get('/{product:id}/edit', [ProductController::class, 'edit'])->name('edit');
         Route::get('/{product:id}/display', [ProductController::class, 'display'])->name('display');
         Route::put('/{product:id}', [ProductController::class, 'update'])->name('update');
