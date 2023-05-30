@@ -44,9 +44,7 @@
                 <label for="" class="form-label cm">Password</label>
                 <div class="input-container">
                     <img class="login-icon-left" src="{{ asset('storage/image/lock-alt.svg') }}" alt="">
-                    <input id="password" type="password" class="form-control cm @error('password') is-invalid @enderror"
-                        name="password" required autocomplete="current-password" aria-describedby="passwordHelp"
-                        placeholder="Enter your Password">
+                    <input id="password" type="password" class="form-control cm @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your Password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <small>{{ $message }}</small>

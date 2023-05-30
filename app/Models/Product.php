@@ -166,4 +166,9 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'verifier_id');
     }
+
+    public function productimporters()
+    {
+        return $this->hasMany(Productimporter::class);
+    }
 }

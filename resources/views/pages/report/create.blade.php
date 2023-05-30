@@ -7,7 +7,7 @@
         <a href="{{ route('report.index')}}" class="nav-icon me-2">
         <i class="fa-solid fa-angle-left"></i> 
         </a>
-        Certificate<span class="sub-nav ms-2" > > Registration > Create</span>
+        Certificate<span class="sub-nav ms-2" > > Registration > Create Certificate</span>
     </h3>
     <p><a href="{{ route('report.index')}}"> <i class="fa-regular fa-eye"></i>View Certificates</a></p>
 </div>
@@ -20,7 +20,7 @@
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="" class="form-label cm">Product Name</label>
-            <select class="form-select kit-form-control mySelect" name="product_id" aria-label="Default select example">
+            <select class="form-select kit-form-control mySelect @error('product_id') is-invalid @enderror" name="product_id" aria-label="Default select example">
                 <option value="1" selected disabled>Select Product</option>
                 @foreach ($products as $product)
                 <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -29,40 +29,40 @@
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">Application Number and Date</label>
-            <input type="text" class="form-control cm" placeholder="Enter application number and date" name="application_number">
+            <input type="text" class="form-control cm @error('application_number') is-invalid @enderror" placeholder="Enter application number and date" name="application_number">
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">Date of Grant</label>
-            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="date_of_grant">
+            <input type="text" class="form-control cm date-picker @error('date_of_grant') is-invalid @enderror" data-single="1" placeholder="Select Date" name="date_of_grant">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="" class="form-label cm">Certificate Validity from</label>
-            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="validity_from">
+            <input type="text" class="form-control cm date-picker @error('validity_from') is-invalid @enderror" data-single="1" placeholder="Select Date" name="validity_from">
         </div>
 
         <div class="col-md-4">
             <label for="" class="form-label cm"> Certificate Validity to</label>
-            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="validity_to">
+            <input type="text" class="form-control cm date-picker @error('validity_to') is-invalid @enderror" data-single="1" placeholder="Select Date" name="validity_to">
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">GMP Validity upto </label>
-            <input type="date" class="form-control cm" placeholder="Select Date" name="gmp_validity">
+            <input type="date" class="form-control cm @error('gmp_validity') is-invalid @enderror" placeholder="Select Date" name="gmp_validity">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-4">
             <label for="" class="form-label cm">Prepared By</label>
-            <input type="text" class="form-control cm" placeholder="Enter Prepared By" name="prepared_by">
+            <input type="text" class="form-control cm @error('prepared_by') is-invalid @enderror" placeholder="Enter Prepared By" name="prepared_by">
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">Post</label>
-            <input type="text" class="form-control cm" placeholder="Enter Post" name="post">
+            <input type="text" class="form-control cm @error('post') is-invalid @enderror" placeholder="Enter Post" name="post">
         </div>
         <div class="col-md-4">
             <label for="" class="form-label cm">Date of Preparation</label>
-            <input type="text" class="form-control cm date-picker" data-single="1" placeholder="Select Date" name="date_of_preparation">
+            <input type="text" class="form-control cm date-picker @error('date_of_preparation') is-invalid @enderror" data-single="1" placeholder="Select Date" name="date_of_preparation">
         </div>
     </div>
     
@@ -88,13 +88,13 @@
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="" class="form-label cm">Voucher Number</label>
-                            <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number">
+                            <input type="text" class="form-control cm @error('voucher_number') is-invalid @enderror" placeholder="Enter payment voucher number" name="voucher_number">
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="" class="form-label cm">Voucher Amount</label>
-                            <input type="text" class="form-control cm" placeholder="Enter paid amount" name="voucher_amount">
+                            <input type="text" class="form-control cm @error('voucher_amount') is-invalid @enderror" placeholder="Enter paid amount" name="voucher_amount">
                         </div>
                     </div>
             </div>

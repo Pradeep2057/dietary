@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
+
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Importer;
@@ -22,7 +23,8 @@ use App\Models\Fiscalyear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ProductController extends Controller
 {
@@ -43,7 +45,7 @@ class ProductController extends Controller
             'producttypes' => Producttype::all(),
             'productforms' => Productform::all(),
             'manufacturers' => Manufacturer::all(),
-            'importers'    => Importer::all(),
+            'labs'    => Lab::all(),
         ]);
     }
 
@@ -51,30 +53,59 @@ class ProductController extends Controller
 
     public function data(Request $request)
     {
+        $data = Product::with('Producttype', 'Productform', 'Manufacturer', 'Importer', 'Lab');
+
+        if ($request->input('status')) {
+            $status = $request->input('status');
+            $data->where('status', $status);
+        }
+
+        if ($request->input('product_type')) {
+            $type = $request->input('product_type');
+            $data->where('product_type', $type);
+        }
+
+        if ($request->input('product_form')) {
+            $form = $request->input('product_form');
+            $data->where('product_form', $form);
+        }
+
+        if ($request->input('manufacturer')) {
+            $manufacturer = $request->input('manufacturer');
+            $data->where('manufacturer_id', $manufacturer);
+        }
+
+        if ($request->input('min')) {
+            $fromDate = $request->input('min');
+            $data->whereDate('created_at', '>=', $fromDate);
+        }
+    
+        if ($request->input('max')) {
+            $toDate = $request->input('max');
+            $data->whereDate('created_at', '<=', $toDate);
+        }
+
+        if ($request->input('lab')) {
+            $lab = $request->input('lab');
+            $data->where('lab_id', $lab);
+        }
+
+        if ($request->input('search')) {
+            $searchValue = $request->input('search');
+            $data->where(function ($query) use ($searchValue) {
+                $query->where('name', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('registration', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('ingredients', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('ingredient_unit', 'LIKE', '%' . $searchValue . '%');
+            });
+        }
+
+        $query = $data->latest();
+
+        
+       
+
         if ($request->ajax()) {
-            // \Log::debug($request->all());
-            $query = Product::with('Producttype', 'Productform', 'Manufacturer', 'Importer', 'Lab')->latest();
-            if ($request->has('product_type')) {
-                $query->where('product_type', $request->product_type);
-            }
-            if ($request->has('product_form')) {
-                $query->where('product_form', $request->product_form);
-            }
-            if ($request->has('manufacturer')) {
-                $query->where('manufacturer', $request->manufacturer);
-            }
-            if ($request->has('importer')) {
-                $query->where('importer', $request->importer);
-            }
-            if ($request->has('status')) {
-                $query->where('status', $request->status);
-            }
-            if ($request->has('min')) {
-                $query->where('created_at', '>=', $request->min);
-            }
-            if ($request->has('max')) {
-                $query->where('created_at', '<=', $request->max);
-            }
 
             return Datatables::of($query)
                 ->addColumn('DT_RowIndex', function ($row) {
@@ -99,9 +130,9 @@ class ProductController extends Controller
                     $importerNames = $row->importers->pluck('name')->implode(', ');
                     return $importerNames ?: "N/A"; 
                 })
-                // ->addColumn('lab', function($row) {
-                //     return $row->Lab->name ?? "N/A"; 
-                // })
+                ->addColumn('lab', function($row) {
+                    return $row->Lab->name ?? "N/A"; 
+                })
                 ->addColumn('status', function($row) {
                     $statusClass = '';
                     if ($row->status == 'Pending') {
@@ -116,6 +147,7 @@ class ProductController extends Controller
                 ->addColumn('created_at', function($row) {
                     return $row->created_at->format('Y-m-d');
                 })
+
                 ->addColumn('action', function($row) {
                     $html = '<div class="d-flex kit-action-com">';
                     $html .= '<div class="action-btn-view">';

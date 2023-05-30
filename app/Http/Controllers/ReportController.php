@@ -48,6 +48,20 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'voucher_number' => 'required',
+            'voucher_amount' => 'required',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'application_number' => 'required',
+            'validity_to' => 'required',
+            'gmp_validity' => 'required',
+            'date_of_preparation' => 'required',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+
         $report = new Report;
 
         if (Auth::user()->role == 0) {
@@ -103,6 +117,20 @@ class ReportController extends Controller
 
     public function update(Request $request, Report $report)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'voucher_number' => 'required',
+            'voucher_amount' => 'required',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'application_number' => 'required',
+            'validity_to' => 'required',
+            'gmp_validity' => 'required',
+            'date_of_preparation' => 'required',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+        
         $this->authorize('update', $report);
         $report->date_of_grant = $request->date_of_grant;
         $report->validity_from = $request->validity_from;

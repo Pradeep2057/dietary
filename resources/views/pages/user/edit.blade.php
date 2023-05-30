@@ -12,19 +12,20 @@
         <div class="row">
             <div class="col-md-4">
                 <label for="" class="form-label cm">Full Name</label>
-                <input type="text" class="form-control cm ps-2" placeholder="Enter your Full Name" name="name"
-                    value="{{ old('name', $user->name) }}" required>
+                <input type="text" class="form-control cm ps-2 @error('name') is-invalid @enderror" placeholder="Enter your Full Name" name="name"
+                    value="{{ old('name', $user->name) }}" >
             </div>
             <div class="col-md-4"> <label for="" class="form-label cm">Email Address</label>
-                <input type="email" class="form-control cm" placeholder="Enter your Email Address" name="email"
-                    value="{{ old('email', $user->email) }}" required>
+                <input type="email" class="form-control cm @error('email') is-invalid @enderror" placeholder="Enter your Email Address" name="email"
+                    value="{{ old('email', $user->email) }}" >
             </div>
             <div class="col-md-4">
                 <label for="" class="form-label cm">User Role</label>
                 <select name="role" class="form-select kit-form-control" required>
-                    <option value="0" @if ($user->role == 0) selected @endif>Super Admin</option>
-                    <option value="1" @if ($user->role == 1) selected @endif>Admin</option>
-                    <option value="2" @if ($user->role == 2) selected @endif>User</option>
+                    <option value="0" @if ($user->role == 0) selected @endif>Verifier</option>
+                    <option value="1" @if ($user->role == 1) selected @endif>Reviewer</option>
+                    <option value="2" @if ($user->role == 2) selected @endif>Data Entry Operator</option>
+                    <option value="3" @if ($user->role == 3) selected @endif>Report Viewer</option>
                 </select>
             </div>
         </div>

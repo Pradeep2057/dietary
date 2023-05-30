@@ -40,33 +40,33 @@
         <div class="row mb-2">
             <div class="col-md-3">
                 <select id="product_type" name="product_type" class="form-select kit-form-control">
-                    <option value="" disabled selected>Select Type</option>
+                    <option value="all" disabled selected>Select Type</option>
                     @foreach ($producttypes->unique('name') as $producttype)
-                    <option value="{{ $producttype->name }}">{{ $producttype->name }}</option>
+                    <option value="{{ $producttype->id }}">{{ $producttype->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
                 <select id="product_form" name="product_form" class="form-select kit-form-control">
-                    <option value="" disabled selected>Select Form</option>
+                    <option value="all" disabled selected>Select Form</option>
                     @foreach ($productforms->unique('name') as $productform)
-                    <option value="{{ $productform->name }}">{{ $productform->name }}</option>
+                    <option value="{{ $productform->id }}">{{ $productform->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
                 <select id="manufacturer"  name="manufacturer" class="form-select kit-form-control">
-                    <option value="" disabled selected>Select Manufacturer</option>
+                    <option value="all" disabled selected>Select Manufacturer</option>
                     @foreach ($manufacturers->unique('name') as $manufacturer)
-                    <option value="{{ $manufacturer->name }}">{{ $manufacturer->name }}</option>
+                    <option value="{{ $manufacturer->id }}">{{ $manufacturer->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-md-3">
-                <select id="importer" name="importer" class="form-select kit-form-control">
-                    <option value="" disabled selected>Select Importer</option>
-                    @foreach ($importers->unique('name') as $importer)
-                    <option value="{{ $importer->name }}">{{ $importer->name }}</option>
+                <select id="lab" name="lab" class="form-select kit-form-control">
+                    <option value="all" disabled selected>Select Lab</option>
+                    @foreach ($labs->unique('name') as $lab)
+                    <option value="{{ $lab->id }}">{{ $lab->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -74,16 +74,16 @@
         <div class="row">
             <div class="col-md-3">
                 <select id="status" name="status" class="form-select kit-form-control">
-                    <option value="" disabled selected>Select Status</option>
+                    <option value="all" disabled selected>Select Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Verified">Verified</option>
                 </select>
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control cm" id="min" name="min" placeholder="From">
+                <input type="date" class="form-control cm" id="min" name="min" placeholder="From">
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control cm" id="max" name="max" placeholder="To">
+                <input type="date" class="form-control cm" id="max" name="max" placeholder="To">
             </div>
             <div class="col-md-3">
             <button id="reset">Reset</button>
@@ -101,14 +101,13 @@
                 <th>Product Type</th>
                 <th>Product Form</th>
                 <th>Manufacturer</th>
+                <th>Lab</th>
                 <th>Importer</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
     </table>
 
             @endsection
@@ -170,65 +169,73 @@
                     }
                 }
             ],
-            ajax: "{{ route('product.data') }}",
+            // ajax: "{{ route('product.data') }}",
+
+            ajax: {
+                url: "{{ route('product.data') }}",
+                data: function (d) {
+                    d.product_type = $('#product_type').val(),
+                    d.product_form = $('#product_form').val(),
+                    d.status = $('#status').val(),
+                    d.manufacturer = $('#manufacturer').val(),
+                    d.min = $('#min').val(),
+                    d.max = $('#max').val(),
+                    d.lab = $('#lab').val(),
+                    d.search = $('input[type="search"]').val()
+                }
+            },
+
             columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', title: 'S.No'},
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', title: 'S.No',orderable: false   },
                 {data: 'registration', name: 'registration' ,orderable: false, searchable: true},
                 {data: 'name', name: 'name' ,orderable: false, searchable: true},
                 {data: 'product_type', name: 'product_type' ,orderable: false, searchable: true},
                 {data: 'product_form', name: 'product_form' ,orderable: false, searchable: true},
                 {data: 'manufacturer', name: 'manufacturer' ,orderable: false, searchable: true},
+                {data: 'lab', name: 'lab' ,orderable: false, searchable: true},
                 {data: 'importer', name: 'importer' ,orderable: false, searchable: true},
                 {data: 'status', name: 'status' ,orderable: false, searchable: true},
                 {data: 'created_at', name: 'created_at' ,orderable: false, searchable: true},
                 {data: 'action', name: 'action', orderable: false, searchable: true},
             ],
-
-            initComplete: function () {
-                applyFilters();
-            }
         });
 
-        $('#product_type, #product_form, #manufacturer, #importer, #status, #min, #max').on('change', function () {
-            applyFilters();
-        });
 
         $('#reset').on('click', function () {
             resetFilters();
         });
 
-        function applyFilters() {
-            var product_type = $('#product_type').val();
-            var product_form = $('#product_form').val();
-            var manufacturer = $('#manufacturer').val();
-            var importer = $('#importer').val();
-            var status = $('#status').val();
-            var min = $('#min').val();
-            var max = $('#max').val();
-
-            table.column(3).search(product_type);
-            table.column(4).search(product_form);
-            table.column(5).search(manufacturer);
-            table.column(6).search(importer);
-            table.column(7).search(status);
-
-            if (min !== '') {
-                table.column(8).min(min);
-            } else {
-                table.column(8).search('');
-            }
-
-            if (max !== '') {
-                table.column(8).max(max);
-            } else {
-                table.column(8).search('');
-            }
-
+        $("#product_type").on('change', function(){
             table.draw();
-        }
+        });
+
+        $("#status").on('change', function(){
+            table.draw();
+        });
+
+        $('#product_form').on('change', function() {
+            table.draw();
+        });
+
+        $('#manufacturer').on('change', function() {
+            table.draw();
+        });
+
+        $('#min').on('change', function() {
+            table.draw();
+        });
+
+        $('#max').on('change', function() {
+            table.draw();
+        });
+
+        $('#lab').on('change', function() {
+            table.draw();
+        });
 
         function resetFilters() {
-            $('#product_type, #product_form, #manufacturer, #importer, #status, #min, #max').val('');
+            $('#product_type, #product_form, #manufacturer, #lab, #status').val('all');
+            $('#min, #max').val('');
             table.columns().search('').draw();
         }
 

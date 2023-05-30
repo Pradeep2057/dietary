@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'ends_with:.com,.net,.org', 'regex:/^.+@.+\..+$/'],
             'role' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'email' => ['required', 'string', 'email', 'max:255','ends_with:.com,.net,.org', 'regex:/^.+@.+\..+$/', 'unique:users,email,' . $user->id],
             'role' => ['required', 'string'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
