@@ -1690,3 +1690,10 @@ button.dt-button, div.dt-button, a.dt-button, input.dt-button{
 .reject-btn:hover{
     background: #d40101!important;
 }
+
+.previewImage {
+    width: 200px;
+    height: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
