@@ -57,11 +57,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Name of Product</label>
                         <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter Name of Product" name="name"
-                        @if($templateProduct)
-                            value="{{ $templateProduct ? $templateProduct->name : '' }}"
-                        @else
-                            value="{{ old('name') }}"
-                        @endif>
+                            value="{{ $templateProduct ? $templateProduct->name : '' }}">
                         @error('name')
                             <small style="color: #ff0000;">{{ $message }}</small>
                         @enderror
@@ -69,8 +65,8 @@
                     
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Type of Product</label>
-                        <select name="product_type" class="form-select kit-form-control mySelect @error('product_type') is-invalid @enderror" value="{{old('product_type')}}">
-                            <option value="all" selected disabled>Select product type</option>
+                        <select name="product_type" class="form-select kit-form-control mySelect @error('product_type') is-invalid @enderror">
+                            <option value="0" selected disabled>Select product type</option>
                             @foreach ($producttypes as $producttype)
                             <option value="{{ $producttype->id }}"
                                 {{ $templateProduct && $templateProducttype->id == $producttype->id ? 'selected' : '' }}>
@@ -84,7 +80,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Form of Product</label>
                         <select name="product_form" class="form-select kit-form-control mySelect @error('product_form') is-invalid @enderror">
-                            <option value="all" selected disabled>Select product form</option>
+                            <option value="1" selected disabled>Select product form</option>
                             @foreach ($productforms as $productform)
                             <option value="{{ $productform->id }}"
                                 {{ $templateProduct && $templateProductform->id == $productform->id ? 'selected' : '' }}>
@@ -95,7 +91,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Dose specified</label>
                         <select name="dose_id" class="form-select kit-form-control mySelect @error('dose_id') is-invalid @enderror" aria-label="Default select example">
-                            <option value="all" selected disabled>Select dose</option>
+                            <option value="1" selected disabled>Select dose</option>
                             @foreach ($doses as $dose)
                             <option value="{{ $dose->id }}"
                                 {{ $templateProduct && $templateDose->id == $dose->id ? 'selected' : '' }}>{{ $dose->name }}
@@ -108,7 +104,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Size of pack</label>
                         <select name="size_id" class="form-select kit-form-control mySelect @error('size_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select size</option>
+                            <option value="1" selected disabled>Select size</option>
                             @foreach ($sizes as $size)
                             <option value="{{ $size->id }}"
                                 {{ $templateProduct && $templateSize->id == $size->id ? 'selected' : '' }}>{{ $size->name }}
@@ -118,8 +114,8 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Expirydate Claim</label>
-                        <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select expiry date</option>
+                        <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_claim') is-invalid @enderror">
+                            <option value="1" selected disabled>Select expiry date</option>
                             @foreach ($expirydates as $expirydate)
                             <option value="{{ $expirydate->id }}"
                                 {{ $templateProduct && $templateExpirydate->id == $expirydate->id ? 'selected' : '' }}>
@@ -142,7 +138,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Name of Manufacturer</label>
                         <select name="manufacturer_id" class="form-select kit-form-control mySelect @error('manufacturer_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select Manufacturer</option>
+                            <option value="" selected disabled>Select Manufacturer</option>
                             @foreach ($manufacturers as $manufacturer)
                             <option value="{{ $manufacturer->id }}" {{ $templateProduct && $templateManufacturer->id == $manufacturer->id ? 'selected' : '' }}>{{ $manufacturer->name }}</option>
                             @endforeach
@@ -153,7 +149,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Lab</label>
                         <select name="lab_id" class="form-select kit-form-control mySelect @error('lab_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select Lab</option>
+                            <option value="1" selected disabled>Select Lab</option>
                             @foreach ($labs as $lab)
                             <option value="{{ $lab->id }}" {{ $templateProduct && $templateLab->id == $lab->id ? 'selected' : '' }}>{{ $lab->name }}</option>
                             @endforeach
@@ -162,7 +158,7 @@
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Capital of firm</label>
                         <select name="capital_id" class="form-select kit-form-control mySelect @error('capital_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select Capital</option>
+                            <option value="1" selected disabled>Select Capital</option>
                             @foreach ($capitals as $capital)
                             <option value="{{ $capital->id }}" {{ $templateProduct && $templateCapital->id == $capital->id ? 'selected' : '' }}>{{ $capital->name }}</option>
                             @endforeach
@@ -181,7 +177,7 @@
                     <div class="mb-3 col-md-4">
                         <label for="" class="form-label cm">GMP Certifying Agency</label>
                         <select name="gmp_id" class="form-select kit-form-control mySelect @error('gmp_id') is-invalid @enderror">
-                            <option value="all" selected disabled>Select GMP Certifying Agency</option>
+                            <option value="0" selected disabled>Select GMP Certifying Agency</option>
                             @foreach ($agencies as $agency)
                             <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                             @endforeach
@@ -196,14 +192,14 @@
                 <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Active ingredients and its quantity</label>
-                        <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30" rows="4">@if($templateProduct){{ $templateIngredients }} @else {{ old('ingredients')}}@endif</textarea>
+                        <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Units per ingredients</label>
                         <input type="text" class="form-control cm @error('ingredient_unit') is-invalid @enderror" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)"
-                            name="ingredient_unit" value="@if($templateProduct){{ $templateIngredientsunit }} @else {{ old('ingredient_unit')}} @endif">
+                            name="ingredient_unit">
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Label of product</label>
@@ -364,13 +360,13 @@
                     </div>
                 </div>
                 
-                </div>
+                <div class="row">
+                    <div class="col-md-12 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button></div>
+                </div>            </div>
           </div>
         </div>
       </div>
-      <div class="row mt-3">
-            <div class="col-md-12 text-end"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button></div>
-      </div>
+
 
    
 
@@ -388,7 +384,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Remarks (if any)</label>
-                        <textarea name="remarks" class="form-control cm" cols="30" rows="4" required></textarea>
+                        <textarea name="remarks" class="form-control cm" cols="30" rows="4"></textarea>
                     </div>
                 </div>
             </div>
@@ -400,7 +396,7 @@
                     <div class="row">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Remarks (if any)</label>
-                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4" required></textarea>
+                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4"></textarea>
                     </div>
             </div>
             <div class="modal-footer">
