@@ -69,7 +69,7 @@
 
 
 <div class="view-page">
-<h3 class="create-form-heading">Certificate Details</h3>
+    <h3 class="create-form-heading">Certificate Details</h3>
         <div class="row">
             <div class="col-md-4">
                 <h4>Name of Product</h4>
