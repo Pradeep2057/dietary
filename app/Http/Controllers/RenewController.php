@@ -54,7 +54,7 @@ class RenewController extends Controller
             'validity_from' => 'required | date',
             'validity_to' => 'required | date',
             'renew_valid' => 'required | date',
-            'voucher_amount' => 'numeric',
+            // 'voucher_amount' => 'numeric',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
             'date_of_preparation' => 'required | date',
@@ -91,7 +91,7 @@ class RenewController extends Controller
         $renew->post = $request->post;
         $renew->author_id = auth()->user()->id;
         $renew->save();
-        return redirect()->route('renew.index')->with('successct', 'renew created successfully.');
+        return redirect()->route('renew.index')->with('successct', 'Renew Certificate created successfully.');
     }
 
     public function edit(Renew $renew)
@@ -124,7 +124,6 @@ class RenewController extends Controller
             'validity_from' => 'required | date',
             'validity_to' => 'required | date',
             'renew_valid' => 'required | date',
-            'voucher_amount' => 'numeric',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
             'date_of_preparation' => 'required | date',
@@ -160,7 +159,7 @@ class RenewController extends Controller
         $renew->voucher_amount = $request->voucher_amount;
 
         $renew->save();
-        return redirect()->route('renew.index')->with('successup', 'renew updated successfully.');;
+        return redirect()->route('renew.index')->with('successup', 'Renew Certificate updated successfully.');;
     }
 
 
@@ -168,7 +167,7 @@ class RenewController extends Controller
     {
         $this->authorize('delete', $renew);
         $renew->delete();
-        return redirect()->route('renew.index')->with('successdt', 'renew deleted successfully.');;
+        return redirect()->route('renew.index')->with('successdt', 'Renew Certificate deleted successfully.');;
     }
 
     public function generatePdf(Renew $renew)

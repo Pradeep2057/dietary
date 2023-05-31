@@ -79,10 +79,7 @@
         </div>
     </div>
 
-    @if(Auth::user()->role==2)
-    <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="" hidden>
-    <input type="number" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_amount" value="" hidden>
-    @endif
+    
 
     @if(Auth::user()->role!=2)
     <div class="row">
@@ -100,6 +97,10 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                @if(Auth::user()->role==2)
+                <input type="text" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_number" value="" hidden>
+                <input type="number" class="form-control cm" placeholder="Enter payment voucher number" name="voucher_amount" value="" hidden>
+                @else
                 <div class="modal-body">
                     <div class="row">
                         <div class="mb-3 col-md-12">
@@ -117,6 +118,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @if(Auth::user()->role==1)
                 <div class="modal-footer">
                     <button type="submit" name="verify" class="btn btn-primary">Update</button>
