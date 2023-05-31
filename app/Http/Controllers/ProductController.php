@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
+
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Importer;
@@ -22,7 +23,8 @@ use App\Models\Fiscalyear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ProductController extends Controller
 {
@@ -40,38 +42,157 @@ class ProductController extends Controller
     public function index()
     {
         return view('pages.product.index',[
-            'products'    => Product::all(),
-            'importers'    => Importer::all(),
+            'producttypes' => Producttype::all(),
+            'productforms' => Productform::all(),
+            'manufacturers' => Manufacturer::all(),
+            'labs'    => Lab::all(),
         ]);
     }
 
-    // public function data(Request $request)
-    // {
-    //     $query = Product::query();
 
-    //     return DataTables::eloquent($query)
-    //         ->addColumn('producttype', function(Product $product) {
-    //             return $product->producttype->name;
-    //         })
-    //         ->addColumn('productform', function(Product $product) {
-    //             return $product->productform->name;
-    //         })
-    //         ->addColumn('manufacturer', function(Product $product) {
-    //             return $product->manufacturer->name;
-    //         })
-    //         ->addColumn('importers', function(Product $product) {
-    //             return $product->importers->name;
-    //         })
-    //         ->addColumn('lab', function(Product $product) {
-    //             return $product->lab->name;
-    //         })
-    //         ->addColumn('action', function(Product $product) {
-    //             // Add your custom action button(s) here
-    //             return '<button>Edit</button>';
-    //         })
-    //         ->rawColumns(['action'])
-    //         ->make(true);
-    // }
+
+    public function data(Request $request)
+    {
+        $data = Product::with('Producttype', 'Productform', 'Manufacturer', 'Importer', 'Lab');
+
+        if ($request->input('status')) {
+            $status = $request->input('status');
+            $data->where('status', $status);
+        }
+
+        if ($request->input('product_type')) {
+            $type = $request->input('product_type');
+            $data->where('product_type', $type);
+        }
+
+        if ($request->input('product_form')) {
+            $form = $request->input('product_form');
+            $data->where('product_form', $form);
+        }
+
+        if ($request->input('manufacturer')) {
+            $manufacturer = $request->input('manufacturer');
+            $data->where('manufacturer_id', $manufacturer);
+        }
+
+        if ($request->input('min')) {
+            $fromDate = $request->input('min');
+            $data->whereDate('created_at', '>=', $fromDate);
+        }
+    
+        if ($request->input('max')) {
+            $toDate = $request->input('max');
+            $data->whereDate('created_at', '<=', $toDate);
+        }
+
+        if ($request->input('lab')) {
+            $lab = $request->input('lab');
+            $data->where('lab_id', $lab);
+        }
+
+        if ($request->input('search')) {
+            $searchValue = $request->input('search');
+            $data->where(function ($query) use ($searchValue) {
+                $query->where('name', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('registration', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('ingredients', 'LIKE', '%' . $searchValue . '%')
+                    ->orWhere('ingredient_unit', 'LIKE', '%' . $searchValue . '%');
+            });
+        }
+
+        $query = $data->latest();
+
+        
+       
+
+        if ($request->ajax()) {
+
+            return Datatables::of($query)
+                ->addColumn('DT_RowIndex', function ($row) {
+                    return $row->getKey() + 1;
+                })
+                ->addColumn('registration', function($row) {
+                    return $row->registration; 
+                })
+                ->addColumn('name', function($row) {
+                    return $row->name; 
+                })
+                ->addColumn('product_type', function($row) {
+                    return $row->Producttype->name ?? "N/A" ;
+                })
+                ->addColumn('product_form', function($row) {
+                    return $row->Productform->name ?? "N/A"; 
+                })
+                ->addColumn('manufacturer', function($row) {
+                    return $row->Manufacturer->name ?? "N/A"; 
+                })
+                ->addColumn('importer', function($row) {
+                    $importerNames = $row->importers->pluck('name')->implode(', ');
+                    return $importerNames ?: "N/A"; 
+                })
+                ->addColumn('lab', function($row) {
+                    return $row->Lab->name ?? "N/A"; 
+                })
+                ->addColumn('status', function($row) {
+                    $statusClass = '';
+                    if ($row->status == 'Pending') {
+                        $statusClass = 'pending';
+                    } elseif ($row->status == 'Verified') {
+                        $statusClass = 'verified';
+                    } else {
+                        $statusClass = 'rejected';
+                    }
+                    return '<div class="' . $statusClass . '">' . $row->status . '</div>';
+                })
+                ->addColumn('created_at', function($row) {
+                    return $row->created_at->format('Y-m-d');
+                })
+
+                ->addColumn('action', function($row) {
+                    $html = '<div class="d-flex kit-action-com">';
+                    $html .= '<div class="action-btn-view">';
+                    $html .= '<a href="'.route('product.display', $row->id).'">';
+                    $html .= '<span class="material-symbols-outlined">visibility</span>';
+                    $html .= '</a>';
+                    $html .= '</div>';
+    
+                    if (auth()->user()->role == 2 && $row->status == 'Pending') {
+                        $html .= '<div class="action-btn-pen">';
+                        $html .= '<a href="'.route('product.edit', $row->id).'" method="put">';
+                        $html .= '<span class="material-symbols-outlined">edit</span>';
+                        $html .= '</a>';
+                        $html .= '</div>';
+                    } elseif (auth()->user()->role == 0 || auth()->user()->role == 1) {
+                        $html .= '<div class="action-btn-pen">';
+                        $html .= '<a href="'.route('product.edit', $row->id).'" method="put">';
+                        $html .= '<span class="material-symbols-outlined">edit</span>';
+                        $html .= '</a>';
+                        $html .= '</div>';
+                    }
+    
+                    if (auth()->user()->role == 0) {
+                        $html .= '<form class="action-btn-dlt" action="'.route('product.delete', $row->id).'" method="post">';
+                        $html .= csrf_field();
+                        $html .= method_field('delete');
+                        $html .= '<button type="submit">';
+                        $html .= '<i class="fa-regular fa-trash-can"></i>';
+                        $html .= '</button>';
+                        $html .= '</form>';
+                    }
+    
+                    $html .= '</div>';
+    
+                    return $html;
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
+    }
+
+
+
+
+
 
     public function create(Product $product)
     {

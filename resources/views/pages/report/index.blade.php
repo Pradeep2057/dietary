@@ -229,6 +229,7 @@
         $('#reset').on('click', function() {
             $('#min').val('');
             $('#max').val('');
+            $('#status').val('');
 
             table.columns().search('').draw();
             minDate.val('');

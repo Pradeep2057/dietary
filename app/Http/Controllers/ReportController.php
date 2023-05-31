@@ -48,6 +48,19 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
+            'voucher_amount' => 'numeric',
+            'application_number' => 'required',
+            'validity_to' => 'required | date',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+
         $report = new Report;
 
         if (Auth::user()->role == 0) {
@@ -61,6 +74,7 @@ class ReportController extends Controller
         }else{
             $report->status = 'Processing';
         }
+
 
         $report->voucher_number = $request->voucher_number;
         $report->voucher_amount = $request->voucher_amount;
@@ -76,7 +90,7 @@ class ReportController extends Controller
         $report->post = $request->post;
         $report->author_id = auth()->user()->id;
         $report->save();
-        return redirect()->route('report.index')->with('successct', 'report created successfully.');
+        return redirect()->route('report.index')->with('successct', 'Certificate created successfully.');
     }
 
     public function edit(Report $report)
@@ -103,6 +117,19 @@ class ReportController extends Controller
 
     public function update(Request $request, Report $report)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
+            'application_number' => 'required',
+            'validity_to' => 'required | date',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+        
         $this->authorize('update', $report);
         $report->date_of_grant = $request->date_of_grant;
         $report->validity_from = $request->validity_from;
@@ -130,7 +157,7 @@ class ReportController extends Controller
         $report->voucher_amount = $request->voucher_amount;
 
         $report->save();
-        return redirect()->route('report.index')->with('successup', 'report updated successfully.');;
+        return redirect()->route('report.index')->with('successup', 'Certificate updated successfully.');;
     }
 
 
@@ -150,9 +177,13 @@ class ReportController extends Controller
         $result = $writer->write($qrCode);
         $dataUri = $result->getDataUri();
 
-        
+        $importers = $report->product->importers;
+
+        // dd($importers);
+
         $html = view('pages.report.pdf', [
             'pdfreport' => $report,
+            'importers'=> $importers,
             'qrCodeImage' => $dataUri
             ])->render();
 

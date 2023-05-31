@@ -35,9 +35,10 @@
         <div class="col-md-4">
             <select id="role" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Role</option>
-                <option value="Super Admin">Super Admin</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
+                <option value="Verifier">Verifier</option>
+                <option value="Reviewer">Reviewer</option>
+                <option value="Data Entry Operator">Data Entry Operator</option>
+                <option value="Report Viewer">Report Viewer</option>
             </select>
         </div>
         <div class="col-md-3">

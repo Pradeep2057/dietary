@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Session;
+
 class LoginController extends Controller
 {
     /*
@@ -38,4 +42,24 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $user = \App\Models\User::where('email', $request->email)->first();
+    
+        if ($user && !\Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'password' => [__('The provided password is incorrect.')],
+            ])->redirectTo(route('login'));
+        } else {
+            throw ValidationException::withMessages([
+                $this->username() => [__('The provided email does not match our records.')],
+            ])->redirectTo(route('login'));
+        }
+    }
+    
+
+
 }

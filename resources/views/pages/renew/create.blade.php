@@ -7,7 +7,7 @@
         <a href="{{ route('renew.index')}}" class="nav-icon me-2">
             <i class="fa-solid fa-angle-left"></i>
         </a>
-        Certificate<span class="sub-nav ms-2" > > Renew Certificate > Create</span>
+        Certificate<span class="sub-nav ms-2" > > Renew Certificate > Create Certificate</span>
     </h3>
     <p><a href="{{ route('renew.index')}}"> <i class="fa-regular fa-eye"></i>View Certificates</a></p>
 </div>
@@ -120,12 +120,10 @@
 
 
 @section('custom-js')
-
     <script src="{{ asset('datepicker/nepali-date-picker.min.js') }}"></script>
     <script>
 		jQuery(document).ready(function () {
 			$('.date-picker').nepaliDatePicker();
 		})
 	</script>
-
 @endsection

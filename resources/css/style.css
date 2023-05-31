@@ -1521,7 +1521,8 @@ th.sorting {
 
 div#sampleTable_wrapper {
     max-width: 100vw;
-    overflow-x: scroll
+    overflow-x: scroll;
+    margin-bottom: 24px;
 }
 
 
