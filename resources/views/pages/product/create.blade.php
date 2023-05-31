@@ -63,6 +63,9 @@
                         @enderror
                     </div>
                     
+
+
+                    
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Type of Product</label>
                         <select name="product_type" class="form-select kit-form-control mySelect @error('product_type') is-invalid @enderror">
