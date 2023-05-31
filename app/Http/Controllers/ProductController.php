@@ -190,10 +190,6 @@ class ProductController extends Controller
     }
 
 
-
-
-
-
     public function create(Product $product)
     {
         $this->authorize('create', $product);
@@ -268,6 +264,17 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255|unique:products',
+            'product_type' => 'required | not_in:all',
+            'product_form' => 'required | not_in:all',
+            'dose_id' => 'required | not_in:all',
+            'size_id' => 'required | not_in:all',
+            'expirydate_id' => 'required | not_in:all',
+            'importers()' => 'required | not_in:all',
+            'manufacturer_id' => 'required | not_in:all',
+            'lab_id' => 'required | not_in:all',
+            'gmp_id' => 'required | not_in:all',
+            'capital_id' => 'required | not_in:all',
+            'gmp_validity_upto' => 'required | date',
         ]);
 
         $product = new Product;
@@ -316,8 +323,6 @@ class ProductController extends Controller
             $product->remarks_1 = $request->remarks1;
         }
 
-        // $product->voucher_no = $request->voucher_number;
-        // $product->voucher_amount = $request->voucher_amount;
 
         $product->product_registration_certificate = $request->product_registration_certificate;
         $product->overall_openion = $request->overall_openion;

@@ -52,7 +52,7 @@ class ReportController extends Controller
             'product_id' => 'required',
             'date_of_grant' => 'required | date',
             'validity_from' => 'required | date',
-            'voucher_amount' => 'numeric',
+            // 'voucher_amount' => 'numeric',
             'application_number' => 'required',
             'validity_to' => 'required | date',
             'gmp_validity' => 'required | date',
@@ -119,7 +119,7 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'voucher_amount' => 'numeric',
+            // 'voucher_amount' => 'numeric',
             'date_of_grant' => 'required | date',
             'validity_from' => 'required | date',
             'application_number' => 'required',
