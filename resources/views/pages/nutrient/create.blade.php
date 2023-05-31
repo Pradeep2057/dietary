@@ -20,11 +20,11 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm"> Name</label>
-            <input type="text" class="form-control cm" placeholder="Enter  Name" name="name">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter  Name" name="name">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Common Name</label>
-            <input type="text" class="form-control cm" placeholder="Enter Common Name" name="common_name">
+            <input type="text" class="form-control cm @error('common_name') is-invalid @enderror" placeholder="Enter Common Name" name="common_name">
         </div>
     </div>
     <div class="row mb-3">
@@ -34,13 +34,13 @@
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">RDA</label>
-            <input type="text" class="form-control cm" placeholder="Enter RDA" name="rda">
+            <input type="text" class="form-control cm @error('rda') is-invalid @enderror" placeholder="Enter RDA" name="rda">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Minimum</label>
-            <input type="text" class="form-control cm" placeholder="Enter Minimum" name="minimum">
+            <input type="text" class="form-control cm @error('minimum') is-invalid @enderror" placeholder="Enter Minimum" name="minimum">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Permissiable Unit</label>

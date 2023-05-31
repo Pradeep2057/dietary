@@ -35,6 +35,8 @@ class CountryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'population' => 'required',
+            'area' => 'required',
         ]);
         $country = new Country;
         $country->name = $validatedData['name'];
@@ -59,6 +61,8 @@ class CountryController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'population' => 'required',
+            'area' => 'required',
         ]);
         $country->name = $validatedData['name'];
         $country->population = $request->population;

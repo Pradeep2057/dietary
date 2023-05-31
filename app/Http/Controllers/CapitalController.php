@@ -35,6 +35,7 @@ class CapitalController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'amount' => 'required|max:255',
         ]);
         $capital = new Capital;
         $capital->name = $validatedData['name'];

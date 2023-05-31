@@ -37,8 +37,8 @@
     @if(!empty($labs))
     <div class="row mb-4 filter-row filters">
         <div class="col-md-4">
-            <select id="agency" class="form-select kit-form-control">
-                <option value="" disabled selected>Select Recognized Agency</option>
+            <select id="agency" class="form-select kit-form-control myselect" >
+                <option value="all" disabled selected>Select Recognized Agency</option>
                 @foreach ($labs->unique('recognized_agency') as $lab)
                 @if(!empty($lab->recognized_agency))
                 <option value="{{ $lab->recognized_agency }}">{{ $lab->recognized_agency }}</option>
@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-2">
             <select id="country" class="form-select kit-form-control">
-                <option value="" disabled selected>Select Country</option>
+                <option value="all" disabled selected>Select Country</option>
                 @foreach ($labs->unique('country.name') as $lab)
                 @if($lab->country != null)
                 <option value="{{ $lab->country->name }}">{{ $lab->country->name }}</option>
@@ -113,7 +113,7 @@
                         
                         
 
-                        @if (auth()->user()->role == 0)
+                        {{-- @if (auth()->user()->role == 0)
                         <form class="action-btn-dlt" action="{{ route('lab.delete', $lab->id) }}" method="post">
                             @csrf
                             @method('delete')
@@ -121,7 +121,7 @@
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
-                        @endif
+                        @endif --}}
                     </div>
                 </td>
             </tr>
@@ -222,8 +222,8 @@
         $('#reset').on('click', function() {
             $('#min').val('');
             $('#max').val('');
-            $('#agency').val('');
-            $('#country').val('');
+            $('#agency').val('all').trigger('change.select2');
+            $('#country').val('all');
 
             table.columns().search('').draw();
             minDate.val('');

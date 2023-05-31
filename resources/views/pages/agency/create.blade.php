@@ -20,17 +20,17 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Agency Name</label>
-            <input type="text" class="form-control cm" placeholder="Enter Size Name" name="name">
+            <input type="text" class="form-control cm  @error('name') is-invalid @enderror" placeholder="Enter agency name" name="name">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Agency Address</label>
-            <input type="text" class="form-control cm" placeholder="Enter Size Name" name="address">
+            <input type="text" class="form-control cm @error('adddress') is-invalid @enderror" placeholder="Enter agency address" name="address">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-12">
             <label for="" class="form-label cm">Agency Description</label>
-            <textarea type="text" class="form-control cm" placeholder="Enter Size Name" name="description" style="height: 120px;"></textarea>
+            <textarea type="text" class="form-control cm @error('description') is-invalid @enderror" placeholder="Enter description" name="description" style="height: 120px;"></textarea>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

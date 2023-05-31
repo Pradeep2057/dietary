@@ -12,7 +12,7 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Manufacturer authority Name</label>
-            <input type="text" class="form-control cm" placeholder="Enter manufacturer authority name" name="name">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror " placeholder="Enter manufacturer authority name" name="name">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

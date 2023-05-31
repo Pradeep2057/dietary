@@ -21,7 +21,7 @@
     <div class="row mb-3">
     <div class="col-md-6">
         <label for="" class="form-label cm">Lab Name</label>
-        <input type="text" class="form-control cm" placeholder="Enter Lab Name" name="name" value="{{ $lab->name }}">
+        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter Lab Name" name="name" value="{{ $lab->name }}">
     </div>
     <div class="col-md-6">
         <label for="" class="form-label cm">Recognized Agency</label>

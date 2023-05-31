@@ -42,14 +42,14 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Capital Amount</label>
-                        <input type="text" class="form-control cm" placeholder="Enter capital" name="name"
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter capital" name="name"
                             value="{{ $capital->name }}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Cost</label>
-                        <input type="text" class="form-control cm" placeholder="Enter cost" name="amount"
+                        <input type="text" class="form-control cm @error('amount') is-invalid @enderror" placeholder="Enter cost" name="amount"
                             value="{{ $capital->amount }}">
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                                         </span></a>
                                 </div>
 
-                                @if (auth()->user()->role == 0)
+                                {{-- @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt" action="{{ route('capital.delete', $capital->id) }}"
                                     method="post">
                                     @csrf
@@ -111,7 +111,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </div>
                         </td>
                     </tr>

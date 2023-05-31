@@ -45,7 +45,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Manufacturer authority Name</label>
-                        <input type="text" class="form-control cm" placeholder="Enter manufacturer authority name"
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter manufacturer authority name"
                             name="name">
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                 </div>
                                 @endif
 
-                                @if (auth()->user()->role == 0)
+                                {{-- @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt"
                                     action="{{ route('manufacturer-authority.delete', $manufacturerauthority->id) }}"
                                     method="post">
@@ -99,7 +99,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </div>
                         </td>
                     </tr>

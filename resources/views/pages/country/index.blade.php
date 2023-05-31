@@ -42,19 +42,19 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Country Name</label>
-                        <input type="text" class="form-control cm" placeholder="Enter country name" name="name">
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter country name" name="name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Population</label>
-                        <input type="text" class="form-control cm" placeholder="Enter population" name="population">
+                        <input type="text" class="form-control cm @error('population') is-invalid @enderror" placeholder="Enter population" name="population">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Area</label>
-                        <input type="text" class="form-control cm" placeholder="Enter area" name="area">
+                        <input type="text" class="form-control cm @error('area') is-invalid @enderror" placeholder="Enter area" name="area">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
@@ -101,7 +101,7 @@
                                 </div>
                                 @endif
 
-                                @if (auth()->user()->role == 0)
+                                {{-- @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt" action="{{ route('country.delete', $country->id) }}"
                                     method="post">
                                     @csrf
@@ -110,7 +110,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </div>
                         </td>
                     </tr>
