@@ -17,11 +17,11 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Capital Amount</label>
-            <input type="text" class="form-control cm" placeholder="Enter dose name" name="name">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter dose name" name="name">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Cost</label>
-            <input type="text" class="form-control cm" placeholder="Enter dose name" name="amount">
+            <input type="text" class="form-control cm @error('amount') is-invalid @enderror" placeholder="Enter dose name" name="amount">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

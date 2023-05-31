@@ -35,6 +35,8 @@ class AgencyController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'adddress' => 'required',
+            'description' => 'required',
         ]);
         $agency = new Agency;
         $agency->name = $validatedData['name'];
@@ -56,6 +58,8 @@ class AgencyController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'adddress' => 'required',
+            'description' => 'required',
         ]);
         $agency->name = $validatedData['name'];
         $agency->address = $request->address;

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('application_number');
             $table->string('prepared_by');
             $table->string('post');
-            $table->string('certificate_category')->default('Registration Renew');
+            $table->string('certificate_category')->default('Product Renewal');
             $table->string('production_renew')->nullable();
             $table->string('production_renew_tippani')->nullable();
             $table->string('status')->default('Processing');
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->foreignId('verifier_id')->nullable()->constrained('users');
             $table->string('verified_at')->nullable();
             
-            $table->foreignId('product_id')->constrained('products');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->foreignId('author_id')->constrained('users');
             $table->timestamps();
         });

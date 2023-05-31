@@ -20,7 +20,7 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Manufacture Name</label>
-            <input type="text" class="form-control cm" placeholder="Enter Manufacture Name" name="name">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter Manufacture Name" name="name">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Registration Number</label>

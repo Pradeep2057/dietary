@@ -38,6 +38,9 @@ class NutrientController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'common_name'=>'required',
+            'rda'=>'required',
+            'minimum'=>'required',
         ]);
         $nutrients = new Nutrients;
         $nutrients->name = $validatedData['name'];
@@ -72,6 +75,9 @@ class NutrientController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'common_name'=>'required',
+            'rda'=>'required',
+            'minimum'=>'required',
         ]);
         $nutrients->name = $validatedData['name'];
         $nutrients->common_name = $request->common_name;

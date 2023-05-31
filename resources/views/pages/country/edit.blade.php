@@ -43,19 +43,19 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Country Name</label>
-                        <input type="text" class="form-control cm" placeholder="Enter country name" name="name" value="{{ $country->name }}">
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter country name" name="name" value="{{ $country->name }}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Population</label>
-                        <input type="text" class="form-control cm" placeholder="Enter population" name="population" value="{{ $country->population }}">
+                        <input type="text" class="form-control cm @error('population') is-invalid @enderror" placeholder="Enter population" name="population" value="{{ $country->population }}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Area</label>
-                        <input type="text" class="form-control cm" placeholder="Enter area" name="area" value="{{ $country->area }}">
+                        <input type="text" class="form-control cm @error('area') is-invalid @enderror" placeholder="Enter area" name="area" value="{{ $country->area }}">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>

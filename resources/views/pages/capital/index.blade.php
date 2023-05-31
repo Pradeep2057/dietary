@@ -42,13 +42,13 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Capital Amount</label>
-                        <input type="text" class="form-control cm" placeholder="Enter capital" name="name">
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter capital" name="name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Cost</label>
-                        <input type="text" class="form-control cm" placeholder="Enter cost" name="amount">
+                        <input type="text" class="form-control cm @error('amount') is-invalid @enderror" placeholder="Enter cost" name="amount">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
