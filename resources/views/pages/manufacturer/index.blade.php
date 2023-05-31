@@ -38,8 +38,8 @@
 
     <div class="row mb-4 filter-row filters">
         <div class="col-md-4">
-            <select id="authority" class="form-select kit-form-control">
-                <option value="" disabled selected>Select Registration Authority</option>
+            <select id="authority" class="form-select kit-form-control myselect">
+                <option value="all" disabled selected>Select Registration Authority</option>
                 @foreach ($manufacturers->unique('manufacturerauthority.name') as $manufacturer)
                 @if($manufacturer->manufacturerauthority != null)
                 <option value="{{ $manufacturer->manufacturerauthority->name }}">{{ $manufacturer->manufacturerauthority->name }}</option>
@@ -118,7 +118,7 @@
                         </div>
                         
 
-                        @if (auth()->user()->role == 0)
+                        {{-- @if (auth()->user()->role == 0)
                         <form class="action-btn-dlt" action="{{ route('manufacturer.delete', $manufacturer->id) }}" method="post">
                             @csrf
                             @method('delete')
@@ -126,7 +126,7 @@
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
-                        @endif
+                        @endif --}}
                     </div>
                 </td>
             </tr>
@@ -229,7 +229,7 @@
         $('#reset').on('click', function() {
             $('#min').val('');
             $('#max').val('');
-            $('#authority').val('');
+            $('#authority').val('all').trigger('change.select2');
             $('#country').val('');
 
             table.columns().search('').draw();

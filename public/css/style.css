@@ -3,8 +3,7 @@
 
 .accordion-body,
 .accordion-body.d-flex.flex-column {
-    background-color: #fbfbfb;
-    box-shadow: inset 0 0 20px 0 rgba(0, 60, 255, 0.1);
+    background-color: #f7f7f7;
     border-radius: 10px;
     width: 87%
 }
