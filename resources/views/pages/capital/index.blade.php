@@ -94,7 +94,7 @@
                                 
                                 
 
-                                @if (auth()->user()->role == 0)
+                                {{-- @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt" action="{{ route('capital.delete', $capital->id) }}"
                                     method="post">
                                     @csrf
@@ -103,7 +103,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </div>
                         </td>
                     </tr>

@@ -41,7 +41,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="" class="form-label cm">Category Name</label>
-                        <input type="text" class="form-control cm" placeholder="Enter category name" name="name">
+                        <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter category name" name="name">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -92,7 +92,7 @@
                                 </div>
                                 
 
-                                @if (auth()->user()->role == 0)
+                                {{-- @if (auth()->user()->role == 0)
                                 <form class="action-btn-dlt" action="{{ route('category.delete', $category->id) }}"
                                     method="post">
                                     @csrf
@@ -101,7 +101,7 @@
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
-                                @endif
+                                @endif --}}
                             </div>
                         </td>
                     </tr>

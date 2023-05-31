@@ -38,8 +38,8 @@
 
     <div class="row mb-4 filter-row filters">
         <div class="col-md-4">
-            <select id="nutrientcategory" class="form-select kit-form-control">
-                <option value="" disabled selected>Select Nutrient Category </option>
+            <select id="nutrientcategory" class="form-select kit-form-control myselect">
+                <option value="all" disabled selected>Select Nutrient Category </option>
                 @foreach ($nutrients->unique('nutrientcategory.name') as $nutrient)
                 @if($nutrient->nutrientcategory != null)
                     <option value="{{ $nutrient->nutrientcategory->name }}">{{ $nutrient->nutrientcategory->name }}</option>
@@ -143,7 +143,7 @@
                         </div>
                         
 
-                        @if (auth()->user()->role == 0)
+                        {{-- @if (auth()->user()->role == 0)
                         <form class="action-btn-dlt" action="{{ route('nutrient.delete', $nutrient->id) }}"
                             method="post">
                             @csrf
@@ -152,7 +152,7 @@
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
-                        @endif
+                        @endif --}}
                     </div>
                 </td>
             </tr>
@@ -249,7 +249,7 @@
         $('#reset').on('click', function() {
             $('#min').val('');
             $('#max').val('');
-            $('#nutrientcategory').val('');
+            $('#nutrientcategory').val('all').trigger('change.select2');
 
             table.columns().search('').draw();
             minDate.val('');

@@ -38,8 +38,8 @@
 
     <div class="row mb-4 filter-row filters">
         <div class="col-md-4">
-            <select id="address" class="form-select kit-form-control">
-                <option value="" disabled selected>Select Address</option>
+            <select id="address" class="form-select kit-form-control myselect">
+                <option value="all" disabled selected>Select Address</option>
                 @foreach ($agencies->unique('address') as $agency)
                 <option value="{{ $agency->address }}">{{ $agency->address }}</option>
                 @endforeach
@@ -96,7 +96,7 @@
                         
                         
 
-                        @if (auth()->user()->role == 0)
+                        {{-- @if (auth()->user()->role == 0)
                         <form class="action-btn-dlt" action="{{ route('agency.delete', $agency->id) }}" method="post">
                             @csrf
                             @method('delete')
@@ -104,7 +104,7 @@
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </form>
-                        @endif
+                        @endif --}}
                     </div>
                 </td>
             </tr>
@@ -201,7 +201,7 @@
         $('#reset').on('click', function() {
             $('#min').val('');
             $('#max').val('');
-            $('#address').val('');
+            $('#address').val('all').trigger('change.select2');
 
             table.columns().search('').draw();
             minDate.val('');
