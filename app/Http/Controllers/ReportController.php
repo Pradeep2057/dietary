@@ -50,14 +50,13 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'voucher_number' => 'required',
-            'voucher_amount' => 'required',
-            'date_of_grant' => 'required',
-            'validity_from' => 'required',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
+            'voucher_amount' => 'numeric',
             'application_number' => 'required',
-            'validity_to' => 'required',
-            'gmp_validity' => 'required',
-            'date_of_preparation' => 'required',
+            'validity_to' => 'required | date',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -76,6 +75,7 @@ class ReportController extends Controller
             $report->status = 'Processing';
         }
 
+
         $report->voucher_number = $request->voucher_number;
         $report->voucher_amount = $request->voucher_amount;
 
@@ -90,7 +90,7 @@ class ReportController extends Controller
         $report->post = $request->post;
         $report->author_id = auth()->user()->id;
         $report->save();
-        return redirect()->route('report.index')->with('successct', 'report created successfully.');
+        return redirect()->route('report.index')->with('successct', 'Certificate created successfully.');
     }
 
     public function edit(Report $report)
@@ -119,14 +119,13 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'voucher_number' => 'required',
-            'voucher_amount' => 'required',
-            'date_of_grant' => 'required',
-            'validity_from' => 'required',
+            'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
             'application_number' => 'required',
-            'validity_to' => 'required',
-            'gmp_validity' => 'required',
-            'date_of_preparation' => 'required',
+            'validity_to' => 'required | date',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -158,7 +157,7 @@ class ReportController extends Controller
         $report->voucher_amount = $request->voucher_amount;
 
         $report->save();
-        return redirect()->route('report.index')->with('successup', 'report updated successfully.');;
+        return redirect()->route('report.index')->with('successup', 'Certificate updated successfully.');;
     }
 
 

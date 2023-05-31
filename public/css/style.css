@@ -1301,19 +1301,15 @@ table.dataTable thead th{
     align-items: center
 }
 
-.db-user-profile {
-    padding: .4rem 0 .4rem .4rem;
+.dropdown button.btn.btn-secondary.dropdown-toggle{
+    padding: .4rem .8rem .4rem .4rem;
     border-radius: 100vw;
     transition: background-color 50ms ease-in-out;
     margin-right: 18px;
+    display: flex;
 }
-
-.db-user-profile:hover {
-    background-color: #e7f0f7
-}
-
-.db-user-profile-right {
-    margin-left: 10px
+.dropdown button.btn.btn-secondary.dropdown-toggle:hover {
+    background-color: #E7F0F7 !important
 }
 
 .db-user-profile-right .username {

@@ -48,6 +48,20 @@ class RenewController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
+            'validity_to' => 'required | date',
+            'renew_valid' => 'required | date',
+            'voucher_amount' => 'numeric',
+            'application_number' => 'required',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+
         $renew = new Renew;
 
         if (Auth::user()->role == 0) {
@@ -104,6 +118,20 @@ class RenewController extends Controller
 
     public function update(Request $request, Renew $renew)
     {
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'date_of_grant' => 'required | date',
+            'validity_from' => 'required | date',
+            'validity_to' => 'required | date',
+            'renew_valid' => 'required | date',
+            'voucher_amount' => 'numeric',
+            'application_number' => 'required',
+            'gmp_validity' => 'required | date',
+            'date_of_preparation' => 'required | date',
+            'prepared_by' => 'required',
+            'post' => 'required',
+        ]);
+        
         $this->authorize('update', $renew);
         $renew->date_of_grant = $request->date_of_grant;
         $renew->renew_valid = $request->renew_valid;
