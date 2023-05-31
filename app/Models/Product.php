@@ -15,6 +15,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'fy',
+        'code',
         'status',
         'registration',
         'health_claim',

@@ -233,8 +233,10 @@
                 <div class="row mb-5">
                     <div class="mb-3 col-md-12">
                         <label for="" class="form-label cm">Image of Product Label</label>
-                        <input type="file" class="form-control cm" name="images[]" multiple>
+                        <input type="file" class="form-control cm" name="images[]" multiple onchange="previewImages(event)">
                     </div>
+                    <div id="previewContainer"></div>
+                    
                 </div>            </div>
           </div>
         </div>
@@ -444,6 +446,24 @@
         }); 
       });
     });
+
+
+    function previewImages(event) {
+        var previewContainer = document.getElementById('previewContainer');
+        previewContainer.innerHTML = '';
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var image = document.createElement('img');
+                image.src = e.target.result;
+                image.classList.add('previewImage');
+                previewContainer.appendChild(image);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
 
 </script>
 @endsection

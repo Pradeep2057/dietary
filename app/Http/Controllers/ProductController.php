@@ -452,13 +452,25 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|unique:products,name,'.$product->id,
+            'product_type' => 'required | not_in:all',
+            'product_form' => 'required | not_in:all',
+            'dose_id' => 'required | not_in:all',
+            'size_id' => 'required | not_in:all',
+            'manufacturer_id' => 'required | not_in:all',
+            'lab_id' => 'required | not_in:all',
+            'gmp_id' => 'required | not_in:all',
+            'capital_id' => 'required | not_in:all',
+            'gmp_validity_upto' => 'required | date',
         ]);
 
+            
         $isFyUpdated = ($request->fy != $product->fy);
 
-        if ($isFyUpdated || is_null($product->fy)) {
-            $lastProduct = Product::where('fy', $request->fy)->orderByDesc('code')->first();
+        if ($isFyUpdated) {
+            $lastProduct = Product::where('fy', $request->fy)
+                           ->orderByDesc('code')
+                           ->first();
             if ($lastProduct) {
                 $product->code = $lastProduct->code + 1;
             } else {
@@ -466,6 +478,7 @@ class ProductController extends Controller
             }
             $product->registration = '01' . $request->fy . str_pad($product->code, 4, '0', STR_PAD_LEFT);
         }
+       
 
         $product->name = $validatedData['name'];
 
@@ -554,7 +567,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('product.index')->with('successup', 'Product edited successfully.');
+        return redirect()->route('product.index')->with('successup', 'Product updated successfully.');
     }
 
 

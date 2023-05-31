@@ -3,50 +3,52 @@
 
 @section('content')
 <div class="add-heading">
-    <h3 class="heading-cm"> 
+    <h3 class="heading-cm">
         <a href="{{ route('product.index')}}" class="nav-icon me-2">
-            <i class="fa-solid fa-angle-left"></i> 
+            <i class="fa-solid fa-angle-left"></i>
         </a>
-        Products<span class="sub-nav ms-2" > > {{ $product->name }} > Edit</span>
+        Products<span class="sub-nav ms-2"> > {{ $product->name }} > Edit</span>
     </h3>
     <p><a href="{{ route('product.index')}}"><i class="fa-regular fa-eye"></i>View Products</a></p>
 </div>
 
 <div class="product-search-form mb-3">
-   <div class="row log-details">
-    <div class="col-md-2">
-        <p>Created By</p>
-        <h4>{{ $product->author->name }}</h4>
+    <div class="row log-details">
+        <div class="col-md-2">
+            <p>Created By</p>
+            <h4>{{ $product->author->name }}</h4>
+        </div>
+        <div class="col-md-2">
+            <p>Created at</p>
+            <h4>{{ $product->created_at}}</h4>
+        </div>
+        @if($product->status == 'Verified')
+        <div class="col-md-2">
+            <p>Verified By</p>
+            <h4>{{ $product->verifier->name }}</h4>
+        </div>
+        <div class="col-md-2">
+            <p>Verified at</p>
+            <h4>{{ $product->verified_at }}</h4>
+        </div>
+        @elseif($product->status == 'Rejected')
+        <div class="col-md-2">
+            <p>Rejected By</p>
+            <h4>{{ $product->verifier->name }}</h4>
+        </div>
+        <div class="col-md-2">
+            <p>Rejected at</p>
+            <h4>{{ $product->verified_at }}</h4>
+        </div>
+        @else
+        <div class="col-md-4"></div>
+        @endif
+        <div class="col-md-4 log-status">
+            <div
+                class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">
+                {{ $product->status}}</div>
+        </div>
     </div>
-    <div class="col-md-2">
-        <p>Created at</p>
-        <h4>{{ $product->created_at}}</h4>
-    </div>
-    @if($product->status == 'Verified')
-    <div class="col-md-2">
-        <p>Verified By</p>
-        <h4>{{ $product->verifier->name }}</h4>
-    </div>
-    <div class="col-md-2">
-        <p>Verified at</p>
-        <h4>{{ $product->verified_at }}</h4>
-    </div>
-    @elseif($product->status == 'Rejected')
-    <div class="col-md-2">
-        <p>Rejected By</p>
-        <h4>{{ $product->verifier->name }}</h4>
-    </div>
-    <div class="col-md-2">
-        <p>Rejected at</p>
-        <h4>{{ $product->verified_at }}</h4>
-    </div>
-    @else
-    <div class="col-md-4"></div>
-    @endif
-    <div class="col-md-4 log-status">
-        <div class="@if($product->status == 'Pending') pending @elseif($product->status == 'Verified') verified @else rejected @endif">{{ $product->status}}</div>
-    </div>
-   </div>
 </div>
 
 <form action="{{ route('product.update', $product) }}" method="post" class="form-cm" enctype="multipart/form-data">
@@ -58,64 +60,85 @@
     <div class="row mb-2">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Name of Product</label>
-            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="name"
-                value="{{ $product->name }}">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror"
+                placeholder="Enter Name of Product" name="name" value="{{ $product->name }}">
+            @error('name')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
+
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Type of Product</label>
-            <select name="product_type" class="form-select kit-form-control">
+            <select name="product_type"
+                class="form-select kit-form-control @error('product_type') is-invalid @enderror">
                 @foreach ($producttypes as $producttype)
                 <option value="{{ $producttype->id }}" @if($producttype->id == $selectedProducttype->id) selected
                     @endif>{{ $producttype->name }}</option>
                 @endforeach
             </select>
+            @error('product_type')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Form of Product</label>
-            <select name="product_form" class="form-select kit-form-control">
+            <select name="product_form"
+                class="form-select kit-form-control @error('product_form') is-invalid @enderror">
                 @foreach ($productforms as $productform)
                 <option value="{{ $productform->id }}" @if($productform->id == $selectedProductform->id) selected
                     @endif>{{ $productform->name }}</option>
                 @endforeach
             </select>
+            @error('product_form')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Dose specified</label>
-            <select name="dose_id" class="form-select kit-form-control" aria-label="Default select example">
+            <select name="dose_id" class="form-select kit-form-control @error('dose_id') is-invalid @enderror"
+                aria-label="Default select example">
                 @foreach ($doses as $dose)
                 <option value="{{ $dose->id }}" @if($dose->id == $selectedDose->id) selected @endif>{{ $dose->name }}
                 </option>
                 @endforeach
             </select>
+            @error('dose_id')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Size of pack</label>
-            <select name="size_id" class="form-select kit-form-control">
+            <select name="size_id" class="form-select kit-form-control @error('size_id') is-invalid @enderror">
                 @foreach ($sizes as $size)
                 <option value="{{ $size->id }}" @if($size->id == $selectedSize->id) selected @endif>{{ $size->name }}
                 </option>
                 @endforeach
             </select>
+            @error('size_id')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Expirydate Claim</label>
             <select name="expirydate_claim" class="form-select kit-form-control mySelect">
-            <option value="1" selected disabled>Select</option>
-            @foreach ($expirydates as $expirydate)
+                <option value="1" selected disabled>Select</option>
+                @foreach ($expirydates as $expirydate)
                 <option value="{{ $expirydate->id }}" @if($expirydate->id == $selectedExpirydate->id) selected
                     @endif>{{ $expirydate->name }}</option>
-            @endforeach
+                @endforeach
             </select>
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Name of Importer</label>
-            <select name="importers[]" class="form-select kit-form-control multipleselect" multiple="multiple" multiple>
+            <select name="importers[]"
+                class="form-select kit-form-control multipleselect"
+                multiple="multiple" multiple>
                 @foreach ($importers as $importer)
                 <option value="{{ $importer->id }}" @if(in_array($importer->id, $selectedImporters)) selected
                     @endif>{{ $importer->name }}</option>
@@ -124,27 +147,34 @@
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Name of Manufacturer</label>
-            <select name="manufacturer_id" class="form-select kit-form-control">
+            <select name="manufacturer_id"
+                class="form-select kit-form-control @error('manufacturer_id') is-invalid @enderror">
                 @foreach ($manufactures as $manufacturer)
                 <option value="{{ $manufacturer->id }}" @if($manufacturer->id == $selectedManufacturer->id) selected
                     @endif>{{ $manufacturer->name }}</option>
                 @endforeach
             </select>
+            @error('manufacturer_id')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Lab</label>
-            <select name="lab_id" class="form-select kit-form-control">
+            <select name="lab_id" class="form-select kit-form-control @error('lab_id') is-invalid @enderror">
                 @foreach ($labs as $lab)
                 <option value="{{ $lab->id }}" @if($lab->id == $selectedLab->id) selected @endif>{{ $lab->name }}
                 </option>
                 @endforeach
             </select>
+            @error('lab_id')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Capital of firm</label>
-            <select name="capital_id" class="form-select kit-form-control">
+            <select name="capital_id" class="form-select kit-form-control @error('capital_id') is-invalid @enderror">
                 @foreach ($capitals as $capital)
                 <option value="{{ $capital->id }}" @if($capital->id == $selectedCapital->id) selected
                     @endif>{{ $capital->name }}</option>
@@ -164,30 +194,37 @@
 
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP certifing agency</label>
-            <select name="gmp_id" class="form-select kit-form-control">
+            <select name="gmp_id" class="form-select kit-form-control @error('gmp_id') is-invalid @enderror">
                 @foreach ($agencies as $agency)
                 <option value="{{ $agency->id }}" @if($agency->id == $selectedAgency->id) selected
                     @endif>{{ $agency->name }}</option>
                 @endforeach
             </select>
+            @error('gmp_id')
+            <small style="color: #ff0000;">{{ $message }}</small>
+            @enderror
         </div>
-        
+
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">GMP certificate validity upto</label>
-            <input type="date" class="form-control cm" placeholder="Select GMP certificate validity upto"
-                name="gmp_validity_upto" value="{{ $product->gmp_validity_upto }}">
+            <input type="date" class="form-control cm @error('gmp_validity_upto') is-invalid @enderror"
+                placeholder="Select GMP certificate validity upto" name="gmp_validity_upto"
+                value="{{ $product->gmp_validity_upto }}">
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-12">
             <label for="" class="form-label cm">Ingredients</label>
-            <textarea name="ingredients" class="form-control cm" cols="30" rows="4">{{ $product->ingredients }}</textarea>
+            <textarea name="ingredients" class="form-control cm @error('ingredients') is-invalid @enderror" cols="30"
+                rows="4">{{ $product->ingredients }}</textarea>
         </div>
     </div>
     <div class="row">
         <div class="mb-3 col-md-6">
             <label for="" class="form-label cm">Units per ingredients</label>
-            <input type="text" class="form-control cm" placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)" name="ingredient_unit" value="{{ $product->ingredient_unit }}">
+            <input type="text" class="form-control cm @error('ingredient_unit') is-invalid @enderror"
+                placeholder="Enter unit per ingedients(Capsule, 5 Gram etc.)" name="ingredient_unit"
+                value="{{ $product->ingredient_unit }}">
         </div>
 
         <div class="mb-3 col-md-6">
@@ -201,7 +238,7 @@
     </div>
     <div class="row @if(Auth::user()->role!=0 || Auth::user()->role!=1) mb-5 @endif">
         <div class="col-md-12 mb-3">
-        <label for="" class="form-label cm">Selected Product Label Images</label>
+            <label for="" class="form-label cm">Selected Product Label Images</label>
             @foreach ($product->images as $image)
             <div>
                 <img src="{{ Storage::url($image->label_image) }}" alt="{{ $product->name }}">
@@ -215,12 +252,10 @@
             <label for="new_images">Add New Images:</label>
             <input type="file" class="form-control cm" name="new_images[]" id="new_images" multiple>
         </div>
+        <div id="previewContainer"></div>
     </div>
 
-    @if(Auth::user()->role==2)
-        <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
-                value="{{ $product->fy }}" hidden>
-    @endif
+
 
     <div class="row">
         <div class="mb-3 col-md-6">
@@ -322,7 +357,7 @@
             </select>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="mb-3 col-md-4">
             <label for="" class="form-label cm">COA inhouse</label>
@@ -389,48 +424,77 @@
     <div class="row">
         <div class="mb-3 col-md-12">
             <label for="" class="form-label cm">Remarks (if any)</label>
-            <textarea name="remarks"  class="form-control cm" cols="30" rows="4">{{ $product->remarks }}</textarea>
+            <textarea name="remarks" class="form-control cm" cols="30" rows="4">{{ $product->remarks }}</textarea>
         </div>
     </div>
 
     @if(Auth::user()->role==0 || Auth::user()->role==1)
     <div class="row">
         <div class="col-md-12 text-end">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Proceed</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">Proceed</button>
         </div>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered approval-modal">
             <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Remarks</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="row">
                         <div class="mb-3 col-md-12">
                             <label for="" class="form-label cm">Fisical Year</label>
+                            @if(Auth::user()->role==2)
+                            <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
+                                value="{{ $product->fy }}" hidden>
+                            @else
                             <input type="text" class="form-control cm" placeholder="Enter Name of Product" name="fy"
                                 value="{{ $product->fy }}">
+                            @endif
                         </div>
                     </div>
                     <div class="row">
-                    <div class="mb-3 col-md-12">
-                        <label for="" class="form-label cm">Remarks (if any)</label>
-                        <textarea name="remarks1" class="form-control cm" cols="30" rows="4" value="{{ $product->remarks_1 }}"></textarea>
+                        <div class="mb-3 col-md-12">
+                            <label for="" class="form-label cm">Remarks (if any)</label>
+                            <textarea name="remarks1" class="form-control cm" cols="30" rows="4"
+                                value="{{ $product->remarks_1 }}"></textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" name="reject" class="btn btn-primary reject-btn">Reject</button>
-                <button type="submit" name="verify" class="btn btn-primary">Verify</button>
-            </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" name="reject" class="btn btn-primary reject-btn">Reject</button>
+                    <button type="submit" name="verify" class="btn btn-primary">Verify</button>
+                </div>
             </div>
         </div>
     </div>
+    </div>
     @else
-        <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
     @endif
 </form>
+@endsection
+
+@section('custom-js')
+<script>
+function previewImages(event) {
+    var previewContainer = document.getElementById('previewContainer');
+    previewContainer.innerHTML = '';
+    var files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var image = document.createElement('img');
+            image.src = e.target.result;
+            image.classList.add('previewImage');
+            previewContainer.appendChild(image);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 @endsection
