@@ -73,6 +73,9 @@
                                 {{ $producttype->name }}</option>
                             @endforeach
                         </select>
+                        @error('product_type')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
             
                 </div>
@@ -87,6 +90,9 @@
                                 {{ $productform->name }}</option>
                             @endforeach
                         </select>
+                        @error('product_form')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Dose specified</label>
@@ -98,6 +104,9 @@
                             </option>
                             @endforeach
                         </select>
+                        @error('dose_id')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -111,11 +120,14 @@
                             </option>
                             @endforeach
                         </select>
+                        @error('size_id')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Expirydate Claim</label>
-                        <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_claim') is-invalid @enderror">
-                            <option value="1" selected disabled>Select expiry date</option>
+                        <select name="expirydate_claim" class="form-select kit-form-control mySelect @error('expirydate_id') is-invalid @enderror">
+                            <option value="all" selected disabled>Select expiry date</option>
                             @foreach ($expirydates as $expirydate)
                             <option value="{{ $expirydate->id }}"
                                 {{ $templateProduct && $templateExpirydate->id == $expirydate->id ? 'selected' : '' }}>
@@ -143,6 +155,9 @@
                             <option value="{{ $manufacturer->id }}" {{ $templateProduct && $templateManufacturer->id == $manufacturer->id ? 'selected' : '' }}>{{ $manufacturer->name }}</option>
                             @endforeach
                         </select>
+                        @error('manufacturer_id')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">
@@ -154,6 +169,9 @@
                             <option value="{{ $lab->id }}" {{ $templateProduct && $templateLab->id == $lab->id ? 'selected' : '' }}>{{ $lab->name }}</option>
                             @endforeach
                         </select>
+                        @error('lab_id')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="" class="form-label cm">Capital of firm</label>
@@ -177,11 +195,14 @@
                     <div class="mb-3 col-md-4">
                         <label for="" class="form-label cm">GMP Certifying Agency</label>
                         <select name="gmp_id" class="form-select kit-form-control mySelect @error('gmp_id') is-invalid @enderror">
-                            <option value="0" selected disabled>Select GMP Certifying Agency</option>
+                            <option value="all" selected disabled>Select GMP Certifying Agency</option>
                             @foreach ($agencies as $agency)
                             <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                             @endforeach
                         </select>
+                        @error('gmp_id')
+                            <small style="color: #ff0000;">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3 col-md-4">
                         <label for="" class="form-label cm">GMP certificate validity upto</label>

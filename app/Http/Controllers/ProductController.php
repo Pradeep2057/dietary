@@ -268,8 +268,6 @@ class ProductController extends Controller
             'product_form' => 'required | not_in:all',
             'dose_id' => 'required | not_in:all',
             'size_id' => 'required | not_in:all',
-            'expirydate_id' => 'required | not_in:all',
-            'importers()' => 'required | not_in:all',
             'manufacturer_id' => 'required | not_in:all',
             'lab_id' => 'required | not_in:all',
             'gmp_id' => 'required | not_in:all',
