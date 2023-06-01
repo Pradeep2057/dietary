@@ -1696,3 +1696,42 @@ button.dt-button, div.dt-button, a.dt-button, input.dt-button{
     margin-right: 10px;
     margin-bottom: 10px;
 }
+
+.delete-body{
+    text-align: center;
+    padding: 50px;
+}
+.delete-body .delete-icon{
+    color: #ff0000;
+    font-size: 50px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.delete-body h3{
+    color: #141414;
+    font-size: 24px;
+    font-weight: 600;
+}
+.cancel-btn, .delete-btn{
+    height: 40px;
+    width: 100px;
+    font-size: 14px!important;
+}
+.cancel-btn{
+    background: #c1c1c1!important;
+    color: #141414!important;
+    margin-right: 10px;
+}
+.cancel-btn:hover{
+    background: #6b6b6b!important;
+    color: #ffffff!important;
+}
+.delete-btn{
+    background: #ffdbdb!important;
+    color: #ff0000!important;
+    margin-left: 10px;
+}
+.delete-btn:hover{
+    background: #ff0000!important;
+    color: #ffffff!important;
+}

@@ -174,9 +174,31 @@ class ProductController extends Controller
                         $html .= '<form class="action-btn-dlt" action="'.route('product.delete', $row->id).'" method="post">';
                         $html .= csrf_field();
                         $html .= method_field('delete');
-                        $html .= '<button type="submit">';
+                        $html .= '<button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">';
                         $html .= '<i class="fa-regular fa-trash-can"></i>';
                         $html .= '</button>';
+                        $html .= '<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered confirmation-modal">
+                            <div class="modal-content">
+                           
+                            <div class="modal-body delete-body">
+                            <span class="material-symbols-outlined delete-icon">cancel</span>
+                                <h3 class="mb-2">Are you sure ?</h3>
+                                <p>Do you really want to delete this product ?<br>
+                                This will also delete the certificate related to it.</p>
+                            </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                            <div class="row d-flex">
+                                <div class="col-md-12">
+                                    <button type="button"  class="btn cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger delete-btn">Delete</button>
+                                </div>
+                            </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>';
                         $html .= '</form>';
                     }
     
