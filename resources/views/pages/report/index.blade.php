@@ -128,9 +128,31 @@
                         <form class="action-btn-dlt" action="{{ route('report.delete', $report->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered confirmation-modal">
+                                    <div class="modal-content">
+                                
+                                    <div class="modal-body delete-body">
+                                    <span class="material-symbols-outlined delete-icon">cancel</span>
+                                        <h3 class="mb-2">Are you sure ?</h3>
+                                        <p>Do you really want to delete this certificate ?<br>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                    <div class="row d-flex">
+                                        <div class="col-md-12">
+                                            <button type="button"  class="btn cancel-btn" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-danger delete-btn">Delete</button>
+                                        </div>
+                                    </div>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                         @endif
                     </div>
