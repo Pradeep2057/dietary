@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->date('date_of_grant');
-            $table->date('validity_from');
-            $table->date('validity_to');
+            $table->string('date_of_grant');
+            $table->string('validity_from');
+            $table->string('validity_to');
             $table->date('gmp_validity');
-            $table->date('date_of_preparation');
+            $table->string('date_of_preparation');
             $table->string('application_number');
             $table->string('prepared_by');
             $table->string('post');

@@ -50,13 +50,12 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            // 'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
             'application_number' => 'required',
-            'validity_to' => 'required | date',
+            'validity_to' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -119,13 +118,12 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            // 'voucher_amount' => 'numeric',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
             'application_number' => 'required',
-            'validity_to' => 'required | date',
+            'validity_to' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required ',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -221,11 +219,18 @@ class ReportController extends Controller
         $logoImageData = base64_encode($logoImageContents);
         $logoImageMimeType = mime_content_type($logoImagePath);
         $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
+        $signImagePath = storage_path('app/public/image/Signature.png');
+        $signImageContents = file_get_contents($signImagePath);
+        $signImageData = base64_encode($signImageContents);
+        $signImageMimeType = mime_content_type($signImagePath);
+        $signImageDataUri = 'data:' . $signImageMimeType . ';base64,' . $signImageData;
  
         $html = view('pages.registration.pdf', [
             'pdfproduct' => $report,
             'qrCodeImage' => $dataUri,
             'logo' => $logoImageDataUri,
+            'sign' => $signImageDataUri,
             ])->render();
  
         $mpdf = new Mpdf([
@@ -249,7 +254,7 @@ class ReportController extends Controller
 
     public function print(Report $report)
     {
-        $pdf_url = asset('storage/reports/product_registration_print/' . $report->product->name .'.pdf');
+        $pdf_url = asset('storage/reports/product_registration/' . $report->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
         $qrCode->setSize(150);

@@ -143,7 +143,6 @@
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'copy',
-                    // text: '<span class="material-symbols-outlined">content_copy</span> Copy',
                     exportOptions: {
                         columns: [0, 1, 2, 3]
                     }

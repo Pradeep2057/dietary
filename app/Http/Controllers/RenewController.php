@@ -50,14 +50,13 @@ class RenewController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            'validity_to' => 'required | date',
-            'renew_valid' => 'required | date',
-            // 'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'validity_to' => 'required',
+            'renew_valid' => 'required',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -120,13 +119,13 @@ class RenewController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            'validity_to' => 'required | date',
-            'renew_valid' => 'required | date',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'validity_to' => 'required',
+            'renew_valid' => 'required',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -218,10 +217,18 @@ class RenewController extends Controller
         $logoImageMimeType = mime_content_type($logoImagePath);
         $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
 
+
+        $signImagePath = storage_path('app/public/image/Signature.png');
+        $signImageContents = file_get_contents($signImagePath);
+        $signImageData = base64_encode($signImageContents);
+        $signImageMimeType = mime_content_type($signImagePath);
+        $signImageDataUri = 'data:' . $signImageMimeType . ';base64,' . $signImageData;
+
         $html = view('pages.renewal.pdf', [
             'pdfproduct' => $renew,
             'qrCodeImage' => $dataUri,
             'logo' => $logoImageDataUri,
+            'sign' => $signImageDataUri,
             ])->render();
 
         $mpdf = new Mpdf([
@@ -245,7 +252,7 @@ class RenewController extends Controller
 
     public function print(Renew $renew)
     {
-        $pdf_url = asset('storage/reports/product_renew_print/' . $renew->product->name .'.pdf');
+        $pdf_url = asset('storage/reports/product_renew/' . $renew->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
         $qrCode->setSize(150);
@@ -258,6 +265,7 @@ class RenewController extends Controller
         $logoImageData = base64_encode($logoImageContents);
         $logoImageMimeType = mime_content_type($logoImagePath);
         $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
 
         $html = view('pages.renewal.print', [
             'pdfproduct' => $renew,

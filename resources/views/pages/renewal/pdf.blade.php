@@ -81,11 +81,11 @@
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px; margin-top:5px;">
                 <td style="width:25%;">
-                        @foreach ($pdfproduct->product->importers as $key => $importer)
+                        @foreach ($pdfproduct->product->importers->unique('name') as $importer)
                     <h1 style=" font-family: roboto; font-size: 22px;">
-                        {{ $importer->name }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                        {{ $importer->name }}
                         <br>
-                        {{ $importer->address }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                        {{ $importer->address }}
                     </h1>
                     @endforeach
                 </td>
@@ -117,7 +117,13 @@
                 </td>
                 <td style="width: 75%; border: 1px solid rgb(220, 220, 220);
             border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->registration }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product)
+                        {{ $pdfproduct->product->registration }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -130,7 +136,13 @@
                 </td>
                 <td style="width: 75%; border: 1px solid rgb(220, 220, 220);
             border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding: 10px;">{{ $pdfproduct->product->name }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding: 10px;">
+                    @if($pdfproduct->product)
+                        {{ $pdfproduct->product->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -144,7 +156,13 @@
                 </td>
                 <td style="width:25%; border: 1px solid rgb(220, 220, 220)
             border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->producttype->name }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product->producttype)
+                        {{ $pdfproduct->product->producttype->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size: 20px;">Form of product
@@ -152,7 +170,13 @@
                 </td>
                 <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->productform->name }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product->productform)
+                        {{ $pdfproduct->product->productform->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -166,7 +190,9 @@
                 </td>
                 <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
-                <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->application_number }}</h2>
+                <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    {{ $pdfproduct->application_number }}
+                </h2>
                 </td>
             </tr>
         </tbody>
@@ -181,8 +207,8 @@
                 <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        @foreach ($pdfproduct->product->importers as  $key => $importer)
-                            {{ $importer->name }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                        @foreach ($pdfproduct->product->importers->unique('name') as  $importer)
+                            {{ $importer->name }}
                         @endforeach
                     </h2>
                 </td>
@@ -199,8 +225,8 @@
                 <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                    @foreach ($pdfproduct->product->importers as  $key => $importer)
-                            {{ $importer->address }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                    @foreach ($pdfproduct->product->importers->unique('name') as  $importer)
+                            {{ $importer->address }}
                         @endforeach
                     </h2>
                 </td>
@@ -217,8 +243,8 @@
                 <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                    @foreach ($pdfproduct->product->importers as  $key => $importer)
-                            {{ $importer->pan }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                    @foreach ($pdfproduct->product->importers->unique('name') as  $importer)
+                            {{ $importer->pan }}
                         @endforeach
                     </h2>
                 </td>
@@ -228,7 +254,13 @@
                 </td>
                 <td style="width:25%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->size->name }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product->size)
+                        {{ $pdfproduct->product->size->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -242,7 +274,13 @@
                 </td>
                 <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
-                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">{{ $pdfproduct->product->manufacturer->name }}</h2>
+                    <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    @if($pdfproduct->product->manufacturer)
+                        {{ $pdfproduct->product->manufacturer->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -257,9 +295,15 @@
                 <td style="width:75%; border: 1px solid rgb(220, 220, 220);
                 border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                    {{ $pdfproduct->product->manufacturer->country->name }}</h2>
+                    @if($pdfproduct->product->manufacturer)
+                        {{ $pdfproduct->product->manufacturer->country->name }}
+                    @else 
+                     -
+                     @endif
+                
+                    </h2>
                 </td>
-                        </tr>
+            </tr>
         </tbody>
     </table>
     <table style="width: 1320px; margin: auto; margin-top: 15px;">
@@ -299,6 +343,7 @@
                 <td style="width:35%;">
                     <h1 style=" font-family: roboto; font-size: 22px;">Signature of Designated Officer
                     </h1>
+                    <img src="{{ $sign }}" alt="logo" style="width: 150px;">
                 </td>
                 <td style="width:25%;">
                     <h1 style=" font-family: roboto; font-size: 22px;">Remarks
