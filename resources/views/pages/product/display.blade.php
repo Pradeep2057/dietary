@@ -62,6 +62,7 @@
             </div>
             <div class="col-md-4">
                 <h4>Type of Product</h4>
+                @if($selectedProducttype)
                 <p>
                 @foreach ($producttypes as $producttype)
                     @if($producttype->id == $selectedProducttype->id) 
@@ -69,11 +70,15 @@
                     @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <h4>Form of Product</h4>
+                @if($selectedProductform)
                 <p>
                 @foreach ($productforms as $productform)
                     @if($productform->id == $selectedProductform->id) 
@@ -81,66 +86,97 @@
                     @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Dose specified</h4>
+                @if($selectedDose)
                 <p>
                 @foreach ($doses as $dose)
                     @if($dose->id == $selectedDose->id) {{ $dose->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Size of pack</h4>
+                @if($selectedSize)
                 <p>
                 @foreach ($sizes as $size)
                     @if($size->id == $selectedSize->id) {{ $size->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <h4>Expirydate Claim</h4>
+                @if($selectedExpirydate)
                 <p>
                 @foreach ($expirydates as $expirydate)
                     @if($expirydate->id == $selectedExpirydate->id) {{ $expirydate->name }}@endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Name of Importer</h4>
+                @if($selectedImporters)
                 <p>
                 @foreach ($importers as $importer)
                     @if(in_array($importer->id, $selectedImporters)) {{ $importer->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Name of Manufacturer</h4>
+                @if($selectedManufacturer)
                 <p>
                 @foreach ($manufactures as $manufacturer)
                     @if($manufacturer->id == $selectedManufacturer->id) {{ $manufacturer->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <h4>Lab</h4>
+                @if($selectedLab)
                 <p>
                 @foreach ($labs as $lab)
                     @if($lab->id == $selectedLab->id) {{ $lab->name }} @endif
                 @endforeach
                 </p>
+                @else 
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Capital of firm</h4>
+                @if($selectedCapital)
                 <p>
                 @foreach ($capitals as $capital)
                     @if($capital->id == $selectedCapital->id) {{ $capital->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>Unit per ingredients</h4>
@@ -156,11 +192,15 @@
         <div class="row">
             <div class="col-md-4">
                 <h4>GMP certifying agency</h4>
+                @if($selectedAgency)
                 <p>
                 @foreach ($agencies as $agency)
                 @if($agency->id == $selectedAgency->id) {{ $agency->name }} @endif
                 @endforeach
                 </p>
+                @else
+                <p>-</p>
+                @endif
             </div>
             <div class="col-md-4">
                 <h4>GMP certificate</h4>

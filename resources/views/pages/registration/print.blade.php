@@ -170,7 +170,12 @@
                 <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->dose->name }}</h2>
+                    @if($pdfproduct->product->dose)
+                        {{ $pdfproduct->product->dose->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>

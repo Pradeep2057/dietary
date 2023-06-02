@@ -249,7 +249,7 @@ class ReportController extends Controller
 
     public function print(Report $report)
     {
-        $pdf_url = asset('storage/reports/product_registration_print/' . $report->product->name .'.pdf');
+        $pdf_url = asset('storage/reports/product_registration/' . $report->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
         $qrCode->setSize(150);
