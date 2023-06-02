@@ -105,7 +105,6 @@ class ReportController extends Controller
 
     public function display(Report $report)
     {
-        $this->authorize('update', $report);
         $selectedProduct = $report->product;
         return view('pages.report.display', [
             'report'            => $report,

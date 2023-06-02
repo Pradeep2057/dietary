@@ -106,7 +106,6 @@ class RenewController extends Controller
 
     public function display(Renew $renew)
     {
-        $this->authorize('update', $renew);
         $selectedProduct = $renew->product;
         return view('pages.renew.display', [
             'renew'            => $renew,
@@ -192,10 +191,12 @@ class RenewController extends Controller
             'autoLangToFont' => true,
             'default_font' => 'freesans',
         ]);
-        
+
+    
         $mpdf->WriteHTML($html);
         $pdf_path = Storage::disk('public')->put('reports/production_renew/' . $renew->product->name . '.pdf', $mpdf->Output('', 'S'));
-        $renew->production_renew = $renew->product->name . '.pdf';
+
+        $renew->production_renew_tippani = $renew->product->name . '.pdf';
         $renew->save();
 
         return response()->download(storage_path('app/public/reports/production_renew/' . $renew->product->name . '.pdf'));
@@ -244,7 +245,7 @@ class RenewController extends Controller
         
         $mpdf->WriteHTML($html);
         $pdf_path = Storage::disk('public')->put('reports/product_renewal/' . $renew->product->name . '.pdf', $mpdf->Output('', 'S'));
-        $renew->production_renew_tippani = $renew->product->name . '.pdf';
+        $renew->production_renew = $renew->product->name . '.pdf';
         $renew->save();
 
         return response()->download(storage_path('app/public/reports/product_renewal/' . $renew->product->name . '.pdf'));

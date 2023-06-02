@@ -474,7 +474,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:products,name,'.$product->id,
+            'name' => 'required',
             'product_type' => 'required | not_in:all',
             'product_form' => 'required | not_in:all',
             'dose_id' => 'required | not_in:all',
