@@ -103,7 +103,9 @@
 
                         
                         <div class="action-btn-view">
-                            <a href="{{ route('report.display', $report->id) }}" method="get">View</a>
+                            <a href="{{ route('report.display', $report->id) }}" method="get"><span class="material-symbols-outlined">
+                            visibility
+                            </span></a>
                         </div>
                         
 

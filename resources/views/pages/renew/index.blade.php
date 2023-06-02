@@ -102,7 +102,7 @@
                         @endif
 
                         <div class="action-btn-pen">
-                        <a href="" method="put"><span class="material-symbols-outlined">
+                        <a href="{{ route('renew.display', $renew->id) }}" method="put"><span class="material-symbols-outlined">
                             visibility
                             </span></a>
                         </div>

@@ -77,6 +77,7 @@
                     <option value="all" disabled selected>Select Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Verified">Verified</option>
+                    <option value="Rejected">Rejected</option>
                 </select>
             </div>
             <div class="col-md-3">

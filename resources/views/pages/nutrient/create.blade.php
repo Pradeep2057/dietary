@@ -20,51 +20,51 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm"> Name</label>
-            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter  Name" name="name">
+            <input type="text" class="form-control cm @error('name') is-invalid @enderror" placeholder="Enter  Name" name="name" value="{{ old('name') }}">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Common Name</label>
-            <input type="text" class="form-control cm @error('common_name') is-invalid @enderror" placeholder="Enter Common Name" name="common_name">
+            <input type="text" class="form-control cm @error('common_name') is-invalid @enderror" placeholder="Enter Common Name" name="common_name" value="{{ old('common_name') }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm"> Unit of expression</label>
-            <input type="text" class="form-control cm" placeholder="Enter Unit ofexpression" name="unit_of_expression">
+            <input type="text" class="form-control cm" placeholder="Enter Unit ofexpression" name="unit_of_expression" value="{{ old('unit_of_expression') }}">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">RDA</label>
-            <input type="text" class="form-control cm @error('rda') is-invalid @enderror" placeholder="Enter RDA" name="rda">
+            <input type="text" class="form-control cm @error('rda') is-invalid @enderror" placeholder="Enter RDA" name="rda" value="{{ old('rda') }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Minimum</label>
-            <input type="text" class="form-control cm @error('minimum') is-invalid @enderror" placeholder="Enter Minimum" name="minimum">
+            <input type="text" class="form-control cm @error('minimum') is-invalid @enderror" placeholder="Enter Minimum" name="minimum" value="{{ old('minimum') }}">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Permissiable Unit</label>
-            <input type="text" class="form-control cm" placeholder="Enter Permissiable Unit" name="permissable_unit">
+            <input type="text" class="form-control cm" placeholder="Enter Permissiable Unit" name="permissable_unit" value="{{ old('permissable_unit') }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Permissiable Overage</label>
-            <input type="text" class="form-control cm" placeholder="Enter Permissiable Overage" name="permissable_overage">
+            <input type="text" class="form-control cm" placeholder="Enter Permissiable Overage" name="permissable_overage" value="{{ old('permissable_overage') }}">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Caution </label>
-            <input type="text" class="form-control cm" placeholder="Enter Caution" name="caution">
+            <input type="text" class="form-control cm" placeholder="Enter Caution" name="caution" value="{{ old('caution') }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="" class="form-label cm">Usable Part</label>
-            <input type="text" class="form-control cm" placeholder="Enter Usable Part" name="usable_part">
+            <input type="text" class="form-control cm" placeholder="Enter Usable Part" name="usable_part" value="{{ old('usable_part') }}">
         </div>
         <div class="col-md-6">
             <label for="" class="form-label cm">Nutrient Category </label>
-            <select name="nutrient_category" class="form-select kit-form-control mySelect" aria-label="Default select example">
+            <select name="nutrient_category" value="{{ old('nutrient_category') }}" class="form-select kit-form-control mySelect" aria-label="Default select example">
             <option value=" " selected disabled>Select Nutrient Category</option>   
             @foreach ($nutrientcategories as $nutrientcategory)
                 <option value="{{ $nutrientcategory->id }}">{{ $nutrientcategory->name }}</option>

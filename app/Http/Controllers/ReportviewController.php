@@ -26,21 +26,22 @@ class ReportviewController extends Controller
         }
 
 
-        public function display(Request $request, Renewal $renewal, Registration $registration, Product $product){
+        public function display(Request $request, Renewal $renewal, Registration $registration, Report $report, Product $product){
             $registration_number = $request->registration_num;
             $certificate_category = $request->certificate_category;
             $product = Product::where('registration', $registration_number)->first();
 
             if(!$product){
                 return Redirect::back()->with(['msg' => 'Product registration number is not available!']);
-            }else{
+            }
+            else{
                 if($certificate_category == 'Product Registration'){
-                    $registration = Registration::whereHas('product', function ($query) use ($registration_number) {
+                    $registration = Report::whereHas('product', function ($query) use ($registration_number) {
                         $query->where('registration', $registration_number);
                     })->first();
 
                     if($registration){
-                        if($registration->product_registration === null){
+                        if($registration->production_report === null){
                             return Redirect::back()->with(['msg' => 'Certificate generation not completed yet!']);
                         }else{
                             if($registration->status=="Verified"){
@@ -50,23 +51,30 @@ class ReportviewController extends Controller
                                 return Redirect::back()->with(['msg' => 'Report not verified yet.']);
                             }
                         }
-                    }
-                    
-            }
-            if($certificate_category == 'Product Renewal'){
-                    $renewal = Registration::whereHas('product', function ($query) use ($registration_number) {
+                    }    
+                }
+
+                if($certificate_category == 'Product Renewal'){
+                    $renewal = Renew::whereHas('product', function ($query) use ($registration_number) {
                         $query->where('registration', $registration_number);
                     })->first();
 
                     if($renewal){
-                        if($renewal->status=="Verified"){
-                            $renewalcertificate = $renewal->product->name;
-                            return view('pages.reportview.renewal', compact('renewalcertificate'));
-                        }elseif($renewal->status!="Verified"){
-                            return Redirect::back()->with(['msg' => 'Report not verified yet.']);
+                        if($renewal->production_renew === null){
+                            return Redirect::back()->with(['msg' => 'Certificate generation not completed yet!']);
+                        }else{
+                            if($renewal->status=="Verified"){
+                                $renewalcertificate = $renewal->product->name;
+                                return view('pages.reportview.display_two', compact('renewalcertificate'));
+                            }elseif($renewal->status!="Verified"){
+                                return Redirect::back()->with(['msg' => 'Report not verified yet.']);
+                            }
                         }
+
+                       
                     }
-            }
+                }
+
             }
         }
 
