@@ -39,10 +39,8 @@
         <div class="col-md-4">
             <select id="certificate" class="form-select kit-form-control">
                 <option value="" disabled selected>Select Certificate Type</option>
-                <option value="Production Registration">Production Registration</option>
-                <option value="Registration Renew">Registration Renew</option>
                 <option value="Product Registration">Product Registration</option>
-                <option value="Product Registration">Product Renewal</option>
+                <option value="Product Renewal">Product Renewal</option>
             </select>
         </div>
         <div class="col-md-3">

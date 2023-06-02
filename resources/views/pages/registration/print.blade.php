@@ -130,11 +130,12 @@
                 <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                    
                     @if($pdfproduct->product->producttype)
                         {{ $pdfproduct->product->producttype->name }}
-                    @else
-                    -
-                    @endif
+                    @else 
+                     -
+                     @endif
                     </h2>
                 </td>
                 <td style="width:25%;">
@@ -144,11 +145,12 @@
                 <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+
                     @if($pdfproduct->product->size)
                         {{ $pdfproduct->product->size->name }}
-                    @else
-                    -
-                    @endif
+                    @else 
+                     -
+                     @endif
                     </h2>
                 </td>
             </tr>
@@ -164,12 +166,12 @@
                 <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
+                       
                     @if($pdfproduct->product->productform)
                         {{ $pdfproduct->product->productform->name }}
-                    @else
-                    -
-                    @endif
-
+                    @else 
+                     -
+                     @endif
                     </h2>
                 </td>
             </tr>
@@ -189,7 +191,7 @@
                         {{ $pdfproduct->product->dose->name }}
                     @else 
                      -
-                     @endif
+                    @endif
                     </h2>
                 </td>
             </tr>
@@ -205,7 +207,10 @@
                 <td style="width:25%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->health_claim }}</h2>
+                    
+                        {{ $pdfproduct->product->health_claim }}
+                     
+                    </h2>
                 </td>
                 <td style="width:25%;">
                     <h1 style="m font-family: roboto; font-size:20px;">Nutritional claim
@@ -214,7 +219,8 @@
                 <td style="width:25%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->nutritional_claim }}</h2>
+                        {{ $pdfproduct->product->nutritional_claim }}
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -229,7 +235,12 @@
                 <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->expirydate->name }}</h2>
+                    @if($pdfproduct->product->expirydate)
+                        {{ $pdfproduct->product->expirydate->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -244,7 +255,12 @@
                 <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->manufacturer->name }}</h2>
+                    @if($pdfproduct->product->manufacturer)
+                        {{ $pdfproduct->product->manufacturer->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -259,7 +275,12 @@
                 <td style="width:75%; border:1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->manufacturer->country->name }}</h2>
+                    @if($pdfproduct->product->manufacturer)
+                        {{ $pdfproduct->product->manufacturer->country->name }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -274,7 +295,12 @@
                 <td style="width:75%; border: 1px solid rgb(220,220,220);
             border-style: dotted;">
                     <h2 style="font-family: roboto; font-weight:400; font-size:20px; padding:5px;">
-                        {{ $pdfproduct->product->manufacturer->registration_number }}</h2>
+                    @if($pdfproduct->product->manufacturer)
+                        {{ $pdfproduct->product->manufacturer->registration_number }}
+                    @else 
+                     -
+                     @endif
+                    </h2>
                 </td>
             </tr>
         </tbody>
@@ -313,5 +339,6 @@
         Supplement Regulation Guidelines, 2072)</p>
 
 </body>
+
 
 </html>

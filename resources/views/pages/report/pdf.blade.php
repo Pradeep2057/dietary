@@ -64,7 +64,7 @@
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                                 border-style: dotted;">
                                 <h2> 
-                                @foreach ($importers as $importer)
+                                @foreach ($importers->unique('name') as $importer)
                                         {{ $importer->firm_no }}
                                 @endforeach
                                 </h2>
@@ -91,7 +91,7 @@
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                                 border-style: dotted;">
                                 <h2>
-                                @foreach ($pdfreport->product->importers as $importer)
+                                @foreach ($pdfreport->product->importers->unique('name') as $importer)
                                     {{ $importer->pan }},
                                 @endforeach
                                 </h2>
@@ -103,9 +103,12 @@
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                         border-style: dotted;"><h2>
-                            @if($pdfreport->product->dose != null)
-                            {{ $pdfreport->product->dose->name }}</h2>
-                        @endif</td>
+                            @if($pdfreport->product->dose)
+                            {{ $pdfreport->product->dose->name }}
+                            @else
+                            - 
+                            @endif
+                        </h2></td>
                         </tr>
                     </tbody>
                 </table>
@@ -120,7 +123,7 @@
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                                 border-style: dotted;">
                                 <h2>
-                                @foreach ($pdfreport->product->importers as $importer)
+                                @foreach ($pdfreport->product->importers->unique('name') as $importer)
                                     {{ $importer->name }},
                                 @endforeach
                                 </h2>
@@ -133,7 +136,7 @@
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                                 border-style: dotted;">
                                 <h2>
-                                @foreach ($pdfreport->product->importers as $importer)
+                                @foreach ($pdfreport->product->importers->unique('name') as $importer)
                                     {{ $importer->address }},
                                 @endforeach
                                 </h2>
@@ -325,7 +328,7 @@
                                 </h1>
                             </td>
                             <td style="width:75%; border: 1px solid rgb(151, 151, 151);
-                        border-style: dotted;"><h2>{{ $pdfreport->product->manufacturer->name }}</h2></td>
+                        border-style: dotted;"><h2>@if($pdfreport->product->manufacturer){{ $pdfreport->product->manufacturer->name }}@else - @endif</h2></td>
                         </tr>
                     </tbody>
                 </table>
@@ -338,7 +341,7 @@
                                 </h1>
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
-                        border-style: dotted;"><h2>{{ $pdfreport->product->manufacturer->country->name }}</h2></td>
+                        border-style: dotted;"><h2>@if($pdfreport->product->manufacturer) {{ $pdfreport->product->manufacturer->country->name }} @else - @endif</h2></td>
                             <td style="width:25%;">
                                 <h1 style="margin: 5px;">COA inhouse
                                 </h1>
@@ -357,7 +360,7 @@
                                 </h1>
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
-                        border-style: dotted;"><h2>{{ $pdfreport->product->manufacturer->registration_number }}</h2></td>
+                        border-style: dotted;"><h2>@if($pdfreport->product->manufacturer){{ $pdfreport->product->manufacturer->registration_number }}@else - @endif</h2></td>
                             <td style="width:25%;">
                                 <h1 style="margin: 5px;">COA Thirdparty
                                 </h1>
@@ -382,7 +385,7 @@
                                 </h1>
                             </td>
                             <td style="width:25%; border: 1px solid rgb(151, 151, 151);
-                        border-style: dotted;"><h2>{{ $pdfreport->product->size->name }}</h2></td>
+                        border-style: dotted;"><h2>@if($pdfreport->product->size){{ $pdfreport->product->size->name }}@else - @endif</h2></td>
                         </tr>
                     </tbody>
                 </table>

@@ -219,11 +219,18 @@ class ReportController extends Controller
         $logoImageData = base64_encode($logoImageContents);
         $logoImageMimeType = mime_content_type($logoImagePath);
         $logoImageDataUri = 'data:' . $logoImageMimeType . ';base64,' . $logoImageData;
+
+        $signImagePath = storage_path('app/public/image/Signature.png');
+        $signImageContents = file_get_contents($signImagePath);
+        $signImageData = base64_encode($signImageContents);
+        $signImageMimeType = mime_content_type($signImagePath);
+        $signImageDataUri = 'data:' . $signImageMimeType . ';base64,' . $signImageData;
  
         $html = view('pages.registration.pdf', [
             'pdfproduct' => $report,
             'qrCodeImage' => $dataUri,
             'logo' => $logoImageDataUri,
+            'sign' => $signImageDataUri,
             ])->render();
  
         $mpdf = new Mpdf([
