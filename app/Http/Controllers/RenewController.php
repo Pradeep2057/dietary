@@ -50,14 +50,13 @@ class RenewController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            'validity_to' => 'required | date',
-            'renew_valid' => 'required | date',
-            // 'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'validity_to' => 'required',
+            'renew_valid' => 'required',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -120,13 +119,13 @@ class RenewController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            'validity_to' => 'required | date',
-            'renew_valid' => 'required | date',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
+            'validity_to' => 'required',
+            'renew_valid' => 'required',
             'application_number' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -245,7 +244,7 @@ class RenewController extends Controller
 
     public function print(Renew $renew)
     {
-        $pdf_url = asset('storage/reports/product_renew_print/' . $renew->product->name .'.pdf');
+        $pdf_url = asset('storage/reports/product_renew/' . $renew->product->name .'.pdf');
         $writer = new PngWriter();
         $qrCode = new QrCode($pdf_url);
         $qrCode->setSize(150);

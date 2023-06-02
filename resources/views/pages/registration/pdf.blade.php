@@ -91,11 +91,11 @@
         <tbody style="width:100%">
             <tr style="margin-bottom: 10px;">
                 <td style="width:25%;">
-                    @foreach ($pdfproduct->product->importers as $key => $importer)
+                    @foreach ($pdfproduct->product->importers->unique('name') as $importer)
                     <h1 style="font-family: roboto; font-size: 22px;">
-                        {{ $importer->name }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                        {{ $importer->name }}
                         <br>
-                        {{ $importer->address }} @if ($key !== count($pdfproduct->product->importers) - 1),@endif
+                        {{ $importer->address }}
                     </h1>
                     @endforeach
                 </td>

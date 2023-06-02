@@ -50,13 +50,12 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
-            // 'voucher_amount' => 'numeric',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
             'application_number' => 'required',
-            'validity_to' => 'required | date',
+            'validity_to' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);
@@ -119,13 +118,12 @@ class ReportController extends Controller
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            // 'voucher_amount' => 'numeric',
-            'date_of_grant' => 'required | date',
-            'validity_from' => 'required | date',
+            'date_of_grant' => 'required',
+            'validity_from' => 'required',
             'application_number' => 'required',
-            'validity_to' => 'required | date',
+            'validity_to' => 'required',
             'gmp_validity' => 'required | date',
-            'date_of_preparation' => 'required | date',
+            'date_of_preparation' => 'required ',
             'prepared_by' => 'required',
             'post' => 'required',
         ]);

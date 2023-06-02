@@ -68,7 +68,7 @@
                         <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
                             <h2> 
-                                @foreach ($pdfrenew->product->importers as $importer)
+                                @foreach ($pdfrenew->product->importers->unique('name') as $importer)
                                     {{ $importer->firm_no }},
                                 @endforeach
                             </h2>
@@ -80,7 +80,7 @@
                         <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
                             <h2>
-                                @foreach ($pdfrenew->product->importers as $importer)
+                                @foreach ($pdfrenew->product->importers->unique('name') as $importer)
                                     {{ $importer->pan }},
                                 @endforeach
                             </h2>
@@ -101,7 +101,7 @@
                 border-style: dotted;">
                     
                             <h2>
-                                @foreach ($pdfrenew->product->importers as $importer)
+                                @foreach ($pdfrenew->product->importers->unique('name') as $importer)
                                     {{ $importer->name }},
                                 @endforeach
                             </h2>
@@ -113,7 +113,7 @@
                         <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
                             <h2>
-                                @foreach ($pdfrenew->product->importers as $importer)
+                                @foreach ($pdfrenew->product->importers->unique('name') as $importer)
                                     {{ $importer->address }},
                                 @endforeach
                             </h2>
@@ -203,7 +203,13 @@
                         </td>
                         <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>{{ $pdfrenew->product->manufacturer->name }}</h2>
+                            <h2>
+                                @if($pdfrenew->product->manufacturer)
+                                    {{ $pdfrenew->product->manufacturer->name }}
+                                @else 
+                                -
+                                @endif
+                            </h2>
                         </td>
                     </tr>
                 </tbody>
@@ -217,7 +223,13 @@
                         </td>
                         <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>{{ $pdfrenew->product->manufacturer->country->name }}</h2>
+                            <h2>
+                                @if($pdfrenew->product->manufacturer)
+                                    {{ $pdfrenew->product->manufacturer->country->name }}
+                                @else
+                                 -
+                                @endif
+                            </h2>
                         </td>
 
                     </tr>
@@ -232,7 +244,13 @@
                         </td>
                         <td style="width:25%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>{{ $pdfrenew->product->manufacturer->registration_number }}</h2>
+                            <h2>
+                                @if($pdfrenew->product->manufacturer)
+                                    {{ $pdfrenew->product->manufacturer->registration_number }}
+                                @else 
+                                - 
+                                @endif
+                            </h2>
                         </td>
                         <td style="width:25%;">
                             <h1 style="margin: 5px;">Certificate validity from
@@ -255,7 +273,13 @@
                         </td>
                         <td style="width:75%; border: 1px solid rgb(151, 151, 151);
                 border-style: dotted;">
-                            <h2>{{ $pdfrenew->product->manufacturer->registration_validity }}</h2>
+                            <h2>
+                            @if($pdfrenew->product->manufacturer)
+                                {{ $pdfrenew->product->manufacturer->registration_validity }}
+                            @else 
+                            - 
+                            @endif
+                            </h2>
                         </td>
                     </tr>
                 </tbody>
