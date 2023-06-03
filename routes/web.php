@@ -46,7 +46,7 @@ use App\Http\Controllers\ImportController;
 
 
 Auth::routes([
-    'register' => true,
+    'register' => false,
 ]);
 
 

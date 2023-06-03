@@ -125,14 +125,14 @@
     <div class="row mb-3">
         <div class="col-md-12">
             <label for="" class="form-label cm">Registration Number</label>
-            <input type="text" class="form-control cm" placeholder="Enter registration number" name="registration_num">
+            <input type="text" class="form-control cm" placeholder="Enter registration number" name="registration_num" value="{{ old('registration_num') }}">
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-md-12">
             <label for="" class="form-label cm">Select Certificate Type</label>
             <select name="certificate_category" class="form-select kit-form-control"
-                aria-label="Default select example">
+                aria-label="Default select example" value="{{ old('certificate_category') ]}">
                 <option value="" selected disabled>Select certificate type</option>
                 <option value="Product Registration">Product Registration</option>
                 <option value="Product Renewal">Product Renewal</option>
