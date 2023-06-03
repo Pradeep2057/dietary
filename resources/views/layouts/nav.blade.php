@@ -70,6 +70,7 @@
                     </div>
                   </button>
                   <ul class="dropdown-menu ">
+                  <!-- <li><a class="dropdown-item profile" href="{{ route('profile') }}">My Account</a></li> -->
                     <li >
                         <a class="dropdown-item log-profile" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
